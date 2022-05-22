@@ -1,0 +1,2788 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:bib="http://bibtexml.sf.net/">
+  <title>General Solutions of Simultaneous Equations</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m19561</md:content-id>
+  <md:title>General Solutions of Simultaneous Equations</md:title>
+  <md:abstract/>
+  <md:uuid>b868ff1a-43e8-45ad-a3e6-e27c5387a71e</md:uuid>
+</metadata>
+
+<content>
+    <para id="id160868">The second problem posed in the introduction is basically the solution of
+simultaneous linear equations <link target-id="bid0"/>, <link target-id="bid1"/>, <link target-id="bid2"/> which is fundamental to
+linear algebra <link target-id="bid3"/>, <link target-id="bid4"/>, <link target-id="bid5"/> and
+very important in diverse areas of applications in mathematics, numerical
+analysis, physical and social sciences, engineering, and business. Since
+a system of linear equations may be over or under determined in a variety
+of ways, or may be consistent but ill conditioned, a comprehensive theory
+turns out to be more complicated than it first appears. Indeed, there is
+a considerable literature on the subject of <emphasis effect="italics">generalized inverses</emphasis> or
+<emphasis effect="italics">pseudo-inverses</emphasis>. The careful statement and formulation of the general
+problem seems to have started with Moore <link target-id="bid6"/> and Penrose
+<link target-id="bid7"/>, <link target-id="bid8"/> and developed by many others.
+Because the generalized solution of simultaneous equations
+is often defined in terms of minimization of an equation error, the techniques
+are useful in a wide variety of approximation and
+optimization problems <link target-id="bid9"/>, <link target-id="bid10"/> as well as signal processing.</para>
+    <para id="id161289">The ideas are presented here in terms of finite dimensions using
+matrices. Many of the ideas extend to infinite dimensions using Banach
+and Hilbert spaces <link target-id="bid11"/>, <link target-id="bid12"/>, <link target-id="bid13"/> in functional analysis.</para>
+    <section id="cid1">
+      <title>The Problem</title>
+      <para id="id161317">Given an <m:math overflow="scroll"><m:mi>M</m:mi></m:math> by <m:math overflow="scroll"><m:mi>N</m:mi></m:math> real matrix <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> and an <m:math overflow="scroll"><m:mi>M</m:mi></m:math> by 1 vector <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math>, find the <m:math overflow="scroll"><m:mi>N</m:mi></m:math> by 1 vector <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> when</para>
+      <equation id="uid1">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>11</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>12</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>13</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:mo>⋯</m:mo>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mrow>
+                        <m:mn>1</m:mn>
+                        <m:mi>N</m:mi>
+                      </m:mrow>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>21</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>22</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>23</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd/>
+                  <m:mtd/>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>31</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>32</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>33</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd/>
+                  <m:mtd/>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:mo>⋮</m:mo>
+                  </m:mtd>
+                  <m:mtd/>
+                  <m:mtd/>
+                  <m:mtd/>
+                  <m:mtd>
+                    <m:mo>⋮</m:mo>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mrow>
+                        <m:mi>M</m:mi>
+                        <m:mn>1</m:mn>
+                      </m:mrow>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd/>
+                  <m:mtd/>
+                  <m:mtd>
+                    <m:mo>⋯</m:mo>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mrow>
+                        <m:mi>M</m:mi>
+                        <m:mi>N</m:mi>
+                      </m:mrow>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>3</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:mo>⋮</m:mo>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mi>N</m:mi>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+            <m:mo>=</m:mo>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>b</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>b</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>b</m:mi>
+                      <m:mn>3</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:mo>⋮</m:mo>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>b</m:mi>
+                      <m:mi>M</m:mi>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id161829">or, using matrix notation,</para>
+      <equation id="uid2">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mi mathvariant="bold">A</m:mi>
+            <m:mi mathvariant="bold">x</m:mi>
+            <m:mo>=</m:mo>
+            <m:mi mathvariant="bold">b</m:mi>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id161861">If <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> does not lie in the range space of <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> (the space
+spanned by the columns of <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math>), there is no exact solution to
+<link target-id="uid2"/>, therefore, an approximation problem can be posed by
+minimizing an equation error defined by</para>
+      <equation id="uid3">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mrow>
+              <m:mi>ε</m:mi>
+              <m:mo>=</m:mo>
+              <m:mi mathvariant="bold">A</m:mi>
+              <m:mi mathvariant="bold">x</m:mi>
+              <m:mo>-</m:mo>
+              <m:mi mathvariant="bold">b</m:mi>
+            </m:mrow>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id161935">A generalized solution (or an optimal approximate solution) to <link target-id="uid2"/> is usually considered to be an <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math>
+that minimizes some norm of <m:math overflow="scroll"><m:mi>ε</m:mi></m:math>. If that problem does not have a unique solution, further
+conditions, such as also minimizing the norm of <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math>, are imposed. The <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mn>2</m:mn></m:msub></m:math> or root-mean-squared
+error or Euclidean norm is
+<m:math overflow="scroll"><m:msqrt><m:mrow><m:msup><m:mi>ε</m:mi><m:mrow><m:mi mathvariant="bold">T</m:mi><m:mo>*</m:mo></m:mrow></m:msup><m:mi>ε</m:mi></m:mrow></m:msqrt></m:math> and minimization sometimes has an analytical solution.
+Minimization of other norms such as <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mi>∞</m:mi></m:msub></m:math> (Chebyshev) or <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mn>1</m:mn></m:msub></m:math> require iterative solutions.
+The general <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mi>p</m:mi></m:msub></m:math> norm is defined as <m:math overflow="scroll"><m:mi>q</m:mi></m:math> where</para>
+      <equation id="uid4">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mi>q</m:mi>
+            <m:mo>=</m:mo>
+            <m:msub>
+              <m:mrow>
+                <m:mo>|</m:mo>
+                <m:mo>|</m:mo>
+                <m:mi>x</m:mi>
+                <m:mo>|</m:mo>
+                <m:mo>|</m:mo>
+              </m:mrow>
+              <m:mi>p</m:mi>
+            </m:msub>
+            <m:mo>=</m:mo>
+            <m:mo>(</m:mo>
+            <m:mrow>
+              <m:munder>
+                <m:mo>∑</m:mo>
+                <m:mi>n</m:mi>
+              </m:munder>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>|</m:mo>
+                  <m:mi>x</m:mi>
+                  <m:mrow>
+                    <m:mo>(</m:mo>
+                    <m:mi>n</m:mi>
+                    <m:mo>)</m:mo>
+                  </m:mrow>
+                  <m:mo>|</m:mo>
+                </m:mrow>
+                <m:mi>p</m:mi>
+              </m:msup>
+              <m:msup>
+                <m:mo>)</m:mo>
+                <m:mrow>
+                  <m:mn>1</m:mn>
+                  <m:mo>/</m:mo>
+                  <m:mi>p</m:mi>
+                </m:mrow>
+              </m:msup>
+            </m:mrow>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id162139">for <m:math overflow="scroll"><m:mrow><m:mn>1</m:mn><m:mo>&lt;</m:mo><m:mi>p</m:mi><m:mo>&lt;</m:mo><m:mi>∞</m:mi></m:mrow></m:math> and a “pseudonorm" (not convex) for <m:math overflow="scroll"><m:mrow><m:mn>0</m:mn><m:mo>&lt;</m:mo><m:mi>p</m:mi><m:mo>&lt;</m:mo><m:mn>1</m:mn></m:mrow></m:math>.
+These can sometimes be evaluated using IRLS (iterative reweighted least squares) algorithms <link target-id="bid14"/>, <link target-id="bid15"/>, <link target-id="bid16"/>, <link target-id="bid17"/>, <link target-id="bid18"/>.</para>
+      <para id="id162207">If there is a non-zero solution of the homogeneous equation</para>
+      <equation id="uid5">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mrow>
+              <m:mi mathvariant="bold">A</m:mi>
+              <m:mi mathvariant="bold">x</m:mi>
+              <m:mo>=</m:mo>
+              <m:mn mathvariant="bold">0</m:mn>
+            </m:mrow>
+            <m:mo>,</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id162241">then <link target-id="uid2"/> has infinitely many generalized solutions in the sense that any particular
+solution of <link target-id="uid2"/> plus an arbitrary scalar times any non-zero solution of
+<link target-id="uid5"/> will have the same error in <link target-id="uid3"/> and, therefore, is also a
+generalized solution. The number of families of solutions is the dimension
+of the null space of <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math>.</para>
+      <para id="id162276">This is analogous to the classical solution of linear, constant coefficient differential equations
+where the total solution consists of a particular solution plus arbitrary constants times the
+solutions to the homogeneous equation. The constants are determined from the initial
+(or other) conditions of the solution to the differential equation.</para>
+    </section>
+    <section id="cid2">
+      <title>Ten Cases to Consider</title>
+      <para id="id162291">Examination of the basic problem shows there are ten cases <link target-id="bid0"/> listed in
+Figure 1 to be considered.
+These depend on the shape of the <m:math overflow="scroll"><m:mi>M</m:mi></m:math> by <m:math overflow="scroll"><m:mi>N</m:mi></m:math> real matrix <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math>,
+the rank <m:math overflow="scroll"><m:mi>r</m:mi></m:math> of <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math>, and whether <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> is in the span of the columns of <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math>.</para>
+      <!--empty paragraphs get left behind.-->
+      <list id="id162368" display="block" list-type="bulleted">
+        <item id="uid6">1a. <m:math overflow="scroll"><m:mrow><m:mi>M</m:mi><m:mo>=</m:mo><m:mi>N</m:mi><m:mo>=</m:mo><m:mi>r</m:mi></m:mrow></m:math>: One solution with no error, <m:math overflow="scroll"><m:mi>ε</m:mi></m:math>.
+</item>
+        <item id="uid7">1b. <m:math overflow="scroll"><m:mrow><m:mi>M</m:mi><m:mo>=</m:mo><m:mi>N</m:mi><m:mo>&gt;</m:mo><m:mi>r</m:mi></m:mrow></m:math>: <m:math overflow="scroll"><m:mrow><m:mi mathvariant="bold">b</m:mi><m:mspace width="0.222222em"/><m:mo>∈</m:mo><m:mi>s</m:mi><m:mi>p</m:mi><m:mi>a</m:mi><m:mi>n</m:mi><m:mo>{</m:mo><m:mi mathvariant="bold">A</m:mi><m:mo>}</m:mo></m:mrow></m:math>: Many solutions with <m:math overflow="scroll"><m:mrow><m:mi>ε</m:mi><m:mo>=</m:mo><m:mn mathvariant="bold">0</m:mn></m:mrow></m:math>.
+</item>
+        <item id="uid8">1c. <m:math overflow="scroll"><m:mrow><m:mi>M</m:mi><m:mo>=</m:mo><m:mi>N</m:mi><m:mo>&gt;</m:mo><m:mi>r</m:mi></m:mrow></m:math>: <m:math overflow="scroll"><m:mrow><m:mi mathvariant="bold">b</m:mi><m:mspace width="0.222222em"/><m:mi>n</m:mi><m:mi>o</m:mi><m:mi>t</m:mi><m:mo>∈</m:mo><m:mi>s</m:mi><m:mi>p</m:mi><m:mi>a</m:mi><m:mi>n</m:mi><m:mo>{</m:mo><m:mi mathvariant="bold">A</m:mi><m:mo>}</m:mo></m:mrow></m:math>: Many solutions with the same minimum error.
+</item>
+        <item id="uid9">2a. <m:math overflow="scroll"><m:mrow><m:mi>M</m:mi><m:mo>&gt;</m:mo><m:mi>N</m:mi><m:mo>=</m:mo><m:mi>r</m:mi></m:mrow></m:math>: <m:math overflow="scroll"><m:mrow><m:mi mathvariant="bold">b</m:mi><m:mspace width="0.222222em"/><m:mo>∈</m:mo><m:mi>s</m:mi><m:mi>p</m:mi><m:mi>a</m:mi><m:mi>n</m:mi><m:mo>{</m:mo><m:mi mathvariant="bold">A</m:mi><m:mo>}</m:mo></m:mrow></m:math>: One solution <m:math overflow="scroll"><m:mrow><m:mi>ε</m:mi><m:mo>=</m:mo><m:mn mathvariant="bold">0</m:mn></m:mrow></m:math>.
+</item>
+        <item id="uid10">2b. <m:math overflow="scroll"><m:mrow><m:mi>M</m:mi><m:mo>&gt;</m:mo><m:mi>N</m:mi><m:mo>=</m:mo><m:mi>r</m:mi></m:mrow></m:math>: <m:math overflow="scroll"><m:mrow><m:mi mathvariant="bold">b</m:mi><m:mspace width="0.222222em"/><m:mi>n</m:mi><m:mi>o</m:mi><m:mi>t</m:mi><m:mo>∈</m:mo><m:mi>s</m:mi><m:mi>p</m:mi><m:mi>a</m:mi><m:mi>n</m:mi><m:mo>{</m:mo><m:mi mathvariant="bold">A</m:mi><m:mo>}</m:mo></m:mrow></m:math>: One solution with minimum error.
+</item>
+        <item id="uid11">2c. <m:math overflow="scroll"><m:mrow><m:mi>M</m:mi><m:mo>&gt;</m:mo><m:mi>N</m:mi><m:mo>&gt;</m:mo><m:mi>r</m:mi></m:mrow></m:math>: <m:math overflow="scroll"><m:mrow><m:mi mathvariant="bold">b</m:mi><m:mspace width="0.222222em"/><m:mo>∈</m:mo><m:mi>s</m:mi><m:mi>p</m:mi><m:mi>a</m:mi><m:mi>n</m:mi><m:mo>{</m:mo><m:mi mathvariant="bold">A</m:mi><m:mo>}</m:mo></m:mrow></m:math>: Many solutions with <m:math overflow="scroll"><m:mrow><m:mi>ε</m:mi><m:mo>=</m:mo><m:mn mathvariant="bold">0</m:mn></m:mrow></m:math>.
+</item>
+        <item id="uid12">2d. <m:math overflow="scroll"><m:mrow><m:mi>M</m:mi><m:mo>&gt;</m:mo><m:mi>N</m:mi><m:mo>&gt;</m:mo><m:mi>r</m:mi></m:mrow></m:math>: <m:math overflow="scroll"><m:mrow><m:mi mathvariant="bold">b</m:mi><m:mspace width="0.222222em"/><m:mi>n</m:mi><m:mi>o</m:mi><m:mi>t</m:mi><m:mo>∈</m:mo><m:mi>s</m:mi><m:mi>p</m:mi><m:mi>a</m:mi><m:mi>n</m:mi><m:mo>{</m:mo><m:mi mathvariant="bold">A</m:mi><m:mo>}</m:mo></m:mrow></m:math>: Many solutions with the same minimum error.
+</item>
+        <item id="uid13">3a. <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>&gt;</m:mo><m:mi>M</m:mi><m:mo>=</m:mo><m:mi>r</m:mi></m:mrow></m:math>: Many solutions with <m:math overflow="scroll"><m:mrow><m:mi>ε</m:mi><m:mo>=</m:mo><m:mn mathvariant="bold">0</m:mn></m:mrow></m:math>.
+</item>
+        <item id="uid14">3b. <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>&gt;</m:mo><m:mi>M</m:mi><m:mo>&gt;</m:mo><m:mi>r</m:mi></m:mrow></m:math>: <m:math overflow="scroll"><m:mrow><m:mi mathvariant="bold">b</m:mi><m:mspace width="0.222222em"/><m:mo>∈</m:mo><m:mi>s</m:mi><m:mi>p</m:mi><m:mi>a</m:mi><m:mi>n</m:mi><m:mo>{</m:mo><m:mi mathvariant="bold">A</m:mi><m:mo>}</m:mo></m:mrow></m:math>: Many solutions with <m:math overflow="scroll"><m:mrow><m:mi>ε</m:mi><m:mo>=</m:mo><m:mn mathvariant="bold">0</m:mn></m:mrow></m:math></item>
+        <item id="uid15">3c. <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>&gt;</m:mo><m:mi>M</m:mi><m:mo>&gt;</m:mo><m:mi>r</m:mi></m:mrow></m:math>: <m:math overflow="scroll"><m:mrow><m:mi mathvariant="bold">b</m:mi><m:mspace width="0.222222em"/><m:mi>n</m:mi><m:mi>o</m:mi><m:mi>t</m:mi><m:mo>∈</m:mo><m:mi>s</m:mi><m:mi>p</m:mi><m:mi>a</m:mi><m:mi>n</m:mi><m:mo>{</m:mo><m:mi mathvariant="bold">A</m:mi><m:mo>}</m:mo></m:mrow></m:math>: Many solutions with the same minimum error.
+</item>
+      </list>
+      <para id="id163055"><emphasis effect="bold">Figure 1.</emphasis> Ten Cases for the Pseudoinverse.</para>
+      <para id="id163063">Here we have:</para>
+      <list id="id163071" display="block" list-type="bulleted">
+        <item id="uid16">case 1 has the same number of equations as unknowns (<emphasis effect="bold">A</emphasis> is square, <m:math overflow="scroll"><m:mrow><m:mi>M</m:mi><m:mo>=</m:mo><m:mi>N</m:mi></m:mrow></m:math>),
+</item>
+        <item id="uid17">case 2 has more equations than unknowns, therefore, is over specified (<emphasis effect="bold">A</emphasis> is taller than wide, <m:math overflow="scroll"><m:mrow><m:mi>M</m:mi><m:mo>&gt;</m:mo><m:mi>N</m:mi></m:mrow></m:math>),
+</item>
+        <item id="uid18">case 3 has fewer equations than unknowns, therefore, is underspecified (<emphasis effect="bold">A</emphasis> is wider than tall <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>&gt;</m:mo><m:mi>M</m:mi></m:mrow></m:math>).
+</item>
+      </list>
+      <para id="id163173">This is a setting for frames and sparse representations.</para>
+      <para id="id163177">In case 1a and 3a, <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> is necessarily in the span of <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math>.
+In addition to these classifications, the possible orthogonality of the
+columns or rows of the matrices gives special characteristics.</para>
+    </section>
+    <section id="cid3">
+      <title>Examples</title>
+      <para id="id163213">Case 1: Here we see a 3 x 3 square matrix which is an example of case 1 in Figure 1 and 2.</para>
+      <equation id="uid19">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>11</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>12</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>13</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>21</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>22</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>23</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>31</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>32</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>33</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>3</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+            <m:mo>=</m:mo>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>b</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>b</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>b</m:mi>
+                      <m:mn>3</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id163396">If the matrix has rank 3, then the <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> vector will necessarily be in the space spanned
+by the columns of <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> which puts it in case 1a. This can be solved for <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> by inverting
+<m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> or using some more robust method. If the matrix has rank 1 or 2, the <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> may or may not lie in the spanned subspace, so the classification will be 1b or 1c and
+minimization of <m:math overflow="scroll"><m:msubsup><m:mrow><m:mo>|</m:mo><m:mo>|</m:mo><m:mi>x</m:mi><m:mo>|</m:mo><m:mo>|</m:mo></m:mrow><m:mn>2</m:mn><m:mn>2</m:mn></m:msubsup></m:math> yields a unique solution.</para>
+      <para id="id163486">Case 2: If <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> is 4 x 3, then we have more equations than unknowns or the overspecified
+or overdetermined case.</para>
+      <equation id="uid20">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>11</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>12</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>13</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>21</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>22</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>23</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>31</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>32</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>33</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>41</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>42</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>43</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>3</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+            <m:mo>=</m:mo>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>b</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>b</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>b</m:mi>
+                      <m:mn>3</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>b</m:mi>
+                      <m:mn>4</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id163716">If this matrix has the maximum rank of 3, then we have case 2a or 2b depending on
+whether <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> is in the span of <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> or not. In either case, a unique solution <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> exists
+which can be found by <link target-id="uid25"/> or <link target-id="uid43"/>. For case 2a, we have a single exact solution with
+no equation error, <m:math overflow="scroll"><m:mrow><m:mi>ϵ</m:mi><m:mo>=</m:mo><m:mn mathvariant="bold">0</m:mn></m:mrow></m:math> just as case 1a. For case 2b, we have a single
+optimal approximate solution with the least possible equation error. If the matrix has
+rank 1 or 2, the classification will be 2c or 2d and minimization of <m:math overflow="scroll"><m:msubsup><m:mrow><m:mo>|</m:mo><m:mo>|</m:mo><m:mi>x</m:mi><m:mo>|</m:mo><m:mo>|</m:mo></m:mrow><m:mn>2</m:mn><m:mn>2</m:mn></m:msubsup></m:math> yelds a unique solution.</para>
+      <para id="id163811">Case 3: If <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> is 3 x 4, then we have more unknowns than equations or the underspecified case.</para>
+      <equation id="uid21">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>11</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>12</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>13</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>14</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>21</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>22</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>23</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>24</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>31</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>32</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>33</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>34</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>3</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>4</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+            <m:mo>=</m:mo>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>b</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>b</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>b</m:mi>
+                      <m:mn>3</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id164039">If this matrix has the maximum rank of 3, then we have case 3a and <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> must be in
+the span of <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> . For this case, many exact solutions <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> exist, all having zero equation
+error and a single one can be found with minimum solution norm <m:math overflow="scroll"><m:mrow><m:mo>|</m:mo><m:mo>|</m:mo><m:mi mathvariant="bold">x</m:mi><m:mo>|</m:mo><m:mo>|</m:mo></m:mrow></m:math>
+using <link target-id="uid27"/> or <link target-id="uid45"/>. If the matrix has rank 1 or 2, the classification will be 3b or 3c.</para>
+    </section>
+    <section id="cid4">
+      <title>Solutions</title>
+      <para id="id164119">There are several assumptions or side conditions that could be used in
+order to define a useful unique solution of <link target-id="uid2"/>. The side conditions used
+to define the Moore-Penrose pseudo-inverse are that the <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mn>2</m:mn></m:msub></m:math> norm squared of the equation error
+<m:math overflow="scroll"><m:mi>ε</m:mi></m:math> be minimized and, if there is ambiguity (several solutions
+with the same minimum error), the <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mn>2</m:mn></m:msub></m:math> norm squared of <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> also be minimized. A
+useful alternative to minimizing the norm of <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> is to require
+certain entries in <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> to be zero (sparse) or fixed to some non-zero value
+(equality constraints).</para>
+      <para id="id164202">In using sparsity in posing a signal processing problem (e.g. compressive sensing), an
+<m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mn>1</m:mn></m:msub></m:math> norm can be used (or even an <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mn>0</m:mn></m:msub></m:math> “pseudo norm”) to obtain solutions with
+zero components if possible <link target-id="bid19"/>, <link target-id="bid20"/>.</para>
+      <para id="id164246">In addition to using side conditions to achieve a unique solution, side
+conditions are sometimes part of the original problem. One interesting case
+requires that certain of the equations be satisfied with no error and the
+approximation be achieved with the remaining equations.</para>
+    </section>
+    <section id="cid5">
+      <title>Moore-Penrose Pseudo-Inverse</title>
+      <para id="id164261">If the <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mn>2</m:mn></m:msub></m:math> norm is used, a unique generalized solution to <link target-id="uid2"/> always exists such that the
+norm squared of the equation error <m:math overflow="scroll"><m:mrow><m:msup><m:mi>ε</m:mi><m:mrow><m:mi mathvariant="bold">T</m:mi><m:mo>*</m:mo></m:mrow></m:msup><m:mi>ε</m:mi></m:mrow></m:math> and the norm squared of the
+solution <m:math overflow="scroll"><m:mrow><m:msup><m:mi mathvariant="bold">x</m:mi><m:mrow><m:mi mathvariant="bold">T</m:mi><m:mo>*</m:mo></m:mrow></m:msup><m:mi mathvariant="bold">x</m:mi></m:mrow></m:math> are both minimized. This solution is denoted by</para>
+      <equation id="uid22">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mi mathvariant="bold">x</m:mi>
+            <m:mo>=</m:mo>
+            <m:msup>
+              <m:mi mathvariant="bold">A</m:mi>
+              <m:mo>+</m:mo>
+            </m:msup>
+            <m:mi mathvariant="bold">b</m:mi>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id164370">where <m:math overflow="scroll"><m:msup><m:mi mathvariant="bold">A</m:mi><m:mo>+</m:mo></m:msup></m:math> is called the Moore-Penrose inverse <link target-id="bid1"/> of <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> (and is also called
+the generalized inverse <link target-id="bid2"/> and the pseudoinverse <link target-id="bid1"/>)</para>
+      <para id="id164420">Roger Penrose <link target-id="bid8"/> showed that for all <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math>,
+there exists a unique <m:math overflow="scroll"><m:msup><m:mi mathvariant="bold">A</m:mi><m:mo>+</m:mo></m:msup></m:math> satisfying the four conditions:</para>
+      <equation id="id164458">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mi mathvariant="bold">A</m:mi>
+            <m:msup>
+              <m:mi mathvariant="bold">A</m:mi>
+              <m:mo>+</m:mo>
+            </m:msup>
+            <m:mi mathvariant="bold">A</m:mi>
+            <m:mo>=</m:mo>
+            <m:mi mathvariant="bold">A</m:mi>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <equation id="uid23">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:msup>
+              <m:mi mathvariant="bold">A</m:mi>
+              <m:mo>+</m:mo>
+            </m:msup>
+            <m:mi mathvariant="bold">A</m:mi>
+            <m:msup>
+              <m:mi mathvariant="bold">A</m:mi>
+              <m:mo>+</m:mo>
+            </m:msup>
+            <m:mo>=</m:mo>
+            <m:msup>
+              <m:mi mathvariant="bold">A</m:mi>
+              <m:mo>+</m:mo>
+            </m:msup>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <equation id="id164542">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:msup>
+              <m:mrow>
+                <m:mo>[</m:mo>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:msup>
+                  <m:mi mathvariant="bold">A</m:mi>
+                  <m:mo>+</m:mo>
+                </m:msup>
+                <m:mo>]</m:mo>
+              </m:mrow>
+              <m:mo>*</m:mo>
+            </m:msup>
+            <m:mo>=</m:mo>
+            <m:mi mathvariant="bold">A</m:mi>
+            <m:msup>
+              <m:mi mathvariant="bold">A</m:mi>
+              <m:mo>+</m:mo>
+            </m:msup>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <equation id="id164592">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:msup>
+              <m:mrow>
+                <m:mo>[</m:mo>
+                <m:msup>
+                  <m:mi mathvariant="bold">A</m:mi>
+                  <m:mo>+</m:mo>
+                </m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mo>]</m:mo>
+              </m:mrow>
+              <m:mo>*</m:mo>
+            </m:msup>
+            <m:mo>=</m:mo>
+            <m:msup>
+              <m:mi mathvariant="bold">A</m:mi>
+              <m:mo>+</m:mo>
+            </m:msup>
+            <m:mi mathvariant="bold">A</m:mi>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id164643">There is a large literature on this problem. Five useful books are
+<link target-id="bid0"/>, <link target-id="bid1"/>, <link target-id="bid2"/>, <link target-id="bid21"/>, <link target-id="bid22"/>. The Moore-Penrose
+pseudo-inverse can be calculated in Matlab <link target-id="bid23"/> by the
+<code display="inline">pinv(A,tol)</code> function which uses a singular value decomposition
+(SVD) to calculate it. There are a variety of other numerical methods
+given in the above references where each has some advantages and some
+disadvantages.</para>
+    </section>
+    <section id="cid6">
+      <title>Properties</title>
+      <para id="id164698">For cases 2a and 2b in Figure 1, the following <m:math overflow="scroll"><m:mi>N</m:mi></m:math> by <m:math overflow="scroll"><m:mi>N</m:mi></m:math> system of equations
+called the <emphasis effect="italics">normal equations</emphasis><link target-id="bid1"/>, <link target-id="bid0"/> have a unique minimum squared
+equation error solution (minimum <m:math overflow="scroll"><m:mrow><m:msup><m:mi>ϵ</m:mi><m:mi>T</m:mi></m:msup><m:mi>ϵ</m:mi></m:mrow></m:math>). Here we have the
+over specified case with more equations than unknowns.
+A derivation is outlined in <link target-id="uid51">"Derivations"</link>, equation <link target-id="uid54"/> below.</para>
+      <equation id="uid24">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:msup>
+              <m:mi mathvariant="bold">A</m:mi>
+              <m:mrow>
+                <m:mi mathvariant="bold">T</m:mi>
+                <m:mo>*</m:mo>
+              </m:mrow>
+            </m:msup>
+            <m:mi mathvariant="bold">A</m:mi>
+            <m:mi mathvariant="bold">x</m:mi>
+            <m:mo>=</m:mo>
+            <m:msup>
+              <m:mi mathvariant="bold">A</m:mi>
+              <m:mrow>
+                <m:mi mathvariant="bold">T</m:mi>
+                <m:mo>*</m:mo>
+              </m:mrow>
+            </m:msup>
+            <m:mi mathvariant="bold">b</m:mi>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id164824">The solution to this equation is often used in least squares approximation
+problems. For these two cases <m:math overflow="scroll"><m:mrow><m:msup><m:mrow><m:mi mathvariant="bold">A</m:mi></m:mrow><m:mi>T</m:mi></m:msup><m:mi mathvariant="bold">A</m:mi></m:mrow></m:math> is non-singular and the <m:math overflow="scroll"><m:mi>N</m:mi></m:math> by <m:math overflow="scroll"><m:mi>M</m:mi></m:math> pseudo-inverse is simply,</para>
+      <equation id="uid25">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mrow>
+              <m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mo>+</m:mo>
+              </m:msup>
+              <m:mo>=</m:mo>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>[</m:mo>
+                  <m:msup>
+                    <m:mi mathvariant="bold">A</m:mi>
+                    <m:mrow>
+                      <m:mi mathvariant="bold">T</m:mi>
+                      <m:mo>*</m:mo>
+                    </m:mrow>
+                  </m:msup>
+                  <m:mi mathvariant="bold">A</m:mi>
+                  <m:mo>]</m:mo>
+                </m:mrow>
+                <m:mrow>
+                  <m:mo>-</m:mo>
+                  <m:mn mathvariant="bold">1</m:mn>
+                </m:mrow>
+              </m:msup>
+              <m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mrow>
+                  <m:mi mathvariant="bold">T</m:mi>
+                  <m:mo>*</m:mo>
+                </m:mrow>
+              </m:msup>
+            </m:mrow>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id164952">A more general problem can be solved by minimizing the weighted equation error,
+<m:math overflow="scroll"><m:mrow><m:msup><m:mi>ϵ</m:mi><m:mi mathvariant="bold">T</m:mi></m:msup><m:msup><m:mi mathvariant="bold">W</m:mi><m:mi mathvariant="bold">T</m:mi></m:msup><m:mi mathvariant="bold">W</m:mi><m:mi>ϵ</m:mi></m:mrow></m:math> where <m:math overflow="scroll"><m:mi mathvariant="bold">W</m:mi></m:math> is a positive semi-definite
+diagonal matrix of the error weights. The solution to that problem <link target-id="bid2"/> is</para>
+      <equation id="uid26">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mrow>
+              <m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mo>+</m:mo>
+              </m:msup>
+              <m:mo>=</m:mo>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>[</m:mo>
+                  <m:msup>
+                    <m:mi mathvariant="bold">A</m:mi>
+                    <m:mrow>
+                      <m:mi mathvariant="bold">T</m:mi>
+                      <m:mo>*</m:mo>
+                    </m:mrow>
+                  </m:msup>
+                  <m:msup>
+                    <m:mi mathvariant="bold">W</m:mi>
+                    <m:mrow>
+                      <m:mi mathvariant="bold">T</m:mi>
+                      <m:mo>*</m:mo>
+                    </m:mrow>
+                  </m:msup>
+                  <m:mi mathvariant="bold">W</m:mi>
+                  <m:mi mathvariant="bold">A</m:mi>
+                  <m:mo>]</m:mo>
+                </m:mrow>
+                <m:mrow>
+                  <m:mo>-</m:mo>
+                  <m:mn mathvariant="bold">1</m:mn>
+                </m:mrow>
+              </m:msup>
+              <m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mrow>
+                  <m:mi mathvariant="bold">T</m:mi>
+                  <m:mo>*</m:mo>
+                </m:mrow>
+              </m:msup>
+              <m:msup>
+                <m:mi mathvariant="bold">W</m:mi>
+                <m:mrow>
+                  <m:mi mathvariant="bold">T</m:mi>
+                  <m:mo>*</m:mo>
+                </m:mrow>
+              </m:msup>
+              <m:mi mathvariant="bold">W</m:mi>
+            </m:mrow>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id165131">For the case 3a in Figure 1 with more unknowns than equations, <m:math overflow="scroll"><m:mrow><m:mi mathvariant="bold">A</m:mi><m:msup><m:mrow><m:mi mathvariant="bold">A</m:mi></m:mrow><m:mi>T</m:mi></m:msup></m:mrow></m:math> is non-singular and
+has a unique minimum norm solution, <m:math overflow="scroll"><m:mrow><m:mo>|</m:mo><m:mo>|</m:mo><m:mi mathvariant="bold">x</m:mi><m:mo>|</m:mo><m:mo>|</m:mo></m:mrow></m:math>. The <m:math overflow="scroll"><m:mi>N</m:mi></m:math> by <m:math overflow="scroll"><m:mi>M</m:mi></m:math> pseudoinverse is simply,</para>
+      <equation id="uid27">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mrow>
+              <m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mo>+</m:mo>
+              </m:msup>
+              <m:mo>=</m:mo>
+              <m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mrow>
+                  <m:mi mathvariant="bold">T</m:mi>
+                  <m:mo>*</m:mo>
+                </m:mrow>
+              </m:msup>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>[</m:mo>
+                  <m:mi mathvariant="bold">A</m:mi>
+                  <m:msup>
+                    <m:mi mathvariant="bold">A</m:mi>
+                    <m:mrow>
+                      <m:mi mathvariant="bold">T</m:mi>
+                      <m:mo>*</m:mo>
+                    </m:mrow>
+                  </m:msup>
+                  <m:mo>]</m:mo>
+                </m:mrow>
+                <m:mrow>
+                  <m:mo>-</m:mo>
+                  <m:mn mathvariant="bold">1</m:mn>
+                </m:mrow>
+              </m:msup>
+            </m:mrow>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id165279">with the formula for the minimum weighted solution norm <m:math overflow="scroll"><m:mrow><m:mo>|</m:mo><m:mo>|</m:mo><m:mi>x</m:mi><m:mo>|</m:mo><m:mo>|</m:mo></m:mrow></m:math> is</para>
+      <equation id="uid28">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mrow>
+              <m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mo>+</m:mo>
+              </m:msup>
+              <m:mo>=</m:mo>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>[</m:mo>
+                  <m:msup>
+                    <m:mi mathvariant="bold">W</m:mi>
+                    <m:mi mathvariant="bold">T</m:mi>
+                  </m:msup>
+                  <m:mi mathvariant="bold">W</m:mi>
+                  <m:mo>]</m:mo>
+                </m:mrow>
+                <m:mrow>
+                  <m:mo>-</m:mo>
+                  <m:mn mathvariant="bold">1</m:mn>
+                </m:mrow>
+              </m:msup>
+              <m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mi mathvariant="bold">T</m:mi>
+              </m:msup>
+              <m:msup>
+                <m:mfenced separators="" open="[" close="]">
+                  <m:mi mathvariant="bold">A</m:mi>
+                  <m:msup>
+                    <m:mrow>
+                      <m:mo>[</m:mo>
+                      <m:msup>
+                        <m:mi mathvariant="bold">W</m:mi>
+                        <m:mi mathvariant="bold">T</m:mi>
+                      </m:msup>
+                      <m:mi mathvariant="bold">W</m:mi>
+                      <m:mo>]</m:mo>
+                    </m:mrow>
+                    <m:mrow>
+                      <m:mo>-</m:mo>
+                      <m:mn mathvariant="bold">1</m:mn>
+                    </m:mrow>
+                  </m:msup>
+                  <m:msup>
+                    <m:mi mathvariant="bold">A</m:mi>
+                    <m:mi mathvariant="bold">T</m:mi>
+                  </m:msup>
+                </m:mfenced>
+                <m:mrow>
+                  <m:mo>-</m:mo>
+                  <m:mn mathvariant="bold">1</m:mn>
+                </m:mrow>
+              </m:msup>
+            </m:mrow>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id165446">For these three cases, either <link target-id="uid25"/> or <link target-id="uid27"/> can be directly calculated, but
+not both. However, they are equal so you simply use the one with the non-singular
+matrix to be inverted. The equality can be shown from
+an equivalent definition <link target-id="bid1"/> of the pseudo-inverse given
+in terms of a limit by</para>
+      <equation id="uid29">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:msup>
+              <m:mi mathvariant="bold">A</m:mi>
+              <m:mo>+</m:mo>
+            </m:msup>
+            <m:mo>=</m:mo>
+            <m:munder>
+              <m:mo movablelimits="true" form="prefix">lim</m:mo>
+              <m:mrow>
+                <m:mi>δ</m:mi>
+                <m:mo>→</m:mo>
+                <m:mn>0</m:mn>
+              </m:mrow>
+            </m:munder>
+            <m:mrow>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>[</m:mo>
+                  <m:msup>
+                    <m:mi mathvariant="bold">A</m:mi>
+                    <m:mrow>
+                      <m:mi mathvariant="bold">T</m:mi>
+                      <m:mo>*</m:mo>
+                    </m:mrow>
+                  </m:msup>
+                  <m:mi mathvariant="bold">A</m:mi>
+                  <m:mo>+</m:mo>
+                  <m:msup>
+                    <m:mi>δ</m:mi>
+                    <m:mn mathvariant="bold">2</m:mn>
+                  </m:msup>
+                  <m:mi mathvariant="bold">I</m:mi>
+                  <m:mo>]</m:mo>
+                </m:mrow>
+                <m:mrow>
+                  <m:mo>-</m:mo>
+                  <m:mn mathvariant="bold">1</m:mn>
+                </m:mrow>
+              </m:msup>
+              <m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mrow>
+                  <m:mi mathvariant="bold">T</m:mi>
+                  <m:mo>*</m:mo>
+                </m:mrow>
+              </m:msup>
+            </m:mrow>
+            <m:mo>=</m:mo>
+            <m:munder>
+              <m:mo movablelimits="true" form="prefix">lim</m:mo>
+              <m:mrow>
+                <m:mi>δ</m:mi>
+                <m:mo>→</m:mo>
+                <m:mn>0</m:mn>
+              </m:mrow>
+            </m:munder>
+            <m:mrow>
+              <m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mrow>
+                  <m:mi mathvariant="bold">T</m:mi>
+                  <m:mo>*</m:mo>
+                </m:mrow>
+              </m:msup>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>[</m:mo>
+                  <m:mi mathvariant="bold">A</m:mi>
+                  <m:msup>
+                    <m:mi mathvariant="bold">A</m:mi>
+                    <m:mrow>
+                      <m:mi mathvariant="bold">T</m:mi>
+                      <m:mo>*</m:mo>
+                    </m:mrow>
+                  </m:msup>
+                  <m:mo>+</m:mo>
+                  <m:msup>
+                    <m:mi>δ</m:mi>
+                    <m:mn mathvariant="bold">2</m:mn>
+                  </m:msup>
+                  <m:mi mathvariant="bold">I</m:mi>
+                  <m:mo>]</m:mo>
+                </m:mrow>
+                <m:mrow>
+                  <m:mo>-</m:mo>
+                  <m:mn mathvariant="bold">1</m:mn>
+                </m:mrow>
+              </m:msup>
+            </m:mrow>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id165672">For the other 6 cases, SVD or other approaches must be used.
+Some properties <link target-id="bid1"/>, <link target-id="bid21"/> are:</para>
+      <list id="id165690" display="block" list-type="bulleted">
+        <item id="uid30">
+          <m:math overflow="scroll">
+            <m:mrow>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>[</m:mo>
+                  <m:msup>
+                    <m:mi mathvariant="bold">A</m:mi>
+                    <m:mo>+</m:mo>
+                  </m:msup>
+                  <m:mo>]</m:mo>
+                </m:mrow>
+                <m:mo>+</m:mo>
+              </m:msup>
+              <m:mo>=</m:mo>
+              <m:mi mathvariant="bold">A</m:mi>
+            </m:mrow>
+          </m:math>
+        </item>
+        <item id="uid31">
+          <m:math overflow="scroll">
+            <m:mrow>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>[</m:mo>
+                  <m:msup>
+                    <m:mi mathvariant="bold">A</m:mi>
+                    <m:mo>+</m:mo>
+                  </m:msup>
+                  <m:mo>]</m:mo>
+                </m:mrow>
+                <m:mo>*</m:mo>
+              </m:msup>
+              <m:mo>=</m:mo>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>[</m:mo>
+                  <m:msup>
+                    <m:mi mathvariant="bold">A</m:mi>
+                    <m:mo>*</m:mo>
+                  </m:msup>
+                  <m:mo>]</m:mo>
+                </m:mrow>
+                <m:mo>+</m:mo>
+              </m:msup>
+            </m:mrow>
+          </m:math>
+        </item>
+        <item id="uid32">
+          <m:math overflow="scroll">
+            <m:mrow>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>[</m:mo>
+                  <m:msup>
+                    <m:mi mathvariant="bold">A</m:mi>
+                    <m:mo>*</m:mo>
+                  </m:msup>
+                  <m:mi mathvariant="bold">A</m:mi>
+                  <m:mo>]</m:mo>
+                </m:mrow>
+                <m:mo>+</m:mo>
+              </m:msup>
+              <m:mo>=</m:mo>
+              <m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mo>+</m:mo>
+              </m:msup>
+              <m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mrow>
+                  <m:mo>*</m:mo>
+                  <m:mo>+</m:mo>
+                </m:mrow>
+              </m:msup>
+            </m:mrow>
+          </m:math>
+        </item>
+        <item id="uid33"><m:math overflow="scroll"><m:mrow><m:msup><m:mi>λ</m:mi><m:mo>+</m:mo></m:msup><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>/</m:mo><m:mi>λ</m:mi></m:mrow></m:math> for <m:math overflow="scroll"><m:mrow><m:mi>λ</m:mi><m:mo>≠</m:mo><m:mn>0</m:mn></m:mrow></m:math> else <m:math overflow="scroll"><m:mrow><m:msup><m:mi>λ</m:mi><m:mo>+</m:mo></m:msup><m:mo>=</m:mo><m:mn>0</m:mn></m:mrow></m:math></item>
+        <item id="uid34">
+          <m:math overflow="scroll">
+            <m:mrow>
+              <m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mo>+</m:mo>
+              </m:msup>
+              <m:mo>=</m:mo>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>[</m:mo>
+                  <m:msup>
+                    <m:mi mathvariant="bold">A</m:mi>
+                    <m:mo>*</m:mo>
+                  </m:msup>
+                  <m:mi mathvariant="bold">A</m:mi>
+                  <m:mo>]</m:mo>
+                </m:mrow>
+                <m:mo>+</m:mo>
+              </m:msup>
+              <m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mo>*</m:mo>
+              </m:msup>
+              <m:mo>=</m:mo>
+              <m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mo>*</m:mo>
+              </m:msup>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>[</m:mo>
+                  <m:mi mathvariant="bold">A</m:mi>
+                  <m:msup>
+                    <m:mi mathvariant="bold">A</m:mi>
+                    <m:mo>*</m:mo>
+                  </m:msup>
+                  <m:mo>]</m:mo>
+                </m:mrow>
+                <m:mo>+</m:mo>
+              </m:msup>
+            </m:mrow>
+          </m:math>
+        </item>
+        <item id="uid35">
+          <m:math overflow="scroll">
+            <m:mrow>
+              <m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mo>*</m:mo>
+              </m:msup>
+              <m:mo>=</m:mo>
+              <m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mo>*</m:mo>
+              </m:msup>
+              <m:mi mathvariant="bold">A</m:mi>
+              <m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mo>+</m:mo>
+              </m:msup>
+              <m:mo>=</m:mo>
+              <m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mo>+</m:mo>
+              </m:msup>
+              <m:mi mathvariant="bold">A</m:mi>
+              <m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mo>*</m:mo>
+              </m:msup>
+            </m:mrow>
+          </m:math>
+        </item>
+      </list>
+      <para id="id166112">It is informative to consider the range and null spaces <link target-id="bid21"/>
+of <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> and <m:math overflow="scroll"><m:msup><m:mi mathvariant="bold">A</m:mi><m:mo>+</m:mo></m:msup></m:math></para>
+      <list id="id166149" display="block" list-type="bulleted">
+        <item id="uid36">
+          <m:math overflow="scroll">
+            <m:mrow>
+              <m:mi>R</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:mi>R</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:msup>
+                  <m:mrow>
+                    <m:mi mathvariant="bold">A</m:mi>
+                  </m:mrow>
+                  <m:mo>+</m:mo>
+                </m:msup>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:mi>R</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:msup>
+                  <m:mrow>
+                    <m:mi mathvariant="bold">A</m:mi>
+                  </m:mrow>
+                  <m:mo>*</m:mo>
+                </m:msup>
+                <m:mo>)</m:mo>
+              </m:mrow>
+            </m:mrow>
+          </m:math>
+        </item>
+        <item id="uid37">
+          <m:math overflow="scroll">
+            <m:mrow>
+              <m:mi>R</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:msup>
+                  <m:mrow>
+                    <m:mi mathvariant="bold">A</m:mi>
+                  </m:mrow>
+                  <m:mo>+</m:mo>
+                </m:msup>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:mi>R</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:msup>
+                  <m:mrow>
+                    <m:mi mathvariant="bold">A</m:mi>
+                  </m:mrow>
+                  <m:mo>*</m:mo>
+                </m:msup>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:mi>R</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:msup>
+                  <m:mrow>
+                    <m:mi mathvariant="bold">A</m:mi>
+                  </m:mrow>
+                  <m:mo>+</m:mo>
+                </m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:mi>R</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:msup>
+                  <m:mrow>
+                    <m:mi mathvariant="bold">A</m:mi>
+                  </m:mrow>
+                  <m:mo>*</m:mo>
+                </m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+            </m:mrow>
+          </m:math>
+        </item>
+        <item id="uid38">
+          <m:math overflow="scroll">
+            <m:mrow>
+              <m:mi>R</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi>I</m:mi>
+                <m:mo>-</m:mo>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:msup>
+                  <m:mrow>
+                    <m:mi mathvariant="bold">A</m:mi>
+                  </m:mrow>
+                  <m:mo>+</m:mo>
+                </m:msup>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:mi>N</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:msup>
+                  <m:mrow>
+                    <m:mi mathvariant="bold">A</m:mi>
+                  </m:mrow>
+                  <m:mo>+</m:mo>
+                </m:msup>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:mi>N</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:msup>
+                  <m:mrow>
+                    <m:mi mathvariant="bold">A</m:mi>
+                  </m:mrow>
+                  <m:mo>*</m:mo>
+                </m:msup>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:mi>N</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:msup>
+                  <m:mrow>
+                    <m:mi mathvariant="bold">A</m:mi>
+                  </m:mrow>
+                  <m:mo>+</m:mo>
+                </m:msup>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:mi>R</m:mi>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>(</m:mo>
+                  <m:mi mathvariant="bold">A</m:mi>
+                  <m:mo>)</m:mo>
+                </m:mrow>
+                <m:mo>⊥</m:mo>
+              </m:msup>
+            </m:mrow>
+          </m:math>
+        </item>
+        <item id="uid39">
+          <m:math overflow="scroll">
+            <m:mrow>
+              <m:mi>R</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi>I</m:mi>
+                <m:mo>-</m:mo>
+                <m:msup>
+                  <m:mrow>
+                    <m:mi mathvariant="bold">A</m:mi>
+                  </m:mrow>
+                  <m:mo>+</m:mo>
+                </m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:mi>N</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:msup>
+                  <m:mrow>
+                    <m:mi mathvariant="bold">A</m:mi>
+                  </m:mrow>
+                  <m:mo>+</m:mo>
+                </m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:mi>N</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:mi>R</m:mi>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>(</m:mo>
+                  <m:msup>
+                    <m:mrow>
+                      <m:mi mathvariant="bold">A</m:mi>
+                    </m:mrow>
+                    <m:mo>*</m:mo>
+                  </m:msup>
+                  <m:mo>)</m:mo>
+                </m:mrow>
+                <m:mo>⊥</m:mo>
+              </m:msup>
+            </m:mrow>
+          </m:math>
+        </item>
+      </list>
+    </section>
+    <section id="cid7">
+      <title>The Cases with Analytical Soluctions</title>
+      <para id="id166585">The four Penrose equations in <link target-id="uid23"/> are remarkable in defining a unique
+pseudoinverse for any <emphasis effect="bold">A</emphasis> with any shape, any rank, for any of
+the ten cases listed in Figure 1.
+However, only four cases of the ten have analytical solutions (actually, all do if you use SVD).</para>
+      <list id="id166601" display="block" list-type="bulleted">
+        <item id="uid40">If <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> is case 1a, (square and nonsingular), then
+<equation id="uid41"><m:math overflow="scroll" mode="display"><m:mrow><m:msup><m:mi mathvariant="bold">A</m:mi><m:mo>+</m:mo></m:msup><m:mo>=</m:mo><m:msup><m:mi mathvariant="bold">A</m:mi><m:mrow><m:mo>-</m:mo><m:mn mathvariant="bold">1</m:mn></m:mrow></m:msup></m:mrow></m:math></equation></item>
+        <item id="uid42">If <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> is case 2a or 2b, (over specified) then
+<equation id="uid43"><m:math overflow="scroll" mode="display"><m:mrow><m:msup><m:mi mathvariant="bold">A</m:mi><m:mo>+</m:mo></m:msup><m:mo>=</m:mo><m:msup><m:mrow><m:mo>[</m:mo><m:msup><m:mi mathvariant="bold">A</m:mi><m:mi mathvariant="bold">T</m:mi></m:msup><m:mi mathvariant="bold">A</m:mi><m:mo>]</m:mo></m:mrow><m:mrow><m:mo>-</m:mo><m:mn mathvariant="bold">1</m:mn></m:mrow></m:msup><m:msup><m:mi mathvariant="bold">A</m:mi><m:mi mathvariant="bold">T</m:mi></m:msup></m:mrow></m:math></equation></item>
+        <item id="uid44">If <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> is case 3a, (under specified) then
+<equation id="uid45"><m:math overflow="scroll" mode="display"><m:mrow><m:msup><m:mi mathvariant="bold">A</m:mi><m:mo>+</m:mo></m:msup><m:mo>=</m:mo><m:msup><m:mi mathvariant="bold">A</m:mi><m:mi mathvariant="bold">T</m:mi></m:msup><m:msup><m:mrow><m:mo>[</m:mo><m:mi mathvariant="bold">A</m:mi><m:msup><m:mi mathvariant="bold">A</m:mi><m:mi mathvariant="bold">T</m:mi></m:msup><m:mo>]</m:mo></m:mrow><m:mrow><m:mo>-</m:mo><m:mn mathvariant="bold">1</m:mn></m:mrow></m:msup></m:mrow></m:math></equation></item>
+      </list>
+      <para id="id166857"><emphasis effect="bold">Figure 2.</emphasis> Four Cases with Analytical Solutions</para>
+      <para id="id166865">Fortunately, most practical cases are one of these four but even then, it is generally
+faster and less error prone to use special techniques on the normal equations
+rather than directly calculating the inverse matrix. Note the matrices
+to be inverted above are all <m:math overflow="scroll"><m:mi>r</m:mi></m:math> by <m:math overflow="scroll"><m:mi>r</m:mi></m:math> (<m:math overflow="scroll"><m:mi>r</m:mi></m:math> is the rank) and nonsingular. In the other
+six cases from the ten in Figure 1, these would be singular, so alternate methods such
+as SVD must be used <link target-id="bid0"/>, <link target-id="bid1"/>, <link target-id="bid2"/>.</para>
+      <para id="id166919">In addition to these four cases with “analytical” solutions, we can pose a more
+general problem by asking for an optimal approximation with a weighted norm <link target-id="bid2"/>
+to emphasize or de-emphasize certain components or range of equations.</para>
+      <list id="id166931" display="block" list-type="bulleted">
+        <item id="uid46">If <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> is case 2a or 2b, (over specified) then the weighted error pseudoinverse is
+<equation id="uid47"><m:math overflow="scroll" mode="display"><m:mrow><m:msup><m:mi mathvariant="bold">A</m:mi><m:mo>+</m:mo></m:msup><m:mo>=</m:mo><m:msup><m:mrow><m:mo>[</m:mo><m:msup><m:mi mathvariant="bold">A</m:mi><m:mrow><m:mi mathvariant="bold">T</m:mi><m:mo>*</m:mo></m:mrow></m:msup><m:msup><m:mi mathvariant="bold">W</m:mi><m:mrow><m:mi mathvariant="bold">T</m:mi><m:mo>*</m:mo></m:mrow></m:msup><m:mi mathvariant="bold">W</m:mi><m:mi mathvariant="bold">A</m:mi><m:mo>]</m:mo></m:mrow><m:mrow><m:mo>-</m:mo><m:mn mathvariant="bold">1</m:mn></m:mrow></m:msup><m:msup><m:mi mathvariant="bold">A</m:mi><m:mrow><m:mi mathvariant="bold">T</m:mi><m:mo>*</m:mo></m:mrow></m:msup><m:msup><m:mi mathvariant="bold">W</m:mi><m:mrow><m:mi mathvariant="bold">T</m:mi><m:mo>*</m:mo></m:mrow></m:msup><m:mi mathvariant="bold">W</m:mi></m:mrow></m:math></equation></item>
+        <item id="uid48">If <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> is case 3a, (under specified) then the weighted norm pseudoinverse is
+<equation id="uid49"><m:math overflow="scroll" mode="display"><m:mrow><m:msup><m:mi mathvariant="bold">A</m:mi><m:mo>+</m:mo></m:msup><m:mo>=</m:mo><m:msup><m:mrow><m:mo>[</m:mo><m:msup><m:mi mathvariant="bold">W</m:mi><m:mi mathvariant="bold">T</m:mi></m:msup><m:mi mathvariant="bold">W</m:mi><m:mo>]</m:mo></m:mrow><m:mrow><m:mo>-</m:mo><m:mn mathvariant="bold">1</m:mn></m:mrow></m:msup><m:msup><m:mi mathvariant="bold">A</m:mi><m:mi mathvariant="bold">T</m:mi></m:msup><m:msup><m:mfenced separators="" open="[" close="]"><m:mi mathvariant="bold">A</m:mi><m:msup><m:mrow><m:mo>[</m:mo><m:msup><m:mi mathvariant="bold">W</m:mi><m:mi mathvariant="bold">T</m:mi></m:msup><m:mi mathvariant="bold">W</m:mi><m:mo>]</m:mo></m:mrow><m:mrow><m:mo>-</m:mo><m:mn mathvariant="bold">1</m:mn></m:mrow></m:msup><m:msup><m:mi mathvariant="bold">A</m:mi><m:mi mathvariant="bold">T</m:mi></m:msup></m:mfenced><m:mrow><m:mo>-</m:mo><m:mn mathvariant="bold">1</m:mn></m:mrow></m:msup></m:mrow></m:math></equation></item>
+      </list>
+      <para id="id167237"><emphasis effect="bold">Figure 3.</emphasis> Three Cases with Analytical Solutions and Weights</para>
+      <para id="id167246">These solutions to the weighted approxomation problem are useful in their own right
+but also serve as the foundation to the Iterative Reweighted Least Squares (IRLS)
+algorithm developed in the next chapter.</para>
+    </section>
+    <section id="cid8">
+      <title>Geometric interpretation and Least Squares Approximation</title>
+      <para id="id167266">A particularly useful application of the pseudo-inverse of a matrix is to
+various least squared error approximations <link target-id="bid0"/>, <link target-id="bid9"/>. A geometric view of the
+derivation of the normal equations can be helpful. If <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> does not
+lie in the range space of <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math>, an error vector is defined as the
+difference between <m:math overflow="scroll"><m:mrow><m:mi mathvariant="bold">A</m:mi><m:mi mathvariant="bold">x</m:mi></m:mrow></m:math> and <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math>. A geometric picture of
+this vector makes it clear that for the length of <m:math overflow="scroll"><m:mi>ε</m:mi></m:math> to be
+minimum, it must be orthogonal to the space spanned by the columns of
+<m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math>. This means that <m:math overflow="scroll"><m:mrow><m:msup><m:mi mathvariant="bold">A</m:mi><m:mo>*</m:mo></m:msup><m:mi>ε</m:mi><m:mo>=</m:mo><m:mn mathvariant="bold">0</m:mn></m:mrow></m:math>. If both sides of
+<link target-id="uid2"/> are multiplied by <m:math overflow="scroll"><m:msup><m:mi mathvariant="bold">A</m:mi><m:mo>*</m:mo></m:msup></m:math>, it is easy to see that the normal
+equations of <link target-id="uid24"/> result in the error being orthogonal to the columns of
+<m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> and, therefore its being minimal length. If <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> does lie
+in the range space of <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math>, the solution of the normal equations
+gives the exact solution of <link target-id="uid2"/> with no error.</para>
+      <para id="id167445">For cases 1b, 1c, 2c, 2d, 3a, 3b, and 3c, the homogeneous equation
+<link target-id="uid5"/> has non-zero solutions. Any vector in the space spanned by
+these solutions (the null space of <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math>) does not contribute to the equation
+error <m:math overflow="scroll"><m:mi>ε</m:mi></m:math> defined in <link target-id="uid3"/> and, therefore, can be added to
+any particular generalized solution of <link target-id="uid2"/> to give a family of
+solutions with the same approximation error. If the dimension of the null
+space of <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> is <m:math overflow="scroll"><m:mi>d</m:mi></m:math>, it is possible to find a unique generalized
+solution of <link target-id="uid2"/> with <m:math overflow="scroll"><m:mi>d</m:mi></m:math> zero elements. The non-unique solution
+for these seven cases can be written in the form <link target-id="bid2"/>.</para>
+      <equation id="uid50">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mi mathvariant="bold">x</m:mi>
+            <m:mo>=</m:mo>
+            <m:msup>
+              <m:mi mathvariant="bold">A</m:mi>
+              <m:mo>+</m:mo>
+            </m:msup>
+            <m:mi mathvariant="bold">b</m:mi>
+            <m:mo>+</m:mo>
+            <m:mrow>
+              <m:mo>[</m:mo>
+              <m:mi mathvariant="bold">I</m:mi>
+              <m:mo>-</m:mo>
+              <m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mo>+</m:mo>
+              </m:msup>
+              <m:mi mathvariant="bold">A</m:mi>
+              <m:mo>]</m:mo>
+            </m:mrow>
+            <m:mi mathvariant="bold">y</m:mi>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id167592">where <m:math overflow="scroll"><m:mi mathvariant="bold">y</m:mi></m:math> is an arbitrary vector. The first term is the minimum
+norm solution given by the Moore-Penrose pseudo-inverse <m:math overflow="scroll"><m:msup><m:mi mathvariant="bold">A</m:mi><m:mo>+</m:mo></m:msup></m:math> and
+the second is a contribution in the null space of <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math>. For the
+minimum <m:math overflow="scroll"><m:mrow><m:mo>|</m:mo><m:mo>|</m:mo><m:mi>x</m:mi><m:mo>|</m:mo><m:mo>|</m:mo></m:mrow></m:math>, the vector <m:math overflow="scroll"><m:mrow><m:mi mathvariant="bold">y</m:mi><m:mo>=</m:mo><m:mn>0</m:mn></m:mrow></m:math>.</para>
+      <section id="uid51">
+        <title>Derivations</title>
+        <para id="id167681">To derive the necessary conditions for minimizing <m:math overflow="scroll"><m:mi>q</m:mi></m:math> in the overspecified case, we
+differentiate <m:math overflow="scroll"><m:mrow><m:mi>q</m:mi><m:mo>=</m:mo><m:mrow><m:msup><m:mi>ϵ</m:mi><m:mi mathvariant="bold">T</m:mi></m:msup><m:mi>ϵ</m:mi></m:mrow></m:mrow></m:math> with respect to <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> and set that
+to zero. Starting with the error</para>
+        <equation id="uid52">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mi>q</m:mi>
+              <m:mo>=</m:mo>
+              <m:mrow>
+                <m:msup>
+                  <m:mi>ϵ</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:mi>ϵ</m:mi>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:mrow>
+                <m:msup>
+                  <m:mrow>
+                    <m:mo>[</m:mo>
+                    <m:mi mathvariant="bold">Ax</m:mi>
+                    <m:mo>-</m:mo>
+                    <m:mi mathvariant="bold">b</m:mi>
+                    <m:mo>]</m:mo>
+                  </m:mrow>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:mrow>
+                  <m:mo>[</m:mo>
+                  <m:mi mathvariant="bold">Ax</m:mi>
+                  <m:mo>-</m:mo>
+                  <m:mi mathvariant="bold">b</m:mi>
+                  <m:mo>]</m:mo>
+                </m:mrow>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:mrow>
+                <m:msup>
+                  <m:mi mathvariant="bold">x</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:msup>
+                  <m:mi mathvariant="bold">A</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mi mathvariant="bold">x</m:mi>
+                <m:mo>-</m:mo>
+                <m:msup>
+                  <m:mi mathvariant="bold">x</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:msup>
+                  <m:mi mathvariant="bold">A</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:mi mathvariant="bold">b</m:mi>
+                <m:mo>-</m:mo>
+                <m:msup>
+                  <m:mi mathvariant="bold">b</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mi mathvariant="bold">x</m:mi>
+                <m:mo>+</m:mo>
+                <m:msup>
+                  <m:mi mathvariant="bold">b</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:mi mathvariant="bold">b</m:mi>
+              </m:mrow>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <equation id="uid53">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mi>q</m:mi>
+              <m:mo>=</m:mo>
+              <m:mrow>
+                <m:msup>
+                  <m:mi mathvariant="bold">x</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:msup>
+                  <m:mi mathvariant="bold">A</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mi mathvariant="bold">x</m:mi>
+                <m:mo>-</m:mo>
+                <m:mn mathvariant="bold">2</m:mn>
+                <m:msup>
+                  <m:mi mathvariant="bold">x</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:msup>
+                  <m:mi mathvariant="bold">A</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:mi mathvariant="bold">b</m:mi>
+                <m:mo>+</m:mo>
+                <m:msup>
+                  <m:mi mathvariant="bold">b</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:mi mathvariant="bold">b</m:mi>
+              </m:mrow>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id168019">and taking the gradient or derivative gives</para>
+        <equation id="uid54">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:msub>
+                <m:mi>∇</m:mi>
+                <m:mi mathvariant="bold">x</m:mi>
+              </m:msub>
+              <m:mi>q</m:mi>
+              <m:mo>=</m:mo>
+              <m:mn>2</m:mn>
+              <m:mrow>
+                <m:msup>
+                  <m:mi mathvariant="bold">A</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mi mathvariant="bold">x</m:mi>
+              </m:mrow>
+              <m:mo>-</m:mo>
+              <m:mn>2</m:mn>
+              <m:mrow>
+                <m:msup>
+                  <m:mi mathvariant="bold">A</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:mi mathvariant="bold">b</m:mi>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:mn mathvariant="bold">0</m:mn>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id168105">which are the normal equations in <link target-id="uid24"/> and the pseudoinverse in <link target-id="uid25"/> and <link target-id="uid43"/>.</para>
+        <para id="id168125">If we start with the weighted error problem</para>
+        <equation id="uid55">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mi>q</m:mi>
+              <m:mo>=</m:mo>
+              <m:mrow>
+                <m:msup>
+                  <m:mi>ϵ</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:msup>
+                  <m:mi mathvariant="bold">W</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:mi mathvariant="bold">W</m:mi>
+                <m:mi>ϵ</m:mi>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:mrow>
+                <m:msup>
+                  <m:mrow>
+                    <m:mo>[</m:mo>
+                    <m:mi mathvariant="bold">Ax</m:mi>
+                    <m:mo>-</m:mo>
+                    <m:mi mathvariant="bold">b</m:mi>
+                    <m:mo>]</m:mo>
+                  </m:mrow>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:msup>
+                  <m:mi mathvariant="bold">W</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:mi mathvariant="bold">W</m:mi>
+                <m:mrow>
+                  <m:mo>[</m:mo>
+                  <m:mi mathvariant="bold">Ax</m:mi>
+                  <m:mo>-</m:mo>
+                  <m:mi mathvariant="bold">b</m:mi>
+                  <m:mo>]</m:mo>
+                </m:mrow>
+              </m:mrow>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id168237">using the same steps as before gives the normal equations for the minimum weighted squared error as</para>
+        <equation id="uid56">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mrow>
+                <m:msup>
+                  <m:mi mathvariant="bold">A</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:msup>
+                  <m:mi mathvariant="bold">W</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:mi mathvariant="bold">W</m:mi>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mi mathvariant="bold">x</m:mi>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:mrow>
+                <m:msup>
+                  <m:mi mathvariant="bold">A</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:msup>
+                  <m:mi mathvariant="bold">W</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:mi mathvariant="bold">W</m:mi>
+                <m:mi mathvariant="bold">b</m:mi>
+              </m:mrow>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id168332">and the pseudoinverse as</para>
+        <equation id="uid57">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mi mathvariant="bold">x</m:mi>
+              <m:mo>=</m:mo>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>[</m:mo>
+                  <m:msup>
+                    <m:mi mathvariant="bold">A</m:mi>
+                    <m:mi mathvariant="bold">T</m:mi>
+                  </m:msup>
+                  <m:msup>
+                    <m:mi mathvariant="bold">W</m:mi>
+                    <m:mi mathvariant="bold">T</m:mi>
+                  </m:msup>
+                  <m:mi mathvariant="bold">W</m:mi>
+                  <m:mi mathvariant="bold">A</m:mi>
+                  <m:mo>]</m:mo>
+                </m:mrow>
+                <m:mrow>
+                  <m:mo>-</m:mo>
+                  <m:mn mathvariant="bold">1</m:mn>
+                </m:mrow>
+              </m:msup>
+              <m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mi mathvariant="bold">T</m:mi>
+              </m:msup>
+              <m:msup>
+                <m:mi mathvariant="bold">W</m:mi>
+                <m:mi mathvariant="bold">T</m:mi>
+              </m:msup>
+              <m:mi mathvariant="bold">W</m:mi>
+              <m:mi mathvariant="bold">b</m:mi>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id168440">To derive the necessary conditions for minimizing the Euclidian norm <m:math overflow="scroll"><m:msub><m:mrow><m:mo>|</m:mo><m:mo>|</m:mo><m:mi>x</m:mi><m:mo>|</m:mo><m:mo>|</m:mo></m:mrow><m:mn>2</m:mn></m:msub></m:math> when
+there are few equations and many solutions to <link target-id="uid1"/>, we define a Lagrangian</para>
+        <equation id="uid58">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mi mathvariant="script">L</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mrow>
+                  <m:mi mathvariant="bold">x</m:mi>
+                  <m:mo>,</m:mo>
+                  <m:mi>μ</m:mi>
+                </m:mrow>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:msubsup>
+                <m:mrow>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                  <m:mrow>
+                    <m:mi mathvariant="bold">W</m:mi>
+                    <m:mi mathvariant="bold">x</m:mi>
+                  </m:mrow>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                </m:mrow>
+                <m:mn>2</m:mn>
+                <m:mn>2</m:mn>
+              </m:msubsup>
+              <m:mo>+</m:mo>
+              <m:mrow>
+                <m:msup>
+                  <m:mi>μ</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:mrow>
+                  <m:mo>(</m:mo>
+                  <m:mi mathvariant="bold">Ax</m:mi>
+                  <m:mo>-</m:mo>
+                  <m:mi mathvariant="bold">b</m:mi>
+                  <m:mo>)</m:mo>
+                </m:mrow>
+              </m:mrow>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id168566">take the derivatives in respect to both <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> and <m:math overflow="scroll"><m:mi>μ</m:mi></m:math> and set them to zero.</para>
+        <equation id="uid59">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:msub>
+                <m:mi>∇</m:mi>
+                <m:mi mathvariant="bold">x</m:mi>
+              </m:msub>
+              <m:mi mathvariant="script">L</m:mi>
+              <m:mo>=</m:mo>
+              <m:mn mathvariant="bold">2</m:mn>
+              <m:msup>
+                <m:mi mathvariant="bold">W</m:mi>
+                <m:mi mathvariant="bold">T</m:mi>
+              </m:msup>
+              <m:mi mathvariant="bold">W</m:mi>
+              <m:mi mathvariant="bold">x</m:mi>
+              <m:mo>+</m:mo>
+              <m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mi mathvariant="bold">T</m:mi>
+              </m:msup>
+              <m:mi>μ</m:mi>
+              <m:mo>=</m:mo>
+              <m:mn mathvariant="bold">0</m:mn>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id168671">and</para>
+        <equation id="uid60">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:msub>
+                <m:mi>∇</m:mi>
+                <m:mi>μ</m:mi>
+              </m:msub>
+              <m:mi mathvariant="script">L</m:mi>
+              <m:mo>=</m:mo>
+              <m:mi mathvariant="bold">Ax</m:mi>
+              <m:mo>-</m:mo>
+              <m:mi mathvariant="bold">b</m:mi>
+              <m:mo>=</m:mo>
+              <m:mn mathvariant="bold">0</m:mn>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id168723">Solve these two equation simultaneously for <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> eliminating <m:math overflow="scroll"><m:mi>μ</m:mi></m:math> gives
+the pseudoinverse in <link target-id="uid27"/> and <link target-id="uid45"/> result.</para>
+        <equation id="uid61">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mi mathvariant="bold">x</m:mi>
+              <m:mo>=</m:mo>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>[</m:mo>
+                  <m:msup>
+                    <m:mi mathvariant="bold">W</m:mi>
+                    <m:mi mathvariant="bold">T</m:mi>
+                  </m:msup>
+                  <m:mi mathvariant="bold">W</m:mi>
+                  <m:mo>]</m:mo>
+                </m:mrow>
+                <m:mrow>
+                  <m:mo>-</m:mo>
+                  <m:mn mathvariant="bold">1</m:mn>
+                </m:mrow>
+              </m:msup>
+              <m:msup>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mi mathvariant="bold">T</m:mi>
+              </m:msup>
+              <m:msup>
+                <m:mfenced separators="" open="[" close="]">
+                  <m:mi mathvariant="bold">A</m:mi>
+                  <m:msup>
+                    <m:mrow>
+                      <m:mo>[</m:mo>
+                      <m:msup>
+                        <m:mi mathvariant="bold">W</m:mi>
+                        <m:mi mathvariant="bold">T</m:mi>
+                      </m:msup>
+                      <m:mi mathvariant="bold">W</m:mi>
+                      <m:mo>]</m:mo>
+                    </m:mrow>
+                    <m:mrow>
+                      <m:mo>-</m:mo>
+                      <m:mn mathvariant="bold">1</m:mn>
+                    </m:mrow>
+                  </m:msup>
+                  <m:msup>
+                    <m:mi mathvariant="bold">A</m:mi>
+                    <m:mi mathvariant="bold">T</m:mi>
+                  </m:msup>
+                </m:mfenced>
+                <m:mrow>
+                  <m:mo>-</m:mo>
+                  <m:mn mathvariant="bold">1</m:mn>
+                </m:mrow>
+              </m:msup>
+              <m:mi mathvariant="bold">b</m:mi>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id168897">Because the weighting matrices <m:math overflow="scroll"><m:mi mathvariant="bold">W</m:mi></m:math> are diagonal and real, multiplication and
+inversion is simple. These equations are used in the Iteratively Reweighted Least
+Squares (IRLS) algorithm described in the next chapter.</para>
+      </section>
+    </section>
+    <section id="cid9">
+      <title>Regularization</title>
+      <para id="id168923">To deal with measurement error and data noise, a process called “regularization" is
+sometimes used <link target-id="bid24"/>, <link target-id="bid9"/>, <link target-id="bid25"/>.</para>
+    </section>
+    <section id="cid10">
+      <title>Least Squares Approximation with Constraints</title>
+      <para id="id168954">The solution of the overdetermined simultaneous equations is generally a
+least squared error approximation problem. A particularly interesting and
+useful variation on this problem adds inequality and/or equality
+constraints. This formulation has proven very powerful in solving the
+constrained least squares approximation part of FIR filter design
+<link target-id="bid26"/>. The equality constraints can be taken into account by using
+Lagrange multipliers and the inequality constraints can use the
+Kuhn-Tucker conditions <link target-id="bid27"/>, <link target-id="bid4"/>, <link target-id="bid28"/>. The iterative
+reweighted least squares (IRLS) algorithm described in the next chapter
+can be modified to give results which are an optimal constrained least p-power
+solution <link target-id="bid29"/>, <link target-id="bid30"/>, <link target-id="bid15"/>.</para>
+    </section>
+    <section id="cid11">
+      <title>Conclusions</title>
+      <para id="id169011">There is remarkable structure and subtlety in the apparently simple
+problem of solving simultaneous equations and considerable insight can be
+gained from these finite dimensional problems. These notes have
+emphasized the <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mn>2</m:mn></m:msub></m:math> norm but some other such as <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mi>∞</m:mi></m:msub></m:math> and
+<m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mn>1</m:mn></m:msub></m:math> are also interesting. The use of sparsity <link target-id="bid20"/> is particularly interesting
+as applied in Compressive Sensing <link target-id="bid31"/>, <link target-id="bid32"/> and in the sparse FFT <link target-id="bid33"/>.
+There are also interesting and important applications in
+infinite dimensions. One of particular interest is in signal analysis
+using wavelet basis functions <link target-id="bid34"/>. The use of weighted error and
+weighted norm pseudoinverses provide a base for iterative reweighted least
+squares (IRLS) algorithms.</para>
+    </section>
+  </content>
+  <bib:file>
+    <bib:entry id="bid1">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Albert, Arthur</bib:author>
+        <bib:title>Regression and the Moore-Penrose Pseudoinverse</bib:title>
+        <bib:publisher>Academic Press</bib:publisher>
+        <bib:year>1972</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>New York</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid31">
+      <bib:article>
+        <!--required fields-->
+        <bib:author>Baraniuk, Richard G.</bib:author>
+        <bib:title>Compressive Sensing</bib:title>
+        <bib:journal>IEEE Signal Processing Magazine</bib:journal>
+        <bib:year>2007</bib:year>
+        <!--optional fields-->
+        <bib:volume>24</bib:volume>
+        <bib:number>4</bib:number>
+        <bib:pages>118–124</bib:pages>
+        <bib:month>July</bib:month>
+        <bib:note>also: http://dsp.rice.edu/cs</bib:note>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid14">
+      <bib:inproceedings>
+        <!--required fields-->
+        <bib:author>Burrus, C. S. and Barreto, J. A.</bib:author>
+        <bib:title>Least <!--no math allowed in bib entries-->-Power Error Design of FIR Filters</bib:title>
+        <bib:booktitle>Proceedings of the IEEE International Symposium on Circuits and Systems</bib:booktitle>
+        <bib:year>1992</bib:year>
+        <!--optional fields-->
+        <bib:editor/>
+        <bib:volume>2</bib:volume>
+        <bib:series/>
+        <bib:pages>545–548</bib:pages>
+        <bib:address>ISCAS-92, San Diego, CA</bib:address>
+        <bib:month>May</bib:month>
+        <bib:organization/>
+        <bib:publisher/>
+        <bib:note/>
+      </bib:inproceedings>
+    </bib:entry>
+    <bib:entry id="bid29">
+      <bib:inproceedings>
+        <!--required fields-->
+        <bib:author>Burrus, C. S. and Barreto, J. A. and Selesnick, I. W.</bib:author>
+        <bib:title>Reweighted Least Squares Design of FIR Filters</bib:title>
+        <bib:booktitle>Paper Summaries for the IEEE Signal Processing Society's Fifth DSP Workshop</bib:booktitle>
+        <bib:year>1992</bib:year>
+        <!--optional fields-->
+        <bib:editor/>
+        <bib:number/>
+        <bib:series/>
+        <bib:pages>3.1.1</bib:pages>
+        <bib:address>Starved Rock Lodge, Utica, IL</bib:address>
+        <bib:month>September 13–16</bib:month>
+        <bib:organization/>
+        <bib:publisher/>
+        <bib:note/>
+      </bib:inproceedings>
+    </bib:entry>
+    <bib:entry id="bid15">
+      <bib:article>
+        <!--required fields-->
+        <bib:author>Burrus, C. S. and Barreto, J. A. and Selesnick, I. W.</bib:author>
+        <bib:title>Iterative Reweighted Least Squares Design of FIR Filters</bib:title>
+        <bib:journal>IEEE Transactions on Signal Processing</bib:journal>
+        <bib:year>1994</bib:year>
+        <!--optional fields-->
+        <bib:volume>42</bib:volume>
+        <bib:number>11</bib:number>
+        <bib:pages>2926–2936</bib:pages>
+        <bib:month>November</bib:month>
+        <bib:note/>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid2">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Ben-Israel, Adi and Greville, T. N. E.</bib:author>
+        <bib:title>Generalized Inverses: Theory and Applications</bib:title>
+        <bib:publisher>Wiley and Sons</bib:publisher>
+        <bib:year>1974</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>New York</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>Second edition, Springer, 2003</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid9">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Björck, Åke</bib:author>
+        <bib:title>Numerical Methods for Least Squares Problems</bib:title>
+        <bib:publisher>Blaisdell, Dover, SIAM</bib:publisher>
+        <bib:year>1996</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>Philadelphia</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid30">
+      <bib:inproceedings>
+        <!--required fields-->
+        <bib:author>Burrus, C. Sidney</bib:author>
+        <bib:title>Constrained Least Squares Design of FIR Filters using Iterative Reweighted Least Squares</bib:title>
+        <bib:booktitle>Proceedings of EUSIPCO-98</bib:booktitle>
+        <bib:year>1998</bib:year>
+        <!--optional fields-->
+        <bib:editor/>
+        <bib:number/>
+        <bib:series/>
+        <bib:pages>281–282</bib:pages>
+        <bib:address>Rhodes, Greece</bib:address>
+        <bib:month>September 8-11</bib:month>
+        <bib:organization/>
+        <bib:publisher/>
+        <bib:note/>
+      </bib:inproceedings>
+    </bib:entry>
+    <bib:entry id="bid21">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Campbell, S. L. and Meyer, Jr, C. D.</bib:author>
+        <bib:title>Generalized Inverses of Linear Transformations</bib:title>
+        <bib:publisher>Pitman</bib:publisher>
+        <bib:year>1979</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>London</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>Reprint by Dover in 1991</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid34">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Daubechies, Ingrid</bib:author>
+        <bib:title>Ten Lectures on Wavelets</bib:title>
+        <bib:publisher>SIAM</bib:publisher>
+        <bib:year>1992</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>Philadelphia, PA</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>Notes from the 1990 CBMS-NSF Conference on Wavelets and Applications at Lowell, MA</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid18">
+      <bib:article>
+        <!--required fields-->
+        <bib:author>Daubechies, Ingrid and DeVore, Ronald and Fornasier, Massimo and Gunturk, C. Sinan</bib:author>
+        <bib:title>Iteratively Reweighted Least Squares Minimization for Sparse Recovery</bib:title>
+        <bib:journal>Communications on Pure and Applied Mathematics</bib:journal>
+        <bib:year>2010</bib:year>
+        <!--optional fields-->
+        <bib:volume>63</bib:volume>
+        <bib:number>1</bib:number>
+        <bib:pages>1–38</bib:pages>
+        <bib:month>January</bib:month>
+        <bib:note/>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid19">
+      <bib:techreport>
+        <!--required fields-->
+        <bib:author>Donoho, David L. and Elad, Michael</bib:author>
+        <bib:title>Optimally Sparse Representation in General (non-Orthogonal) Dictionaries via <!--no math allowed in bib entries--> Minimization</bib:title>
+        <bib:institution>Statistics Department, Stanford University</bib:institution>
+        <bib:year>2002</bib:year>
+        <!--optional fields-->
+        <bib:type>Technical report</bib:type>
+        <bib:number/>
+        <bib:address/>
+        <bib:month/>
+        <bib:note/>
+      </bib:techreport>
+    </bib:entry>
+    <bib:entry id="bid32">
+      <bib:techreport>
+        <!--required fields-->
+        <bib:author>Donoho, David L.</bib:author>
+        <bib:title>Compressed Sensing</bib:title>
+        <bib:institution>Statistics Department, Stanford University</bib:institution>
+        <bib:year>2004</bib:year>
+        <!--optional fields-->
+        <bib:type>Technical report</bib:type>
+        <bib:number/>
+        <bib:address/>
+        <bib:month>September</bib:month>
+        <bib:note>http://www-stat.stanford.edu/ donoho/ Reports/2004/CompressedSensing091604.pdf</bib:note>
+      </bib:techreport>
+    </bib:entry>
+    <bib:entry id="bid27">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Fletcher, R.</bib:author>
+        <bib:title>Practical Methods of Optimization</bib:title>
+        <bib:publisher>John Wiley &amp; Sons</bib:publisher>
+        <bib:year>1987</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>New York</bib:address>
+        <bib:edition>Second</bib:edition>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid24">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Golub, Gene H. and Loan, Charles F. Van</bib:author>
+        <bib:title>Matrix Computations</bib:title>
+        <bib:publisher>The John Hopkins University Press</bib:publisher>
+        <bib:year>1996</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>Baltimore, MD</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>3rd edition, 4th edition is forthcoming</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid17">
+      <bib:article>
+        <!--required fields-->
+        <bib:author>Gorodnitsky, Irina F. and Rao, Bhaskar D.</bib:author>
+        <bib:title>Sparse Signal Reconstruction from Limited Data using FOCUSS: a Re-weighted Minimum Norm Algorithm</bib:title>
+        <bib:journal>IEEE Transactions on Signal Processing</bib:journal>
+        <bib:year>1997</bib:year>
+        <!--optional fields-->
+        <bib:volume>45</bib:volume>
+        <bib:number>3</bib:number>
+        <bib:pages/>
+        <bib:month>March</bib:month>
+        <bib:note/>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid3">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Hefferon, Jim</bib:author>
+        <bib:title>Linear Algebra</bib:title>
+        <bib:publisher>Virginia Commonwealth Univeristy Mathematics Textbook Series</bib:publisher>
+        <bib:year>2011</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address/>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>Copyright: cc-by-sa, URL:joshua.smcvt.edu</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid33">
+      <bib:article>
+        <!--required fields-->
+        <bib:author>Hassanieh, Haitham and Indyk, Piotr and Katabi, Dina and Price, Eric</bib:author>
+        <bib:title>Nearly Optimal Sparse Fourier Transform</bib:title>
+        <bib:journal>arXiv:1201.2501v1 [cs.DS] 12 Jan 2012</bib:journal>
+        <bib:year>2012</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:number/>
+        <bib:pages/>
+        <bib:month/>
+        <bib:note/>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid0">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Lawson, C. L. and Hanson, R. J.</bib:author>
+        <bib:title>Solving Least Squares Problems</bib:title>
+        <bib:publisher>Prentice-Hall</bib:publisher>
+        <bib:year>1974</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>Inglewood Cliffs, NJ</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>Second edition by SIAM in 1987</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid28">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Luenberger, D. G.</bib:author>
+        <bib:title>Introduction to Linear and Nonlinear Programming</bib:title>
+        <bib:publisher>Springer</bib:publisher>
+        <bib:year>2008</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address/>
+        <bib:edition>Third</bib:edition>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid10">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Luenberger, D. G.</bib:author>
+        <bib:title>Optimization by Vector Space Methods</bib:title>
+        <bib:publisher>John Wiley &amp; Sons</bib:publisher>
+        <bib:year>1969, 1997</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>New York</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid23">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Moler, Cleve and Little, John and Bangert, Steve</bib:author>
+        <bib:title>Matlab User's Guide</bib:title>
+        <bib:publisher>The MathWorks, Inc.</bib:publisher>
+        <bib:year>1989</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>South Natick, MA</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid5">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Moler, Cleve</bib:author>
+        <bib:title>Numerical Computing with MATLAB</bib:title>
+        <bib:publisher>The MathWorks, Inc.</bib:publisher>
+        <bib:year>2008</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>South Natick, MA</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>available: http://www.mathworks.com/moler/</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid6">
+      <bib:article>
+        <!--required fields-->
+        <bib:author>Moore, E. H.</bib:author>
+        <bib:title>On the Reciprocal of the General Algebraic Matrix</bib:title>
+        <bib:journal>Bulletin of the AMS</bib:journal>
+        <bib:year>1920</bib:year>
+        <!--optional fields-->
+        <bib:volume>26</bib:volume>
+        <bib:number/>
+        <bib:pages>394–395</bib:pages>
+        <bib:month/>
+        <bib:note/>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid25">
+      <bib:article>
+        <!--required fields-->
+        <bib:author>Neumaier, A.</bib:author>
+        <bib:title>Solving ill-conditioned and singular linear systems: A Tutorial on Regularization</bib:title>
+        <bib:journal>SIAM Reiview</bib:journal>
+        <bib:year>1998</bib:year>
+        <!--optional fields-->
+        <bib:volume>40</bib:volume>
+        <bib:number/>
+        <bib:pages>636–666</bib:pages>
+        <bib:month/>
+        <bib:note>available: http://www.mat.univie.ac.at/ neum/</bib:note>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid12">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Oden, J. Tinsley and Demkowicz, Leszek F.</bib:author>
+        <bib:title>Applied Functional Analysis</bib:title>
+        <bib:publisher>CRC Press</bib:publisher>
+        <bib:year>1996</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>Boca Raton</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid7">
+      <bib:article>
+        <!--required fields-->
+        <bib:author>Penrose, R.</bib:author>
+        <bib:title>A Generalized Inverse for Matrices</bib:title>
+        <bib:journal>Proc. Cambridge Phil. Soc.</bib:journal>
+        <bib:year>1955</bib:year>
+        <!--optional fields-->
+        <bib:volume>51</bib:volume>
+        <bib:number/>
+        <bib:pages>406–413</bib:pages>
+        <bib:month/>
+        <bib:note/>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid8">
+      <bib:article>
+        <!--required fields-->
+        <bib:author>Penrose, R.</bib:author>
+        <bib:title>On best Approximate Solutions of Linear Matrix Equations</bib:title>
+        <bib:journal>Proc. Cambridge Phil. Soc.</bib:journal>
+        <bib:year>1955</bib:year>
+        <!--optional fields-->
+        <bib:volume>52</bib:volume>
+        <bib:number/>
+        <bib:pages>17–19</bib:pages>
+        <bib:month/>
+        <bib:note/>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid22">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Rao, C. R. and Mitra, S. K.</bib:author>
+        <bib:title>Generalized Inverse of Matrices and its Applications</bib:title>
+        <bib:publisher>John Wiley &amp; Sons</bib:publisher>
+        <bib:year>1971</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>New York</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid11">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Riesz, Frigyes and Sz.–Nagy, Béla</bib:author>
+        <bib:title>Functional Analysis</bib:title>
+        <bib:publisher>Dover</bib:publisher>
+        <bib:year>1955</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>New York</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid20">
+      <bib:article>
+        <!--required fields-->
+        <bib:author>Selesnick, Ivan</bib:author>
+        <bib:title>Introduction to Sparsity in Signal Processing</bib:title>
+        <bib:journal>Connexions Web Site</bib:journal>
+        <bib:year>2012</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:number/>
+        <bib:pages/>
+        <bib:month>May</bib:month>
+        <bib:note>Available: http://cnx.org/content/m43545/latest/</bib:note>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid26">
+      <bib:article>
+        <!--required fields-->
+        <bib:author>Selesnick, Ivan W. and Lang, Markus and Burrus, C. Sidney</bib:author>
+        <bib:title>Constrained Least Square Design of FIR Filters without Explicitly Specified Transition Bands</bib:title>
+        <bib:journal>IEEE Transactions on Signal Processing</bib:journal>
+        <bib:year>1996</bib:year>
+        <!--optional fields-->
+        <bib:volume>44</bib:volume>
+        <bib:number>8</bib:number>
+        <bib:pages>1879–1892</bib:pages>
+        <bib:month>August</bib:month>
+        <bib:note/>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid4">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Strang, Gilbert</bib:author>
+        <bib:title>Introduction to Linear Algebra</bib:title>
+        <bib:publisher>Wellesley Cambridge</bib:publisher>
+        <bib:year>1986</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>New York</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>4th Edition, 2009</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid16">
+      <bib:article>
+        <!--required fields-->
+        <bib:author>Vargas, Ricardo and Burrus, C. Sidney</bib:author>
+        <bib:title>Iterative Design of <!--no math allowed in bib entries--> Digital Filters</bib:title>
+        <bib:journal>arXiv</bib:journal>
+        <bib:year>2012</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:number/>
+        <bib:pages/>
+        <bib:month/>
+        <bib:note>arXiv:1207.4526v1 [cs.IT] July 19, 2012</bib:note>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid13">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Young, R. M.</bib:author>
+        <bib:title>An Introduction to Nonharmonic Fourier Series</bib:title>
+        <bib:publisher>Academic Press</bib:publisher>
+        <bib:year>1980</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>New York</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+  </bib:file>
+</document>

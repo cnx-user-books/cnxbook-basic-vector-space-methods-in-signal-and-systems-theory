@@ -1,0 +1,2526 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:bib="http://bibtexml.sf.net/">
+  <title>A Matrix Times a Vector</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m19559</md:content-id>
+  <md:title>A Matrix Times a Vector</md:title>
+  <md:abstract>One can look at the operation of a matrix times a vector as changing the basis set for the vector or as changing the vector with the same basis description.  Many signal and systems problem can be posed in this form.</md:abstract>
+  <md:uuid>85b25429-f79e-4c1c-8e73-68a29cd57145</md:uuid>
+</metadata>
+
+<content>
+    <section id="cid1">
+      <title>A Matrix Times a Vector</title>
+      <para id="id124221">In this chapter we consider the first problem posed in the introduction</para>
+      <equation id="uid1">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mi mathvariant="bold">A</m:mi>
+            <m:mi mathvariant="bold">x</m:mi>
+            <m:mo>=</m:mo>
+            <m:mi mathvariant="bold">b</m:mi>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id124252">where the matrix <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> and vector <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> are given and we want to interpret and give structure to
+the calculation of the vector <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> . Equation <link target-id="uid1"/> has a variety of special
+cases. The matrix <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> may be square or may be rectangular. It may have
+full column or row rank or it may not. It may be symmetric or orthogonal
+or non-singular or many other characteristics which would be interesting
+properties as an operator. If we view the vectors as signals and the
+matrix as an operator or processor, there are two interesting interpretations.</para>
+      <list id="id124643" display="block" list-type="bulleted">
+        <item id="uid2">The operation <link target-id="uid1"/> is a change of basis or coordinates for a
+fixed signal. The signal stays the same, the basis (or frame) changes.
+</item>
+        <item id="uid3">The operation <link target-id="uid1"/> alters the characteristics of the signal
+(processes it) but within a fixed basis system. The basis stays the same, the signal
+changes.
+</item>
+      </list>
+      <para id="id124681">An example of the first would be the discrete Fourier transform (DFT)
+where one calculates frequency components of a signal which are
+coordinates in a frequency space for a given signal.
+The definition of the DFT from <link target-id="bid0"/> can be written as a matrix-vector
+operation by <m:math overflow="scroll"><m:mrow><m:mi mathvariant="bold">c</m:mi><m:mo>=</m:mo><m:mi mathvariant="bold">Wx</m:mi></m:mrow></m:math> which, for <m:math overflow="scroll"><m:mrow><m:mi>w</m:mi><m:mo>=</m:mo><m:msup><m:mi>e</m:mi><m:mrow><m:mo>-</m:mo><m:mi>j</m:mi><m:mn>2</m:mn><m:mi>π</m:mi><m:mo>/</m:mo><m:mi>N</m:mi></m:mrow></m:msup></m:mrow></m:math> and <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>=</m:mo><m:mn>4</m:mn></m:mrow></m:math>, is</para>
+      <!--empty paragraphs get left behind.-->
+      <equation id="uid4">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>c</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>c</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>c</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>c</m:mi>
+                      <m:mn>3</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+            <m:mo>=</m:mo>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msup>
+                      <m:mi>w</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msup>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msup>
+                      <m:mi>w</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msup>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msup>
+                      <m:mi>w</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msup>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msup>
+                      <m:mi>w</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msup>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msup>
+                      <m:mi>w</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msup>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msup>
+                      <m:mi>w</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msup>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msup>
+                      <m:mi>w</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msup>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msup>
+                      <m:mi>w</m:mi>
+                      <m:mn>3</m:mn>
+                    </m:msup>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msup>
+                      <m:mi>w</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msup>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msup>
+                      <m:mi>w</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msup>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msup>
+                      <m:mi>w</m:mi>
+                      <m:mn>4</m:mn>
+                    </m:msup>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msup>
+                      <m:mi>w</m:mi>
+                      <m:mn>6</m:mn>
+                    </m:msup>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msup>
+                      <m:mi>w</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msup>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msup>
+                      <m:mi>w</m:mi>
+                      <m:mn>3</m:mn>
+                    </m:msup>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msup>
+                      <m:mi>w</m:mi>
+                      <m:mn>6</m:mn>
+                    </m:msup>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msup>
+                      <m:mi>w</m:mi>
+                      <m:mn>9</m:mn>
+                    </m:msup>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>3</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id125196">
+An example of the
+second might be convolution where you are processing or filtering a
+signal and staying in the same space or coordinate system.</para>
+      <!--empty paragraphs get left behind.-->
+      <equation id="uid5">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>y</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>y</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>y</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:mo>⋮</m:mo>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+            <m:mo>=</m:mo>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:mn>0</m:mn>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:mn>0</m:mn>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:mo>⋯</m:mo>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:mn>0</m:mn>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:mn>0</m:mn>
+                  </m:mtd>
+                  <m:mtd/>
+                  <m:mtd/>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd/>
+                  <m:mtd/>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:mo>⋮</m:mo>
+                  </m:mtd>
+                  <m:mtd/>
+                  <m:mtd/>
+                  <m:mtd/>
+                  <m:mtd>
+                    <m:mo>⋮</m:mo>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:mo>⋮</m:mo>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <!--empty paragraphs get left behind.-->
+      <para id="id125407">A particularly powerful sequence of operations is to first change the basis
+for a signal, then process the signal in this new basis, and finally return
+to the original basis. For example, the discrete Fourier transform (DFT)
+of a signal is taken followed by setting some of the Fourier coefficients to
+zero followed by taking the inverse DFT.</para>
+      <para id="id125413">Another application of <link target-id="uid1"/> is made in linear regression where the
+input signals are rows of <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> and the unknown weights of the hypothesis
+are in <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> and the outputs are the elements of <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> .</para>
+    </section>
+    <section id="cid2">
+      <title>Change of Basis</title>
+      <para id="id125460">Consider the two views:</para>
+      <list id="id125463" display="block" list-type="enumerated">
+        <item id="uid6">The operation given in <link target-id="uid1"/> can be viewed as <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> being a set of weights so that <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> is a
+weighted sum of the columns of <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> . In other words, <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> will lie in the
+space spanned by the columns of <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> at a location determined by <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> . This
+view is a composition of a signal from a set of weights as in <link target-id="uid11"/>
+and <link target-id="uid13"/> below. If the vector <m:math overflow="scroll"><m:msub><m:mi mathvariant="bold">a</m:mi><m:mi mathvariant="bold">i</m:mi></m:msub></m:math> is the
+<m:math overflow="scroll"><m:msup><m:mi>i</m:mi><m:mrow><m:mi>t</m:mi><m:mi>h</m:mi></m:mrow></m:msup></m:math> column of <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math>, it is illustrated by
+<equation id="uid7"><m:math overflow="scroll" mode="display"><m:mrow><m:mrow><m:mi mathvariant="bold">A</m:mi><m:mi mathvariant="bold">x</m:mi></m:mrow><m:mo>=</m:mo><m:msub><m:mi>x</m:mi><m:mn>1</m:mn></m:msub><m:mfenced separators="" open="[" close="]"><m:mtable><m:mtr><m:mtd><m:mo>⋮</m:mo></m:mtd></m:mtr><m:mtr><m:mtd><m:msub><m:mi mathvariant="bold">a</m:mi><m:mn mathvariant="bold">1</m:mn></m:msub></m:mtd></m:mtr><m:mtr><m:mtd><m:mo>⋮</m:mo></m:mtd></m:mtr></m:mtable></m:mfenced><m:mo>+</m:mo><m:msub><m:mi>x</m:mi><m:mn>2</m:mn></m:msub><m:mfenced separators="" open="[" close="]"><m:mtable><m:mtr><m:mtd><m:mo>⋮</m:mo></m:mtd></m:mtr><m:mtr><m:mtd><m:msub><m:mi mathvariant="bold">a</m:mi><m:mn mathvariant="bold">2</m:mn></m:msub></m:mtd></m:mtr><m:mtr><m:mtd><m:mo>⋮</m:mo></m:mtd></m:mtr></m:mtable></m:mfenced><m:mo>+</m:mo><m:msub><m:mi>x</m:mi><m:mn>3</m:mn></m:msub><m:mfenced separators="" open="[" close="]"><m:mtable><m:mtr><m:mtd><m:mo>⋮</m:mo></m:mtd></m:mtr><m:mtr><m:mtd><m:msub><m:mi mathvariant="bold">a</m:mi><m:mn mathvariant="bold">3</m:mn></m:msub></m:mtd></m:mtr><m:mtr><m:mtd><m:mo>⋮</m:mo></m:mtd></m:mtr></m:mtable></m:mfenced><m:mo>=</m:mo><m:mi mathvariant="bold">b</m:mi><m:mo>.</m:mo></m:mrow></m:math></equation></item>
+        <item id="uid8">An alternative view has <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> being a signal vector
+and with <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> being a vector whose entries are inner products of <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> and the
+rows of <emphasis effect="bold">A</emphasis>. In other words, the elements of <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> are the projection
+coefficients of <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> onto the coordinates given by the rows of <emphasis effect="bold">A</emphasis>. The
+multiplication of a signal by this operator decomposes the signal and gives the
+coefficients of the decomposition. If <m:math overflow="scroll"><m:msub><m:mover accent="true"><m:mi mathvariant="bold">a</m:mi><m:mo>¯</m:mo></m:mover><m:mi mathvariant="bold">j</m:mi></m:msub></m:math> is the <m:math overflow="scroll"><m:msup><m:mi>j</m:mi><m:mrow><m:mi>t</m:mi><m:mi>h</m:mi></m:mrow></m:msup></m:math> row of <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math>
+we have:
+<equation id="uid9"><m:math overflow="scroll" mode="display"><m:mrow><m:msub><m:mi>b</m:mi><m:mn>1</m:mn></m:msub><m:mo>=</m:mo><m:mfenced open="[" close="]"><m:mtable><m:mtr><m:mtd><m:mrow><m:mo>⋯</m:mo><m:msub><m:mover accent="true"><m:mi mathvariant="bold">a</m:mi><m:mo>¯</m:mo></m:mover><m:mn mathvariant="bold">1</m:mn></m:msub><m:mo>⋯</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:mfenced><m:mfenced separators="" open="[" close="]"><m:mtable><m:mtr><m:mtd><m:mo>⋮</m:mo></m:mtd></m:mtr><m:mtr><m:mtd><m:mi mathvariant="bold">x</m:mi></m:mtd></m:mtr><m:mtr><m:mtd><m:mo>⋮</m:mo></m:mtd></m:mtr></m:mtable></m:mfenced><m:mspace width="4pt"/><m:mspace width="4pt"/><m:mspace width="4pt"/><m:mspace width="4pt"/><m:mspace width="4pt"/><m:mspace width="4pt"/><m:mspace width="4pt"/><m:mspace width="4pt"/><m:msub><m:mi>b</m:mi><m:mn>2</m:mn></m:msub><m:mo>=</m:mo><m:mfenced open="[" close="]"><m:mtable><m:mtr><m:mtd><m:mrow><m:mo>⋯</m:mo><m:msub><m:mover accent="true"><m:mi mathvariant="bold">a</m:mi><m:mo>¯</m:mo></m:mover><m:mn mathvariant="bold">2</m:mn></m:msub><m:mo>⋯</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:mfenced><m:mfenced separators="" open="[" close="]"><m:mtable><m:mtr><m:mtd><m:mo>⋮</m:mo></m:mtd></m:mtr><m:mtr><m:mtd><m:mi mathvariant="bold">x</m:mi></m:mtd></m:mtr><m:mtr><m:mtd><m:mo>⋮</m:mo></m:mtd></m:mtr></m:mtable></m:mfenced><m:mspace width="4pt"/><m:mspace width="4pt"/><m:mspace width="4pt"/><m:mspace width="4pt"/><m:mspace width="4pt"/><m:mspace width="4pt"/><m:mspace width="4pt"/><m:mspace width="4pt"/><m:mi>e</m:mi><m:mi>t</m:mi><m:mi>c</m:mi><m:mo>.</m:mo></m:mrow></m:math></equation>
+Regression can be posed from this view with the input signal being the rows of <emphasis effect="bold">A</emphasis>.
+</item>
+      </list>
+      <para id="id126078">These two views of the operation as a decomposition of a signal or the
+recomposition of the signal to or from a different basis system are
+extremely valuable in signal analysis. The ideas from linear algebra of subspaces,
+inner product, span, orthogonality, rank, etc. are all important here.
+The dimensions of the domain and
+range of the operators may or may not be the same. The matrices may or
+may not be square and may or may not be of full rank <link target-id="bid1"/>, <link target-id="bid2"/>.</para>
+      <section id="uid10">
+        <title>A Basis and Dual Basis</title>
+        <para id="id126103">A set of linearly independent vectors <m:math overflow="scroll"><m:msub><m:mi mathvariant="bold">x</m:mi><m:mi mathvariant="bold">n</m:mi></m:msub></m:math> forms a <emphasis effect="italics">basis</emphasis> for
+a vector space if every vector <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> in the space can be uniquely written</para>
+        <equation id="uid11">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mi mathvariant="bold">x</m:mi>
+              <m:mo>=</m:mo>
+              <m:munder>
+                <m:mo>∑</m:mo>
+                <m:mi>n</m:mi>
+              </m:munder>
+              <m:msub>
+                <m:mi>a</m:mi>
+                <m:mi>n</m:mi>
+              </m:msub>
+              <m:mspace width="0.166667em"/>
+              <m:msub>
+                <m:mi mathvariant="bold">x</m:mi>
+                <m:mi mathvariant="bold">n</m:mi>
+              </m:msub>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id126187">and the <emphasis effect="italics">dual basis</emphasis> is defined as a set vectors <m:math overflow="scroll"><m:msub><m:mover accent="true"><m:mi mathvariant="bold">x</m:mi><m:mo>˜</m:mo></m:mover><m:mi mathvariant="bold">n</m:mi></m:msub></m:math> in that space allows a simple inner
+product (denoted by parenthesis: <m:math overflow="scroll"><m:mrow><m:mo>(</m:mo><m:mrow><m:mi mathvariant="bold">x</m:mi><m:mo>,</m:mo><m:mi mathvariant="bold">y</m:mi></m:mrow><m:mo>)</m:mo></m:mrow></m:math>) to calculate the expansion coefficients as</para>
+        <equation id="uid12">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:msub>
+                <m:mi>a</m:mi>
+                <m:mi>n</m:mi>
+              </m:msub>
+              <m:mo>=</m:mo>
+              <m:mspace width="0.166667em"/>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mrow>
+                  <m:mi mathvariant="bold">x</m:mi>
+                  <m:mo>,</m:mo>
+                  <m:msub>
+                    <m:mover accent="true">
+                      <m:mi mathvariant="bold">x</m:mi>
+                      <m:mo>˜</m:mo>
+                    </m:mover>
+                    <m:mi mathvariant="bold">n</m:mi>
+                  </m:msub>
+                </m:mrow>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mspace width="0.166667em"/>
+              <m:mo>=</m:mo>
+              <m:mrow>
+                <m:msup>
+                  <m:mi mathvariant="bold">x</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:msub>
+                  <m:mover accent="true">
+                    <m:mi mathvariant="bold">x</m:mi>
+                    <m:mo>˜</m:mo>
+                  </m:mover>
+                  <m:mi mathvariant="bold">n</m:mi>
+                </m:msub>
+              </m:mrow>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id126336">A basis expansion has enough vectors but none extra. It is efficient in that no fewer expansion vectors
+will represent all the vectors in the space but is fragil in that losing one coefficient or one basis vector
+destroys the ability to exactly represent the signal by <link target-id="uid11"/>.
+The expansion <link target-id="uid11"/> can be written as a matrix operation</para>
+        <equation id="uid13">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mi mathvariant="bold">F</m:mi>
+              <m:mspace width="0.166667em"/>
+              <m:mi mathvariant="bold">a</m:mi>
+              <m:mo>=</m:mo>
+              <m:mi mathvariant="bold">x</m:mi>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id126381">where the columns of <emphasis effect="bold">F</emphasis> are the basis vectors <m:math overflow="scroll"><m:msub><m:mi mathvariant="bold">x</m:mi><m:mi mathvariant="bold">n</m:mi></m:msub></m:math> and the vector <emphasis effect="bold">a</emphasis>
+has the expansion coefficients <m:math overflow="scroll"><m:msub><m:mi>a</m:mi><m:mi>n</m:mi></m:msub></m:math> as entries. Equation <link target-id="uid12"/> can
+also be written as a matrix operation</para>
+        <equation id="uid14">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mover accent="true">
+                <m:mi mathvariant="bold">F</m:mi>
+                <m:mo>˜</m:mo>
+              </m:mover>
+              <m:mspace width="0.166667em"/>
+              <m:mi mathvariant="bold">x</m:mi>
+              <m:mo>=</m:mo>
+              <m:mi mathvariant="bold">a</m:mi>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id126474">which has the dual basis vectors as rows of <m:math overflow="scroll"><m:mover accent="true"><m:mi mathvariant="bold">F</m:mi><m:mo>˜</m:mo></m:mover></m:math>. From
+<link target-id="uid13"/> and <link target-id="uid14"/>, we have</para>
+        <equation id="uid15">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mi mathvariant="bold">F</m:mi>
+              <m:mover accent="true">
+                <m:mi mathvariant="bold">F</m:mi>
+                <m:mo>˜</m:mo>
+              </m:mover>
+              <m:mspace width="0.166667em"/>
+              <m:mi mathvariant="bold">x</m:mi>
+              <m:mo>=</m:mo>
+              <m:mi mathvariant="bold">x</m:mi>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id126551">Since this is true for all <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math>,</para>
+        <equation id="uid16">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mi mathvariant="bold">F</m:mi>
+              <m:mspace width="0.166667em"/>
+              <m:mover accent="true">
+                <m:mi mathvariant="bold">F</m:mi>
+                <m:mo>˜</m:mo>
+              </m:mover>
+              <m:mo>=</m:mo>
+              <m:mi mathvariant="bold">I</m:mi>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id126608">or</para>
+        <equation id="uid17">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mover accent="true">
+                <m:mi mathvariant="bold">F</m:mi>
+                <m:mo>˜</m:mo>
+              </m:mover>
+              <m:mo>=</m:mo>
+              <m:msup>
+                <m:mi mathvariant="bold">F</m:mi>
+                <m:mrow>
+                  <m:mo>-</m:mo>
+                  <m:mn mathvariant="bold">1</m:mn>
+                </m:mrow>
+              </m:msup>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id126656">which states the dual basis vectors are the rows of the inverse of the
+matrix whose columns are the basis vectors (and vice versa). When the
+vector set is a basis, <emphasis effect="bold">F</emphasis> is necessarily square and from <link target-id="uid13"/>
+and <link target-id="uid14"/>, one can show</para>
+        <equation id="uid18">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mrow>
+                <m:mi mathvariant="bold">F</m:mi>
+                <m:mspace width="0.166667em"/>
+                <m:mover accent="true">
+                  <m:mi mathvariant="bold">F</m:mi>
+                  <m:mo>˜</m:mo>
+                </m:mover>
+                <m:mo>=</m:mo>
+                <m:mover accent="true">
+                  <m:mi mathvariant="bold">F</m:mi>
+                  <m:mo>˜</m:mo>
+                </m:mover>
+                <m:mspace width="0.166667em"/>
+                <m:mi mathvariant="bold">F</m:mi>
+              </m:mrow>
+              <m:mo>.</m:mo>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id126735">Because this system requires two basis sets, the expansion basis and the
+dual basis, it is called <emphasis effect="italics">biorthogonal</emphasis>.</para>
+      </section>
+      <section id="uid19">
+        <title>Orthogonal Basis</title>
+        <para id="id126757">If the basis vectors are not only independent but orthonormal, the basis
+set is its own dual and the inverse of <emphasis effect="bold">F</emphasis> is simply its transpose.</para>
+        <equation id="uid20">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:msup>
+                <m:mi mathvariant="bold">F</m:mi>
+                <m:mrow>
+                  <m:mo>-</m:mo>
+                  <m:mn mathvariant="bold">1</m:mn>
+                </m:mrow>
+              </m:msup>
+              <m:mo>=</m:mo>
+              <m:mover accent="true">
+                <m:mi mathvariant="bold">F</m:mi>
+                <m:mo>˜</m:mo>
+              </m:mover>
+              <m:mo>=</m:mo>
+              <m:msup>
+                <m:mi mathvariant="bold">F</m:mi>
+                <m:mi mathvariant="bold">T</m:mi>
+              </m:msup>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id126824">When done in Hilbert spaces, this decomposition is sometimes called an
+abstract Fourier expansion <link target-id="bid1"/>, <link target-id="bid3"/>, <link target-id="bid4"/>.</para>
+      </section>
+      <section id="uid21">
+        <title>Parseval's Theorem</title>
+        <para id="id126857">Because many signals are digital representations of voltage, current, force, velocity, pressure, flow, etc.,
+the inner product of the signal with itself (the norm squared) is a measure of the signal energy <m:math overflow="scroll"><m:mi>q</m:mi></m:math>.</para>
+        <equation id="uid22">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mi>q</m:mi>
+              <m:mo>=</m:mo>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi mathvariant="bold">x</m:mi>
+                <m:mo>,</m:mo>
+                <m:mi mathvariant="bold">x</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                  <m:mi mathvariant="bold">x</m:mi>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                </m:mrow>
+                <m:mn mathvariant="bold">2</m:mn>
+              </m:msup>
+              <m:mo>=</m:mo>
+              <m:mrow>
+                <m:msup>
+                  <m:mi mathvariant="bold">x</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:mi mathvariant="bold">x</m:mi>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:munderover>
+                <m:mo>∑</m:mo>
+                <m:mrow>
+                  <m:mi>n</m:mi>
+                  <m:mo>=</m:mo>
+                  <m:mn>0</m:mn>
+                </m:mrow>
+                <m:mrow>
+                  <m:mi>N</m:mi>
+                  <m:mo>-</m:mo>
+                  <m:mn>1</m:mn>
+                </m:mrow>
+              </m:munderover>
+              <m:msubsup>
+                <m:mi>x</m:mi>
+                <m:mi>n</m:mi>
+                <m:mn>2</m:mn>
+              </m:msubsup>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id126983"><emphasis effect="italics">Parseval's theorem</emphasis> states that if the basis system is orthogonal, then the norm squared (or “energy”)
+is invarient across a change in basis. If a change of basis is made with</para>
+        <equation id="uid23">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mi mathvariant="bold">c</m:mi>
+              <m:mo>=</m:mo>
+              <m:mi mathvariant="bold">Ax</m:mi>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id127024">then</para>
+        <equation id="uid24">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mi>q</m:mi>
+              <m:mo>=</m:mo>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi mathvariant="bold">x</m:mi>
+                <m:mo>,</m:mo>
+                <m:mi mathvariant="bold">x</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                  <m:mi mathvariant="bold">x</m:mi>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                </m:mrow>
+                <m:mn mathvariant="bold">2</m:mn>
+              </m:msup>
+              <m:mo>=</m:mo>
+              <m:mrow>
+                <m:msup>
+                  <m:mi mathvariant="bold">x</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:mi mathvariant="bold">x</m:mi>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:munderover>
+                <m:mo>∑</m:mo>
+                <m:mrow>
+                  <m:mi>n</m:mi>
+                  <m:mo>=</m:mo>
+                  <m:mn>0</m:mn>
+                </m:mrow>
+                <m:mrow>
+                  <m:mi>N</m:mi>
+                  <m:mo>-</m:mo>
+                  <m:mn>1</m:mn>
+                </m:mrow>
+              </m:munderover>
+              <m:msubsup>
+                <m:mi>x</m:mi>
+                <m:mi>n</m:mi>
+                <m:mn>2</m:mn>
+              </m:msubsup>
+              <m:mo>=</m:mo>
+              <m:mi>K</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi mathvariant="bold">c</m:mi>
+                <m:mo>,</m:mo>
+                <m:mi mathvariant="bold">c</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:mi>K</m:mi>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                  <m:mi mathvariant="bold">c</m:mi>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                </m:mrow>
+                <m:mn mathvariant="bold">2</m:mn>
+              </m:msup>
+              <m:mo>=</m:mo>
+              <m:mi>K</m:mi>
+              <m:mrow>
+                <m:msup>
+                  <m:mi mathvariant="bold">c</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:mi mathvariant="bold">c</m:mi>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:mi>K</m:mi>
+              <m:munderover>
+                <m:mo>∑</m:mo>
+                <m:mrow>
+                  <m:mi>k</m:mi>
+                  <m:mo>=</m:mo>
+                  <m:mn>0</m:mn>
+                </m:mrow>
+                <m:mrow>
+                  <m:mi>N</m:mi>
+                  <m:mo>-</m:mo>
+                  <m:mn>1</m:mn>
+                </m:mrow>
+              </m:munderover>
+              <m:msubsup>
+                <m:mi>c</m:mi>
+                <m:mi>k</m:mi>
+                <m:mn>2</m:mn>
+              </m:msubsup>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id127247">for some constant <m:math overflow="scroll"><m:mi>K</m:mi></m:math> which can be made unity by normalization if desired.</para>
+        <para id="id127263">For the discrete Fourier transform (DFT) of <m:math overflow="scroll"><m:msub><m:mi>x</m:mi><m:mi>n</m:mi></m:msub></m:math> which is</para>
+        <equation id="uid25">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:msub>
+                <m:mi>c</m:mi>
+                <m:mi>k</m:mi>
+              </m:msub>
+              <m:mo>=</m:mo>
+              <m:mfrac>
+                <m:mn>1</m:mn>
+                <m:mi>N</m:mi>
+              </m:mfrac>
+              <m:munderover>
+                <m:mo>∑</m:mo>
+                <m:mrow>
+                  <m:mi>n</m:mi>
+                  <m:mo>=</m:mo>
+                  <m:mn>0</m:mn>
+                </m:mrow>
+                <m:mrow>
+                  <m:mi>N</m:mi>
+                  <m:mo>-</m:mo>
+                  <m:mn>1</m:mn>
+                </m:mrow>
+              </m:munderover>
+              <m:msub>
+                <m:mi>x</m:mi>
+                <m:mi>n</m:mi>
+              </m:msub>
+              <m:msup>
+                <m:mi>e</m:mi>
+                <m:mrow>
+                  <m:mo>-</m:mo>
+                  <m:mi>j</m:mi>
+                  <m:mn>2</m:mn>
+                  <m:mi>π</m:mi>
+                  <m:mi>n</m:mi>
+                  <m:mi>k</m:mi>
+                  <m:mo>/</m:mo>
+                  <m:mi>N</m:mi>
+                </m:mrow>
+              </m:msup>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id127363">the energy calculated in the time domain: <m:math overflow="scroll"><m:mrow><m:mi>q</m:mi><m:mo>=</m:mo><m:msub><m:mo>∑</m:mo><m:mi>n</m:mi></m:msub><m:msubsup><m:mi>x</m:mi><m:mi>n</m:mi><m:mn>2</m:mn></m:msubsup></m:mrow></m:math> is equal to the norm squared
+of the frequency coefficients: <m:math overflow="scroll"><m:mrow><m:mi>q</m:mi><m:mo>=</m:mo><m:msub><m:mo>∑</m:mo><m:mi>k</m:mi></m:msub><m:msubsup><m:mi>c</m:mi><m:mi>k</m:mi><m:mn>2</m:mn></m:msubsup></m:mrow></m:math>, within a multiplicative constant of <m:math overflow="scroll"><m:mrow><m:mn>1</m:mn><m:mo>/</m:mo><m:mi>N</m:mi></m:mrow></m:math>.
+This is because the basis functions of the Fourier transform are orthogonal:
+“the sum of the squares is the square of the sum” which means
+means the energy calculated in the time domain is the same as that calculated in the frequency domain.
+The energy of the signal (the square of the sum) is the sum of the energies at each frequency (the
+sum of the squares). Because of the orthogonal basis, the cross terms are zero.
+Although one seldom directly uses Parseval's theorem, its truth is what make sense in talking about
+frequency domain filtering of a time domain signal. A more general form is known as Plancherel theorem
+<link target-id="bid5"/>.</para>
+        <para id="id127456">If a transformation is made on the signal with a non-orthogonal basis system, then Parseval's theorem does
+not hold and the concept of energy does not move back and forth between domains. We can get around some
+of these restrictions by using frames rather than bases.</para>
+      </section>
+      <section id="uid26">
+        <title>Frames and Tight Frames</title>
+        <para id="id127471">In order to look at a more general expansion system than a basis and to generalize the ideas
+of orthogonality and of energy
+being calculated in the original expansion system or the transformed system, the concept of <emphasis effect="italics">frame</emphasis> is
+defined. A frame decomposition or representation is generally more robust and flexible than a
+basis decomposition or representation but it requires more computation and memory <link target-id="bid6"/>, <link target-id="bid7"/>, <link target-id="bid5"/>.
+Sometimes a frame is called a redundant basis or representing an underdetermined or underspecified set of
+equations.</para>
+        <para id="id127501">If a set of vectors, <m:math overflow="scroll"><m:msub><m:mi mathvariant="bold">f</m:mi><m:mi mathvariant="bold">k</m:mi></m:msub></m:math>, span a vector space (or subspace) but are not necessarily independent nor orthogonal,
+bounds on the energy in the transform can still be defined. A set of vectors that span a vector space is called a
+<emphasis effect="italics">frame</emphasis> if two constants, <m:math overflow="scroll"><m:mi>A</m:mi></m:math> and <m:math overflow="scroll"><m:mi>B</m:mi></m:math> exist such that</para>
+        <equation id="uid27">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:msup>
+                <m:mrow>
+                  <m:mn>0</m:mn>
+                  <m:mo>&lt;</m:mo>
+                  <m:mi>A</m:mi>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                  <m:mi mathvariant="bold">x</m:mi>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                </m:mrow>
+                <m:mn>2</m:mn>
+              </m:msup>
+              <m:mo>≤</m:mo>
+              <m:munder>
+                <m:mo>∑</m:mo>
+                <m:mi>k</m:mi>
+              </m:munder>
+              <m:mrow>
+                <m:mo>|</m:mo>
+              </m:mrow>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mrow>
+                  <m:msub>
+                    <m:mi mathvariant="bold">f</m:mi>
+                    <m:mi mathvariant="bold">k</m:mi>
+                  </m:msub>
+                  <m:mo>,</m:mo>
+                  <m:mi mathvariant="bold">x</m:mi>
+                </m:mrow>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>|</m:mo>
+                </m:mrow>
+                <m:mn>2</m:mn>
+              </m:msup>
+              <m:mo>≤</m:mo>
+              <m:msup>
+                <m:mrow>
+                  <m:mi>B</m:mi>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                  <m:mi mathvariant="bold">x</m:mi>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                </m:mrow>
+                <m:mn>2</m:mn>
+              </m:msup>
+              <m:mo>&lt;</m:mo>
+              <m:mi>∞</m:mi>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id127664">and the two constants are called the <emphasis effect="italics">frame bounds</emphasis> for the system. This can be written</para>
+        <equation id="uid28">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:msup>
+                <m:mrow>
+                  <m:mn>0</m:mn>
+                  <m:mo>&lt;</m:mo>
+                  <m:mi>A</m:mi>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                  <m:mi mathvariant="bold">x</m:mi>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                </m:mrow>
+                <m:mn>2</m:mn>
+              </m:msup>
+              <m:mo>≤</m:mo>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                  <m:mi mathvariant="bold">c</m:mi>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                </m:mrow>
+                <m:mn>2</m:mn>
+              </m:msup>
+              <m:mo>≤</m:mo>
+              <m:msup>
+                <m:mrow>
+                  <m:mi>B</m:mi>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                  <m:mi mathvariant="bold">x</m:mi>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                </m:mrow>
+                <m:mn>2</m:mn>
+              </m:msup>
+              <m:mo>&lt;</m:mo>
+              <m:mi>∞</m:mi>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id127766">where</para>
+        <equation id="uid29">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mi mathvariant="bold">c</m:mi>
+              <m:mo>=</m:mo>
+              <m:mi mathvariant="bold">F</m:mi>
+              <m:mi mathvariant="bold">x</m:mi>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id127801">If the <m:math overflow="scroll"><m:msub><m:mi mathvariant="bold">f</m:mi><m:mi mathvariant="bold">k</m:mi></m:msub></m:math> are linearly independent but not orthogonal, then the frame is a non-orthogonal basis. If the
+<m:math overflow="scroll"><m:msub><m:mi mathvariant="bold">f</m:mi><m:mi mathvariant="bold">k</m:mi></m:msub></m:math> are not independent
+the frame is called redundant since there are more than the minimum number of expansion vectors that
+a basis would have. If the
+frame bounds are equal, <m:math overflow="scroll"><m:mrow><m:mi>A</m:mi><m:mo>=</m:mo><m:mi>B</m:mi></m:mrow></m:math>, the system is called a <emphasis effect="italics">tight frame</emphasis> and it has many of features of an orthogonal basis.
+If the bounds are equal to each other and to one, <m:math overflow="scroll"><m:mrow><m:mi>A</m:mi><m:mo>=</m:mo><m:mi>B</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow></m:math>, then the frame is a basis and is tight.
+It is, therefore, an orthogonal basis.</para>
+        <para id="id127887">So a frame is a generalization of a basis and a tight frame is a generalization of an orthogonal basis. If , <m:math overflow="scroll"><m:mrow><m:mi>A</m:mi><m:mo>=</m:mo><m:mi>B</m:mi></m:mrow></m:math>, the frame
+is tight and we have a scaled Parseval's theorem:</para>
+        <equation id="uid30">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:msup>
+                <m:mrow>
+                  <m:mi>A</m:mi>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                  <m:mi mathvariant="bold">x</m:mi>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                </m:mrow>
+                <m:mn>2</m:mn>
+              </m:msup>
+              <m:mo>=</m:mo>
+              <m:munder>
+                <m:mo>∑</m:mo>
+                <m:mi>k</m:mi>
+              </m:munder>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>|</m:mo>
+                  <m:mrow>
+                    <m:mo>(</m:mo>
+                    <m:mrow>
+                      <m:msub>
+                        <m:mi mathvariant="bold">f</m:mi>
+                        <m:mi mathvariant="bold">k</m:mi>
+                      </m:msub>
+                      <m:mo>,</m:mo>
+                      <m:mi mathvariant="bold">x</m:mi>
+                    </m:mrow>
+                    <m:mo>)</m:mo>
+                  </m:mrow>
+                  <m:mo>|</m:mo>
+                </m:mrow>
+                <m:mn>2</m:mn>
+              </m:msup>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id127986">If <m:math overflow="scroll"><m:mrow><m:mi>A</m:mi><m:mo>=</m:mo><m:mi>B</m:mi><m:mo>&gt;</m:mo><m:mn>1</m:mn></m:mrow></m:math>, then the number of expansion vectors are more than needed for a basis and <m:math overflow="scroll"><m:mi>A</m:mi></m:math> is a measure of the redundancy
+of the system (for normalized frame vectors). For example, if there are three frame vectors in a two dimensional vector space, <m:math overflow="scroll"><m:mrow><m:mi>A</m:mi><m:mo>=</m:mo><m:mn>3</m:mn><m:mo>/</m:mo><m:mn>2</m:mn></m:mrow></m:math>.</para>
+        <para id="id128039">A finite dimensional matrix version of the redundant case would have <m:math overflow="scroll"><m:mi mathvariant="bold">F</m:mi></m:math> in <link target-id="uid13"/> with more columns
+than rows but with full row rank. For example</para>
+        <equation id="uid31">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mfenced separators="" open="[" close="]">
+                <m:mtable>
+                  <m:mtr>
+                    <m:mtd>
+                      <m:msub>
+                        <m:mi>a</m:mi>
+                        <m:mn>00</m:mn>
+                      </m:msub>
+                    </m:mtd>
+                    <m:mtd>
+                      <m:msub>
+                        <m:mi>a</m:mi>
+                        <m:mn>01</m:mn>
+                      </m:msub>
+                    </m:mtd>
+                    <m:mtd>
+                      <m:msub>
+                        <m:mi>a</m:mi>
+                        <m:mn>02</m:mn>
+                      </m:msub>
+                    </m:mtd>
+                  </m:mtr>
+                  <m:mtr>
+                    <m:mtd>
+                      <m:msub>
+                        <m:mi>a</m:mi>
+                        <m:mn>10</m:mn>
+                      </m:msub>
+                    </m:mtd>
+                    <m:mtd>
+                      <m:msub>
+                        <m:mi>a</m:mi>
+                        <m:mn>11</m:mn>
+                      </m:msub>
+                    </m:mtd>
+                    <m:mtd>
+                      <m:msub>
+                        <m:mi>a</m:mi>
+                        <m:mn>12</m:mn>
+                      </m:msub>
+                    </m:mtd>
+                  </m:mtr>
+                </m:mtable>
+              </m:mfenced>
+              <m:mfenced separators="" open="[" close="]">
+                <m:mtable>
+                  <m:mtr>
+                    <m:mtd>
+                      <m:msub>
+                        <m:mi>x</m:mi>
+                        <m:mn>0</m:mn>
+                      </m:msub>
+                    </m:mtd>
+                  </m:mtr>
+                  <m:mtr>
+                    <m:mtd>
+                      <m:msub>
+                        <m:mi>x</m:mi>
+                        <m:mn>1</m:mn>
+                      </m:msub>
+                    </m:mtd>
+                  </m:mtr>
+                  <m:mtr>
+                    <m:mtd>
+                      <m:msub>
+                        <m:mi>x</m:mi>
+                        <m:mn>2</m:mn>
+                      </m:msub>
+                    </m:mtd>
+                  </m:mtr>
+                </m:mtable>
+              </m:mfenced>
+              <m:mo>=</m:mo>
+              <m:mfenced separators="" open="[" close="]">
+                <m:mtable>
+                  <m:mtr>
+                    <m:mtd>
+                      <m:msub>
+                        <m:mi>b</m:mi>
+                        <m:mn>0</m:mn>
+                      </m:msub>
+                    </m:mtd>
+                  </m:mtr>
+                  <m:mtr>
+                    <m:mtd>
+                      <m:msub>
+                        <m:mi>b</m:mi>
+                        <m:mn>1</m:mn>
+                      </m:msub>
+                    </m:mtd>
+                  </m:mtr>
+                </m:mtable>
+              </m:mfenced>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id128201">has three frame vectors as the columns of <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> but in a two dimensional space.</para>
+        <para id="id128218">The prototypical example is called the Mercedes-Benz tight frame where three frame
+vectors that are <m:math overflow="scroll"><m:msup><m:mn>120</m:mn><m:mo>∘</m:mo></m:msup></m:math> apart are used in a two-dimensional
+plane and look like the Mercedes car hood ornament. These three frame vectors must be as
+far apart from each other as possible to be tight, hence the <m:math overflow="scroll"><m:msup><m:mn>120</m:mn><m:mo>∘</m:mo></m:msup></m:math> separation.
+But, they can be rotated any amount and remain tight <link target-id="bid7"/>, <link target-id="bid8"/> and, therefore,
+are not unique.</para>
+        <equation id="uid32">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mfenced separators="" open="[" close="]">
+                <m:mtable>
+                  <m:mtr>
+                    <m:mtd>
+                      <m:mn>1</m:mn>
+                    </m:mtd>
+                    <m:mtd>
+                      <m:mrow>
+                        <m:mo>-</m:mo>
+                        <m:mn>0</m:mn>
+                        <m:mo>.</m:mo>
+                        <m:mn>5</m:mn>
+                      </m:mrow>
+                    </m:mtd>
+                    <m:mtd>
+                      <m:mrow>
+                        <m:mo>-</m:mo>
+                        <m:mn>0</m:mn>
+                        <m:mo>.</m:mo>
+                        <m:mn>5</m:mn>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                  <m:mtr>
+                    <m:mtd>
+                      <m:mn>0</m:mn>
+                    </m:mtd>
+                    <m:mtd>
+                      <m:mrow>
+                        <m:mn>0</m:mn>
+                        <m:mo>.</m:mo>
+                        <m:mn>866</m:mn>
+                      </m:mrow>
+                    </m:mtd>
+                    <m:mtd>
+                      <m:mrow>
+                        <m:mo>-</m:mo>
+                        <m:mn>0</m:mn>
+                        <m:mo>.</m:mo>
+                        <m:mn>866</m:mn>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                </m:mtable>
+              </m:mfenced>
+              <m:mfenced separators="" open="[" close="]">
+                <m:mtable>
+                  <m:mtr>
+                    <m:mtd>
+                      <m:msub>
+                        <m:mi>x</m:mi>
+                        <m:mn>0</m:mn>
+                      </m:msub>
+                    </m:mtd>
+                  </m:mtr>
+                  <m:mtr>
+                    <m:mtd>
+                      <m:msub>
+                        <m:mi>x</m:mi>
+                        <m:mn>1</m:mn>
+                      </m:msub>
+                    </m:mtd>
+                  </m:mtr>
+                  <m:mtr>
+                    <m:mtd>
+                      <m:msub>
+                        <m:mi>x</m:mi>
+                        <m:mn>2</m:mn>
+                      </m:msub>
+                    </m:mtd>
+                  </m:mtr>
+                </m:mtable>
+              </m:mfenced>
+              <m:mo>=</m:mo>
+              <m:mfenced separators="" open="[" close="]">
+                <m:mtable>
+                  <m:mtr>
+                    <m:mtd>
+                      <m:msub>
+                        <m:mi>b</m:mi>
+                        <m:mn>0</m:mn>
+                      </m:msub>
+                    </m:mtd>
+                  </m:mtr>
+                  <m:mtr>
+                    <m:mtd>
+                      <m:msub>
+                        <m:mi>b</m:mi>
+                        <m:mn>1</m:mn>
+                      </m:msub>
+                    </m:mtd>
+                  </m:mtr>
+                </m:mtable>
+              </m:mfenced>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id128402">In the next section, we will use the pseudo-inverse of <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> to find the optimal <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> for a given <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math>.</para>
+        <para id="id128441">So the frame bounds <m:math overflow="scroll"><m:mi>A</m:mi></m:math> and <m:math overflow="scroll"><m:mi>B</m:mi></m:math> in <link target-id="uid27"/> are an indication of the redundancy of the expansion system <m:math overflow="scroll"><m:msub><m:mi>f</m:mi><m:mi>k</m:mi></m:msub></m:math> and to
+how close they are to being orthogonal or tight. Indeed, <link target-id="uid27"/> is a sort of approximate Parseval's theorem
+<link target-id="bid9"/>, <link target-id="bid10"/>, <link target-id="bid11"/>, <link target-id="bid12"/>, <link target-id="bid5"/>, <link target-id="bid7"/>, <link target-id="bid13"/>, <link target-id="bid14"/>.</para>
+        <para id="id128530">The dual frame vectors are also not
+unique but a set can be found such that <link target-id="uid14"/> and, therefore,
+<link target-id="uid15"/> hold (but <link target-id="uid18"/> does not). A set of dual frame vectors
+could be found by adding a set of arbitrary but independent rows to <emphasis effect="bold">F</emphasis> until it is square, inverting it, then taking the first <m:math overflow="scroll"><m:mi>N</m:mi></m:math> columns to
+form <m:math overflow="scroll"><m:mover accent="true"><m:mi mathvariant="bold">F</m:mi><m:mo>˜</m:mo></m:mover></m:math> whose rows will be a set of dual frame vectors.
+This method of construction shows the non-uniqueness of the dual frame
+vectors. This non-uniqueness is often resolved by optimizing some other
+parameter of the system <link target-id="bid10"/>.</para>
+        <para id="id128588">If the matrix operations are implementing a frame decomposition and the
+rows of <emphasis effect="bold">F</emphasis> are orthonormal, then <m:math overflow="scroll"><m:mrow><m:mover accent="true"><m:mi mathvariant="bold">F</m:mi><m:mo>˜</m:mo></m:mover><m:mo>=</m:mo><m:msup><m:mi mathvariant="bold">F</m:mi><m:mi mathvariant="bold">T</m:mi></m:msup></m:mrow></m:math> and the vector set
+is a tight frame <link target-id="bid9"/>, <link target-id="bid10"/>. If the frame vectors are
+normalized to <m:math overflow="scroll"><m:mrow><m:mrow><m:mo>|</m:mo><m:mo>|</m:mo></m:mrow><m:msub><m:mi mathvariant="bold">x</m:mi><m:mi mathvariant="bold">k</m:mi></m:msub><m:mrow><m:mo>|</m:mo><m:mo>|</m:mo></m:mrow><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow></m:math>, the decomposition in <link target-id="uid11"/> becomes</para>
+        <equation id="uid33">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mi mathvariant="bold">x</m:mi>
+              <m:mo>=</m:mo>
+              <m:mfrac>
+                <m:mn>1</m:mn>
+                <m:mi>A</m:mi>
+              </m:mfrac>
+              <m:munder>
+                <m:mo>∑</m:mo>
+                <m:mi>n</m:mi>
+              </m:munder>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mrow>
+                  <m:mi mathvariant="bold">x</m:mi>
+                  <m:mo>,</m:mo>
+                  <m:msub>
+                    <m:mover accent="true">
+                      <m:mi mathvariant="bold">x</m:mi>
+                      <m:mo>˜</m:mo>
+                    </m:mover>
+                    <m:mi mathvariant="bold">n</m:mi>
+                  </m:msub>
+                </m:mrow>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mspace width="0.277778em"/>
+              <m:msub>
+                <m:mi mathvariant="bold">x</m:mi>
+                <m:mi mathvariant="bold">n</m:mi>
+              </m:msub>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id128764">where the constant <m:math overflow="scroll"><m:mi>A</m:mi></m:math> is a measure of the redundancy of the expansion
+which has more expansion vectors than necessary <link target-id="bid10"/>.</para>
+        <para id="id128786">The matrix form is</para>
+        <equation id="uid34">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mi mathvariant="bold">x</m:mi>
+              <m:mo>=</m:mo>
+              <m:mfrac>
+                <m:mn>1</m:mn>
+                <m:mi>A</m:mi>
+              </m:mfrac>
+              <m:mspace width="0.277778em"/>
+              <m:mrow>
+                <m:mi mathvariant="bold">F</m:mi>
+                <m:mspace width="0.166667em"/>
+                <m:msup>
+                  <m:mi mathvariant="bold">F</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:mspace width="0.277778em"/>
+                <m:mi mathvariant="bold">x</m:mi>
+              </m:mrow>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id128847">where <m:math overflow="scroll"><m:mi mathvariant="bold">F</m:mi></m:math> has more columns than rows. Examples can be found in
+<link target-id="bid15"/>.</para>
+      </section>
+      <section id="uid35">
+        <title>Sinc Expansion as a Tight Frame</title>
+        <para id="id128885">The Shannon sampling theorem <link target-id="bid16"/> can be viewied as an infinite dimensional signal expansion
+where the <emphasis effect="italics">sinc</emphasis> functions are an orthogonal basis. The sampling theorem
+with critical sampling, i.e. at the Nyquist rate, is the expansion:</para>
+        <equation id="uid37">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mi>g</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi>t</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mspace width="4pt"/>
+              <m:mo>=</m:mo>
+              <m:mspace width="4pt"/>
+              <m:munder>
+                <m:mo>∑</m:mo>
+                <m:mi>n</m:mi>
+              </m:munder>
+              <m:mi>g</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi>T</m:mi>
+                <m:mi>n</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mspace width="0.166667em"/>
+              <m:mfrac>
+                <m:mrow>
+                  <m:mo form="prefix">sin</m:mo>
+                  <m:mo>(</m:mo>
+                  <m:mfrac>
+                    <m:mi>π</m:mi>
+                    <m:mi>T</m:mi>
+                  </m:mfrac>
+                  <m:mrow>
+                    <m:mo>(</m:mo>
+                    <m:mi>t</m:mi>
+                    <m:mo>-</m:mo>
+                    <m:mi>T</m:mi>
+                    <m:mi>n</m:mi>
+                    <m:mo>)</m:mo>
+                  </m:mrow>
+                  <m:mo>)</m:mo>
+                </m:mrow>
+                <m:mrow>
+                  <m:mfrac>
+                    <m:mi>π</m:mi>
+                    <m:mi>T</m:mi>
+                  </m:mfrac>
+                  <m:mrow>
+                    <m:mo>(</m:mo>
+                    <m:mi>t</m:mi>
+                    <m:mo>-</m:mo>
+                    <m:mi>T</m:mi>
+                    <m:mi>n</m:mi>
+                    <m:mo>)</m:mo>
+                  </m:mrow>
+                </m:mrow>
+              </m:mfrac>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id129011">where the expansion coefficients are the samples and where
+the <emphasis effect="italics">sinc</emphasis> functions are easily shown to be orthogonal.</para>
+        <para id="id129023"><emphasis effect="italics">Over sampling</emphasis> is
+an example of an infinite-dimensional tight frame <link target-id="bid17"/>, <link target-id="bid15"/>.
+If a function is over-sampled but the sinc functions remains consistent
+with the upper spectral limit <m:math overflow="scroll"><m:mi>W</m:mi></m:math>, using <m:math overflow="scroll"><m:mi>A</m:mi></m:math> as the amount of
+over-sampling, the sampling theorem becomes:</para>
+        <equation id="uid38">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mi>A</m:mi>
+              <m:mi>W</m:mi>
+              <m:mspace width="4pt"/>
+              <m:mo>=</m:mo>
+              <m:mspace width="4pt"/>
+              <m:mfrac>
+                <m:mi>π</m:mi>
+                <m:mi>T</m:mi>
+              </m:mfrac>
+              <m:mo>,</m:mo>
+              <m:mspace width="4pt"/>
+              <m:mspace width="4pt"/>
+              <m:mspace width="4pt"/>
+              <m:mspace width="4pt"/>
+              <m:mtext>for</m:mtext>
+              <m:mspace width="4.pt"/>
+              <m:mrow>
+                <m:mi>A</m:mi>
+                <m:mo>≥</m:mo>
+                <m:mn>1</m:mn>
+              </m:mrow>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id129122">and we have</para>
+        <equation id="uid39">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mi>g</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi>t</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mspace width="4pt"/>
+              <m:mo>=</m:mo>
+              <m:mspace width="4pt"/>
+              <m:mfrac>
+                <m:mn>1</m:mn>
+                <m:mi>A</m:mi>
+              </m:mfrac>
+              <m:munder>
+                <m:mo>∑</m:mo>
+                <m:mi>n</m:mi>
+              </m:munder>
+              <m:mi>g</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi>T</m:mi>
+                <m:mi>n</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mspace width="0.166667em"/>
+              <m:mfrac>
+                <m:mrow>
+                  <m:mo form="prefix">sin</m:mo>
+                  <m:mo>(</m:mo>
+                  <m:mfrac>
+                    <m:mi>π</m:mi>
+                    <m:mrow>
+                      <m:mi>A</m:mi>
+                      <m:mi>T</m:mi>
+                    </m:mrow>
+                  </m:mfrac>
+                  <m:mrow>
+                    <m:mo>(</m:mo>
+                    <m:mi>t</m:mi>
+                    <m:mo>-</m:mo>
+                    <m:mi>T</m:mi>
+                    <m:mi>n</m:mi>
+                    <m:mo>)</m:mo>
+                  </m:mrow>
+                  <m:mo>)</m:mo>
+                </m:mrow>
+                <m:mrow>
+                  <m:mfrac>
+                    <m:mi>π</m:mi>
+                    <m:mrow>
+                      <m:mi>A</m:mi>
+                      <m:mi>T</m:mi>
+                    </m:mrow>
+                  </m:mfrac>
+                  <m:mrow>
+                    <m:mo>(</m:mo>
+                    <m:mi>t</m:mi>
+                    <m:mo>-</m:mo>
+                    <m:mi>T</m:mi>
+                    <m:mi>n</m:mi>
+                    <m:mo>)</m:mo>
+                  </m:mrow>
+                </m:mrow>
+              </m:mfrac>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id129250">where the sinc functions are no longer orthogonal. In fact, they are
+no longer a basis as they are not independent. They are, however, a tight
+frame and, therefore, have some of the characteristics of an orthogonal basis but with
+a “redundancy" factor <m:math overflow="scroll"><m:mi>A</m:mi></m:math> as a multiplier in the formula <link target-id="bid15"/> and
+a generalized Parseval's theorem.
+Here, moving from a basis to a frame (actually from an orthogonal basis
+to a tight frame) is almost invisible.</para>
+      </section>
+      <section id="uid40">
+        <title>Frequency Response of an FIR Digital Filter</title>
+        <para id="id129286">The discrete-time Fourier transform (DTFT) of the impulse response of an
+FIR digital filter <m:math overflow="scroll"><m:mrow><m:mi>h</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math> is its frequency response. The discrete Fourier transform (DFT) of
+<m:math overflow="scroll"><m:mrow><m:mi>h</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math> gives samples of the frequency response <link target-id="bid16"/>. This is a powerful analysis tool
+in digital signal processing (DSP) and suggests that an inverse (or pseudoinverse)
+method could be useful for design <link target-id="bid16"/>.</para>
+      </section>
+      <section id="uid41">
+        <title>Conclusions</title>
+        <para id="id129345">Frames tend to be more robust than bases in tolerating errors and missing
+terms. They allow flexibility is designing wavelet systems <link target-id="bid10"/> where
+frame expansions are often chosen.</para>
+        <para id="id129355">In an infinite dimensional vector space, if basis vectors are chosen such
+that all expansions converge very rapidly, the basis is called an <emphasis effect="italics">unconditional basis</emphasis> and is near optimal for a wide class of signal
+representation and processing problems. This is discussed by Donoho in
+<link target-id="bid18"/>.</para>
+        <para id="id129372">Still another view of a matrix operator being a change of basis can be
+developed using the eigenvectors of an operator as
+the basis vectors. Then a signal can decomposed into its eigenvector
+components which are then simply multiplied by the scalar eigenvalues to
+accomplish the same task as a general matrix multiplication. This is an
+interesting idea but will not be developed here.</para>
+      </section>
+    </section>
+    <section id="cid3">
+      <title>Change of Signal</title>
+      <para id="id129388">If both <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> and <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> in <link target-id="uid1"/> are considered to be signals in the same coordinate or
+basis system, the matrix operator <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> is generally square. It may or may
+not be of full rank and it may or may not have a variety of other
+properties, but both <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> and <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> are viewed in the same coordinate system and
+therefore are the same size.</para>
+      <para id="id129455">One of the most ubiquitous of these is convolution where the input to a linear,
+shift invariant system with impulse response <m:math overflow="scroll"><m:mrow><m:mi>h</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math> is calculated by <link target-id="uid1"/>
+if <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> is the convolution matrix and <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> is the input <link target-id="bid16"/>.</para>
+      <equation id="uid42">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>y</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>y</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>y</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:mo>⋮</m:mo>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+            <m:mo>=</m:mo>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:mn>0</m:mn>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:mn>0</m:mn>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:mo>⋯</m:mo>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:mn>0</m:mn>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:mn>0</m:mn>
+                  </m:mtd>
+                  <m:mtd/>
+                  <m:mtd/>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd/>
+                  <m:mtd/>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:mo>⋮</m:mo>
+                  </m:mtd>
+                  <m:mtd/>
+                  <m:mtd/>
+                  <m:mtd/>
+                  <m:mtd>
+                    <m:mo>⋮</m:mo>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:mo>⋮</m:mo>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id129702">It can also be calculated if <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> is the arrangement of the input and
+<m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> is the the impulse response.</para>
+      <equation id="uid43">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>y</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>y</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>y</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:mo>⋮</m:mo>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+            <m:mo>=</m:mo>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:mn>0</m:mn>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:mn>0</m:mn>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:mo>⋯</m:mo>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:mn>0</m:mn>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:mn>0</m:mn>
+                  </m:mtd>
+                  <m:mtd/>
+                  <m:mtd/>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd/>
+                  <m:mtd/>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:mo>⋮</m:mo>
+                  </m:mtd>
+                  <m:mtd/>
+                  <m:mtd/>
+                  <m:mtd/>
+                  <m:mtd>
+                    <m:mo>⋮</m:mo>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:mo>⋮</m:mo>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id129926">If the signal is periodic or if the DFT is being used, then what is called a
+<emphasis effect="italics">circulate</emphasis> is used to represent cyclic convolution. An example for
+<m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>=</m:mo><m:mn>4</m:mn></m:mrow></m:math> is the Toeplitz system</para>
+      <equation id="uid44">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>y</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>y</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>y</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>y</m:mi>
+                      <m:mn>3</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+            <m:mo>=</m:mo>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>3</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>3</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>3</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>3</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>3</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id130214">One method of understanding and generating matrices of this sort is to
+construct them as a product of first a decomposition operator, then a
+modification operator in the new basis system, followed by a recomposition
+operator. For example, one could first multiply a signal by the DFT
+operator which will change it into the frequency domain. One (or more)
+of the frequency coefficients could be removed (set to zero) and the
+remainder multiplied by the inverse DFT operator to give a signal back in
+the time domain but changed by having a frequency component removed. That
+is a form of signal filtering and one can talk about removing the energy of
+a signal at a certain frequency (or many) because of Parseval's theorem.</para>
+      <para id="id130229">It would be instructive for the reader to make sense out of the cryptic
+statement “the DFT diagonalizes the cyclic convolution matrix" to add to
+the ideas in this note.</para>
+    </section>
+    <section id="cid4">
+      <title>Factoring the Matrix <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math></title>
+      <para id="id130255">For insight, algorithm development, and/or computational efficiency, it is sometime
+worthwhile to factor <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> into a product of two or more matrices. For example,
+the <m:math overflow="scroll"><m:mrow><m:mi>D</m:mi><m:mi>F</m:mi><m:mi>T</m:mi></m:mrow></m:math> matrix <link target-id="bid0"/> illustrated in <link target-id="uid4"/> can be factored into a product
+of fairly sparce matrices. If fact, the fast Fourier transform (FFT) can be derived by
+factoring the DFT matrix into <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo form="prefix">log</m:mo><m:mo>(</m:mo><m:mi>N</m:mi><m:mo>)</m:mo></m:mrow></m:math> factors (if <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>=</m:mo><m:msup><m:mn>2</m:mn><m:mi>m</m:mi></m:msup></m:mrow></m:math>), each requiring order <m:math overflow="scroll"><m:mi>N</m:mi></m:math> multiplies.
+This is done in <link target-id="bid0"/>.</para>
+      <para id="id130351">Using eigenvalue theory <link target-id="bid2"/>, a full rank square matrix can be factored into a product</para>
+      <equation id="uid45">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mi mathvariant="bold">A</m:mi>
+            <m:mi mathvariant="bold">V</m:mi>
+            <m:mo>=</m:mo>
+            <m:mi mathvariant="bold">V</m:mi>
+            <m:mi>Λ</m:mi>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id130392">where <m:math overflow="scroll"><m:mi mathvariant="bold">V</m:mi></m:math> is a matrix with columns of the eigenvectors of <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> and
+<m:math overflow="scroll"><m:mi>Λ</m:mi></m:math> is a diagonal matrix with the eigenvalues along the diagonal. The
+inverse is a method to “diagonalize" a matrix</para>
+      <equation id="uid46">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mi>Λ</m:mi>
+            <m:mo>=</m:mo>
+            <m:msup>
+              <m:mi mathvariant="bold">V</m:mi>
+              <m:mrow>
+                <m:mo>-</m:mo>
+                <m:mn mathvariant="bold">1</m:mn>
+              </m:mrow>
+            </m:msup>
+            <m:mi mathvariant="bold">A</m:mi>
+            <m:mi mathvariant="bold">V</m:mi>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id130474">If a matrix has “repeated eigenvalues", in other words, two or more of the <m:math overflow="scroll"><m:mi>N</m:mi></m:math>
+eigenvalues have the same value but less than <m:math overflow="scroll"><m:mi>N</m:mi></m:math> indepentant eigenvectors, it is
+not possible to diagonalize the matrix but
+an “almost" diagonal form called the <emphasis effect="italics">Jordan normal form</emphasis> can be acheived.
+Those details can be found in most books on matrix theory <link target-id="bid19"/>.</para>
+      <para id="id130512">A more general decompostion is the singular value decomposition (SVD) which is
+similar to the eigenvalue problem but allows rectangular matrices.
+It is particularly valuable for expressing the pseudoinverse in a simple form and
+in making numerical calculations <link target-id="bid20"/>.</para>
+    </section>
+    <section id="cid5">
+      <title>State Equations</title>
+      <para id="id130533">If our matrix multiplication equation is a vector differential equation (DE) of the form</para>
+      <equation id="uid47">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mover accent="true">
+              <m:mi mathvariant="bold">x</m:mi>
+              <m:mo>˙</m:mo>
+            </m:mover>
+            <m:mo>=</m:mo>
+            <m:mi mathvariant="bold">A</m:mi>
+            <m:mi mathvariant="bold">x</m:mi>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id130573">or for difference equations and discrete-time signals or digital signals,</para>
+      <equation id="uid48">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mi mathvariant="bold">x</m:mi>
+            <m:mo>(</m:mo>
+            <m:mi>n</m:mi>
+            <m:mo>+</m:mo>
+            <m:mn>1</m:mn>
+            <m:mo>)</m:mo>
+            <m:mo>=</m:mo>
+            <m:mrow>
+              <m:mi mathvariant="bold">A</m:mi>
+              <m:mi mathvariant="bold">x</m:mi>
+            </m:mrow>
+            <m:mo>(</m:mo>
+            <m:mi>n</m:mi>
+            <m:mo>)</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id130627">an inverse or even pseudoinverse will not solve for <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> . A different
+approach must be taken <link target-id="bid21"/> and different properties and tools from
+linear algebra will be used. The solution of this first order vector DE is a
+coupled set of solutions of first order DEs. If a change of
+basis is made so that <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> is diagonal (or Jordan form), equation <link target-id="uid47"/> becomes a
+set on uncoupled (or almost uncoupled in the Jordan form case) first order DEs and we know the solution of a first order
+DE is an exponential. This requires consideration of the eigenvalue problem,
+diagonalization, and solution of scalar first order DEs <link target-id="bid21"/>.</para>
+      <para id="id130675">State equations are often used to model or describe a system such as a
+control system or a digital filter or a numerical algorithm <link target-id="bid21"/>, <link target-id="bid22"/>.
+
+
+</para>
+    </section>
+  </content>
+  <bib:file>
+    <bib:entry id="bid15">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Burrus, C. Sidney and Gopinath, Ramesh A. and Guo, Haitao</bib:author>
+        <bib:title>Introduction to Wavelets and the Wavelet Transform</bib:title>
+        <bib:publisher>Prentice Hall</bib:publisher>
+        <bib:year>1998</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>Upper Saddle River, NJ</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>to appear on the web in Connexions: cnx.org</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid16">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Burrus, C. Sidney</bib:author>
+        <bib:title>Digital Signal Processing and Digital Filter Design</bib:title>
+        <bib:publisher>Connexions, cnx.org</bib:publisher>
+        <bib:year>2008</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address/>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>http://cnx.org/content/col10598/latest/</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid0">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Burrus, C. Sidney</bib:author>
+        <bib:title>Fast Fourier Transforms</bib:title>
+        <bib:publisher>Connexions, cnx.org</bib:publisher>
+        <bib:year>2008</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address/>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>http://cnx.org/content/col10550/latest/</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid5">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Christensen, Ole</bib:author>
+        <bib:title>An Introduction to Frames and Riesz Bases</bib:title>
+        <bib:publisher>Birkhäuser</bib:publisher>
+        <bib:year>2002</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address/>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid10">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Daubechies, Ingrid</bib:author>
+        <bib:title>Ten Lectures on Wavelets</bib:title>
+        <bib:publisher>SIAM</bib:publisher>
+        <bib:year>1992</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>Philadelphia, PA</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>Notes from the 1990 CBMS-NSF Conference on Wavelets and Applications at Lowell, MA</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid18">
+      <bib:article>
+        <!--required fields-->
+        <bib:author>Donoho, David L.</bib:author>
+        <bib:title>Unconditional Bases are Optimal Bases for Data Compression and for Statistical Estimation</bib:title>
+        <bib:journal>Applied and Computational Harmonic Analysis</bib:journal>
+        <bib:year>1993</bib:year>
+        <!--optional fields-->
+        <bib:volume>1</bib:volume>
+        <bib:number>1</bib:number>
+        <bib:pages>100–115</bib:pages>
+        <bib:month>December</bib:month>
+        <bib:note>Also Stanford Statistics Dept. Report TR-410, Nov. 1992</bib:note>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid21">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Dorf, Richard C.</bib:author>
+        <bib:title>Time-Domain Analysis and Design of Control Systems</bib:title>
+        <bib:publisher>Addison-Wesley</bib:publisher>
+        <bib:year>1965</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address/>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid13">
+      <bib:article>
+        <!--required fields-->
+        <bib:author>Ferreira, Paulo J. S. G.</bib:author>
+        <bib:title>Mathematics for Multimedia Signal Processing II: Discrete Finite Frames and Signal Reconstruction</bib:title>
+        <bib:journal>Signal Processing for Multimedia</bib:journal>
+        <bib:year>1999</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:number/>
+        <bib:pages>35–54</bib:pages>
+        <bib:month/>
+        <bib:note>J. S. Byrnes (editor), IOS Press</bib:note>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid3">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Halmos, Paul R.</bib:author>
+        <bib:title>Introduction to Hilbert Space and the Theory of Spectral Multiplicity</bib:title>
+        <bib:publisher>Chelsea</bib:publisher>
+        <bib:year>1951</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>New York</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>second edition 1957</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid1">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Halmos, Paul R.</bib:author>
+        <bib:title>Finite-Dimensional Vector Spaces</bib:title>
+        <bib:publisher>Van Nostrand</bib:publisher>
+        <bib:year>1958</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>Princeton, NJ</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>Springer 1974</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid6">
+      <bib:book>
+        <!--required fields-->
+        <bib:editor/>
+        <bib:title>Wavelets, Frames and Operator Theory</bib:title>
+        <bib:publisher>American Mathematical Society</bib:publisher>
+        <bib:year>2004</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address/>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid12">
+      <bib:article>
+        <!--required fields-->
+        <bib:author>Kovacevic, Jelena and Chebira, Amina</bib:author>
+        <bib:title>Life Beyond Bases: The Advent of Frames (Part I)</bib:title>
+        <bib:journal>IEEE Signal Processing Magazine</bib:journal>
+        <bib:year>2007</bib:year>
+        <!--optional fields-->
+        <bib:volume>24</bib:volume>
+        <bib:number>4</bib:number>
+        <bib:pages>86–104</bib:pages>
+        <bib:month>July</bib:month>
+        <bib:note/>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid8">
+      <bib:article>
+        <!--required fields-->
+        <bib:author>Kovacevic, Jelena and Chebira, Amina</bib:author>
+        <bib:title>Life Beyond Bases: The Advent of Frames (Part II)</bib:title>
+        <bib:journal>IEEE Signal Processing Magazine</bib:journal>
+        <bib:year>2007</bib:year>
+        <!--optional fields-->
+        <bib:volume>24</bib:volume>
+        <bib:number>5</bib:number>
+        <bib:pages>115–125</bib:pages>
+        <bib:month>September</bib:month>
+        <bib:note/>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid14">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Kovacevic, Jelena and Goyal, Vivek K. and Vetterli, Martin</bib:author>
+        <bib:title>Signal Processing: Foundations</bib:title>
+        <bib:publisher>On Line publication by fourierandwavelets.org</bib:publisher>
+        <bib:year>2012</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address/>
+        <bib:edition/>
+        <bib:month>March</bib:month>
+        <bib:note>available online: http://fourierandwavelets.org/</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid17">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Marks II, R. J.</bib:author>
+        <bib:title>Introduction to Shannon Sampling and Interpolation Theory</bib:title>
+        <bib:publisher>Springer-Verlag</bib:publisher>
+        <bib:year>1991</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>New York</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid11">
+      <bib:article>
+        <!--required fields-->
+        <bib:author>Pei, Soo-Chang and Yeh, Min-Hung</bib:author>
+        <bib:title>An Introduction to Discrete Finite Frames</bib:title>
+        <bib:journal>IEEE Signal Processing Magazine</bib:journal>
+        <bib:year>1997</bib:year>
+        <!--optional fields-->
+        <bib:volume>14</bib:volume>
+        <bib:number>6</bib:number>
+        <bib:pages>84–96</bib:pages>
+        <bib:month>November</bib:month>
+        <bib:note/>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid19">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Strang, Gilbert</bib:author>
+        <bib:title>Linear Algebra and Its Applications</bib:title>
+        <bib:publisher>Academic Press</bib:publisher>
+        <bib:year>1976</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>New York</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>4th Edition, Brooks Cole, 2005</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid2">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Strang, Gilbert</bib:author>
+        <bib:title>Introduction to Linear Algebra</bib:title>
+        <bib:publisher>Wellesley Cambridge</bib:publisher>
+        <bib:year>1986</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>New York</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>4th Edition, 2009</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid20">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Trefethen, Lloyd N. and III, David Bau</bib:author>
+        <bib:title>Numerical Linear Algebra</bib:title>
+        <bib:publisher>SIAM</bib:publisher>
+        <bib:year>1997</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address/>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid7">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Waldron, Shayne F. D.</bib:author>
+        <bib:title>An Introduction to Finite Tight Frames, Draft</bib:title>
+        <bib:publisher>Springer</bib:publisher>
+        <bib:year>2010</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address/>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>http://www.math.auckland.ac.nz/ waldron/Harmonic-frames/Tuan-Shayne/book.pdf</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid9">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Young, R. M.</bib:author>
+        <bib:title>An Introduction to Nonharmonic Fourier Series</bib:title>
+        <bib:publisher>Academic Press</bib:publisher>
+        <bib:year>1980</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>New York</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid4">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Young, N.</bib:author>
+        <bib:title>An Introduction to Hilbert Space</bib:title>
+        <bib:publisher>Cambridge Press</bib:publisher>
+        <bib:year>1988</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address/>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid22">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Zadeh, Lotfi A. and Desoer, Charles A.</bib:author>
+        <bib:title>Linear System Theory: The State Space Approach</bib:title>
+        <bib:publisher>Dover</bib:publisher>
+        <bib:year>1963, 2008</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address/>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+  </bib:file>
+</document>

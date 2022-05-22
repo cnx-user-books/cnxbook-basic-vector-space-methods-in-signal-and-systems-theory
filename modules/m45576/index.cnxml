@@ -1,0 +1,947 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:bib="http://bibtexml.sf.net/">
+  <title>Approximation with Other Norms and Error Measures</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m45576</md:content-id>
+  <md:title>Approximation with Other Norms and Error Measures</md:title>
+  <md:abstract>Here we use a more general definition of norm in addition to L_2.  In particular, we consider L_p.</md:abstract>
+  <md:uuid>520124d8-6535-4636-bd4b-56a7acabff35</md:uuid>
+</metadata>
+
+<content>
+    <section id="cid1">
+      <title>Approximation with Other Norms and Error Measures</title>
+      <para id="id251880">Most of the discussion about the approximate solutions to <m:math overflow="scroll"><m:mrow><m:mi mathvariant="bold">Ax</m:mi><m:mo>=</m:mo><m:mi mathvariant="bold">b</m:mi></m:mrow></m:math> are about
+the result of minimizing the <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mn>2</m:mn></m:msub></m:math> equation error <m:math overflow="scroll"><m:mrow><m:mrow><m:mo>|</m:mo><m:mo>|</m:mo><m:mi>A</m:mi><m:mi>x</m:mi></m:mrow><m:mo>-</m:mo><m:msub><m:mrow><m:mi>b</m:mi><m:mo>|</m:mo><m:mo>|</m:mo></m:mrow><m:mn>2</m:mn></m:msub></m:mrow></m:math>
+and/or the <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mn>2</m:mn></m:msub></m:math> norm of the solution <m:math overflow="scroll"><m:msub><m:mrow><m:mo>|</m:mo><m:mo>|</m:mo><m:mi mathvariant="bold">x</m:mi><m:mo>|</m:mo><m:mo>|</m:mo></m:mrow><m:mn>2</m:mn></m:msub></m:math> because in some cases that can be done
+by analytic formulas and also because the <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mn>2</m:mn></m:msub></m:math> norm has a energy interpretation.
+However, both the <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mn>1</m:mn></m:msub></m:math> and the <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mi>∞</m:mi></m:msub></m:math><link target-id="bid0"/> have well known applications that are
+important <link target-id="bid1"/>, <link target-id="bid2"/> and the more general <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mi>p</m:mi></m:msub></m:math> error
+is remarkably flexible <link target-id="bid3"/>, <link target-id="bid4"/>. Donoho has shown <link target-id="bid5"/> that
+<m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mn>1</m:mn></m:msub></m:math> optimization gives essentially the same sparsity as the true sparsity measure in <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mn>0</m:mn></m:msub></m:math>.</para>
+      <para id="id252436">In some cases, one uses a different norm for the minimization of
+the equation error than the one for minimization of the solution norm. And in
+other cases, one minimizes a weighted error to emphasize some
+equations relative to others <link target-id="bid6"/>. A modification allows minimizing according
+to one norm for one set of equations and another for a different set. A more general
+error measure than a norm can be used which used a polynomial error <link target-id="bid4"/> which
+does not satisfy the scaling requirement of a norm, but is convex. One could even use the
+so-called <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mi>p</m:mi></m:msub></m:math> norm for <m:math overflow="scroll"><m:mrow><m:mn>1</m:mn><m:mo>&gt;</m:mo><m:mi>p</m:mi><m:mo>&gt;</m:mo><m:mn>0</m:mn></m:mrow></m:math> which is not even convex but is an interesting
+tool for obtaining sparse solutions.</para>
+      <figure id="uid1">
+        <media id="uid1_media" alt="">
+          <image mime-type="image/png" src="../../media/power2.png" id="uid1_onlineimage" width="347"><!-- NOTE: attribute width changes image size online (pixels). original width is 347. --></image>
+          <image mime-type="application/postscript" for="pdf" src="../../media/power2.eps" id="uid1_printimage" print-width="5.0in">
+            <!--NOTE: attribute width changes image size in printed PDF (if specified in .tex file)-->
+          </image>
+        </media>
+        <caption>Different <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mi>p</m:mi></m:msub></m:math> norms: p = .2, 1, 2, 10.</caption>
+      </figure>
+      <para id="id252512">Note from the figure how the <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mn>10</m:mn></m:msub></m:math> norm puts a large penalty on large errors.
+This gives a Chebyshev-like solution. The <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mrow><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>2</m:mn></m:mrow></m:msub></m:math> norm puts a large penalty on
+small errors making them tend to zero. This (and the <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mn>1</m:mn></m:msub></m:math> norm) give a sparse solution.</para>
+    </section>
+    <section id="cid2">
+      <title>The <m:math overflow="scroll"><m:msub><m:mi>L</m:mi><m:mi>p</m:mi></m:msub></m:math> Norm Approximation</title>
+      <para id="id251822">The <emphasis effect="bold">IRLS</emphasis> (iterative reweighted least squares) algorithm allows an iterative
+algorithm to be built from the analytical solutions of the weighted least squares
+with an iterative reweighting to converge to the optimal <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mi>p</m:mi></m:msub></m:math> approximation <link target-id="bid7"/>.</para>
+      <section id="uid2">
+        <title>The Overdetermined System with more Equations than Unknowns</title>
+        <para id="id252801">If one poses the <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mi>p</m:mi></m:msub></m:math> approximation problem in solving an overdetermined set of
+equations (case 2 from Chapter 3), it comes from defining the equation error vector</para>
+        <equation id="uid3">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mi mathvariant="bold">e</m:mi>
+              <m:mo>=</m:mo>
+              <m:mrow>
+                <m:mi mathvariant="bold">A</m:mi>
+                <m:mi mathvariant="bold">x</m:mi>
+              </m:mrow>
+              <m:mo>-</m:mo>
+              <m:mi mathvariant="bold">b</m:mi>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id252854">and minimizing the p-norm</para>
+        <equation id="uid4">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:msub>
+                <m:mrow>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                  <m:mi mathvariant="bold">e</m:mi>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                </m:mrow>
+                <m:mi>p</m:mi>
+              </m:msub>
+              <m:mo>=</m:mo>
+              <m:msup>
+                <m:mfenced separators="" open="(" close=")">
+                  <m:munder>
+                    <m:mo>∑</m:mo>
+                    <m:mi>n</m:mi>
+                  </m:munder>
+                  <m:msup>
+                    <m:mrow>
+                      <m:mo>|</m:mo>
+                      <m:msub>
+                        <m:mi>e</m:mi>
+                        <m:mi>n</m:mi>
+                      </m:msub>
+                      <m:mo>|</m:mo>
+                    </m:mrow>
+                    <m:mi>p</m:mi>
+                  </m:msup>
+                </m:mfenced>
+                <m:mrow>
+                  <m:mn>1</m:mn>
+                  <m:mo>/</m:mo>
+                  <m:mi>p</m:mi>
+                </m:mrow>
+              </m:msup>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id252940">or</para>
+        <equation id="uid5">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:msubsup>
+                <m:mrow>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                  <m:mi mathvariant="bold">e</m:mi>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                </m:mrow>
+                <m:mi mathvariant="bold">p</m:mi>
+                <m:mi mathvariant="bold">p</m:mi>
+              </m:msubsup>
+              <m:mo>=</m:mo>
+              <m:munder>
+                <m:mo>∑</m:mo>
+                <m:mi mathvariant="bold">n</m:mi>
+              </m:munder>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>|</m:mo>
+                  <m:msub>
+                    <m:mi mathvariant="bold">e</m:mi>
+                    <m:mi mathvariant="bold">n</m:mi>
+                  </m:msub>
+                  <m:mo>|</m:mo>
+                </m:mrow>
+                <m:mi mathvariant="bold">p</m:mi>
+              </m:msup>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id253019">neither of which can we minimize easily. However, we do have formulas <link target-id="bid6"/> to find the
+minimum of the weighted squared error</para>
+        <equation id="uid6">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:msubsup>
+                <m:mrow>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                  <m:mrow>
+                    <m:mi mathvariant="bold">W</m:mi>
+                    <m:mi mathvariant="bold">e</m:mi>
+                  </m:mrow>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                </m:mrow>
+                <m:mn mathvariant="bold">2</m:mn>
+                <m:mn mathvariant="bold">2</m:mn>
+              </m:msubsup>
+              <m:mo>=</m:mo>
+              <m:munder>
+                <m:mo>∑</m:mo>
+                <m:mi mathvariant="bold">n</m:mi>
+              </m:munder>
+              <m:msubsup>
+                <m:mi mathvariant="bold">w</m:mi>
+                <m:mi mathvariant="bold">n</m:mi>
+                <m:mn mathvariant="bold">2</m:mn>
+              </m:msubsup>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>|</m:mo>
+                  <m:msub>
+                    <m:mi mathvariant="bold">e</m:mi>
+                    <m:mi mathvariant="bold">n</m:mi>
+                  </m:msub>
+                  <m:mo>|</m:mo>
+                </m:mrow>
+                <m:mn mathvariant="bold">2</m:mn>
+              </m:msup>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id253128">one of which is derived in <link target-id=""/>, equation <link target-id=""/> and is</para>
+        <equation id="uid7">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mi mathvariant="bold">x</m:mi>
+              <m:mo>=</m:mo>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>[</m:mo>
+                  <m:mrow>
+                    <m:msup>
+                      <m:mi mathvariant="bold">A</m:mi>
+                      <m:mi mathvariant="bold">T</m:mi>
+                    </m:msup>
+                    <m:msup>
+                      <m:mi mathvariant="bold">W</m:mi>
+                      <m:mi mathvariant="bold">T</m:mi>
+                    </m:msup>
+                    <m:mi mathvariant="bold">W</m:mi>
+                    <m:mi mathvariant="bold">A</m:mi>
+                  </m:mrow>
+                  <m:mo>]</m:mo>
+                </m:mrow>
+                <m:mrow>
+                  <m:mo>-</m:mo>
+                  <m:mn>1</m:mn>
+                </m:mrow>
+              </m:msup>
+              <m:mrow>
+                <m:msup>
+                  <m:mi mathvariant="bold">A</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:msup>
+                  <m:mi mathvariant="bold">W</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:mi mathvariant="bold">W</m:mi>
+                <m:mi mathvariant="bold">b</m:mi>
+              </m:mrow>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id253235">where <m:math overflow="scroll"><m:mi mathvariant="bold">W</m:mi></m:math> is a diagonal matrix of the error weights, <m:math overflow="scroll"><m:msub><m:mi>w</m:mi><m:mi>n</m:mi></m:msub></m:math>. From
+this, we propose the iterative reweighted least squared (IRLS) error algorithm
+which starts with unity weighting, <m:math overflow="scroll"><m:mrow><m:mi mathvariant="bold">W</m:mi><m:mo>=</m:mo><m:mi mathvariant="bold">I</m:mi></m:mrow></m:math>, solves for an
+initial <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> with <link target-id="uid7"/>, calculates a new error from<link target-id="uid3"/>,
+which is then used to set a new weighting matrix <m:math overflow="scroll"><m:mi mathvariant="bold">W</m:mi></m:math></para>
+        <equation id="uid8">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mi mathvariant="bold">W</m:mi>
+              <m:mo>=</m:mo>
+              <m:mi>d</m:mi>
+              <m:mi>i</m:mi>
+              <m:mi>a</m:mi>
+              <m:mi>g</m:mi>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>(</m:mo>
+                  <m:msub>
+                    <m:mi>w</m:mi>
+                    <m:mi>n</m:mi>
+                  </m:msub>
+                  <m:mo>)</m:mo>
+                </m:mrow>
+                <m:mrow>
+                  <m:mo>(</m:mo>
+                  <m:mi>p</m:mi>
+                  <m:mo>-</m:mo>
+                  <m:mn>2</m:mn>
+                  <m:mo>)</m:mo>
+                  <m:mo>/</m:mo>
+                  <m:mn>2</m:mn>
+                </m:mrow>
+              </m:msup>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id253369">to be used in the next iteration of <link target-id="uid7"/>.
+Using this, we find a new solution <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> and repeat until convergence
+(if it happens!).</para>
+        <para id="id253389">This core idea has been repeatedly proposed and developed in different
+application areas over the past 50 years with a variety of success <link target-id="bid7"/>. Used
+in this basic form, it reliably converges for <m:math overflow="scroll"><m:mrow><m:mn>2</m:mn><m:mo>&lt;</m:mo><m:mi>p</m:mi><m:mo>&lt;</m:mo><m:mn>3</m:mn></m:mrow></m:math>. In 1990, a
+modification was made to partially update the solution each iteration with</para>
+        <equation id="uid9">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mi mathvariant="bold">x</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi>k</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:mi>q</m:mi>
+              <m:mover accent="true">
+                <m:mi mathvariant="bold">x</m:mi>
+                <m:mo>^</m:mo>
+              </m:mover>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi>k</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>+</m:mo>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mn>1</m:mn>
+                <m:mo>-</m:mo>
+                <m:mi>q</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mi mathvariant="bold">x</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi>k</m:mi>
+                <m:mo>-</m:mo>
+                <m:mn>1</m:mn>
+                <m:mo>)</m:mo>
+              </m:mrow>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id253493">where <m:math overflow="scroll"><m:mover accent="true"><m:mi mathvariant="bold">x</m:mi><m:mo>^</m:mo></m:mover></m:math> is the new weighted least squares solution of <link target-id=""/>
+which is used to partially update the previous value <m:math overflow="scroll"><m:mrow><m:mi mathvariant="bold">x</m:mi><m:mo>(</m:mo><m:mi>k</m:mi><m:mo>-</m:mo><m:mn>1</m:mn><m:mo>)</m:mo></m:mrow></m:math>
+using a convergence up-date factor <m:math overflow="scroll"><m:mrow><m:mn>0</m:mn><m:mo>&lt;</m:mo><m:mi>q</m:mi><m:mo>&lt;</m:mo><m:mn>1</m:mn></m:mrow></m:math> which gave convergence
+over a larger range of around <m:math overflow="scroll"><m:mrow><m:mn>1</m:mn><m:mo>.</m:mo><m:mn>5</m:mn><m:mo>&lt;</m:mo><m:mi>p</m:mi><m:mo>&lt;</m:mo><m:mn>5</m:mn></m:mrow></m:math> but but it was slower.</para>
+        <para id="id253579">A second improvement showed that a specific up-date factor of</para>
+        <equation id="uid10">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mi>q</m:mi>
+              <m:mo>=</m:mo>
+              <m:mfrac>
+                <m:mn>1</m:mn>
+                <m:mrow>
+                  <m:mi>p</m:mi>
+                  <m:mo>-</m:mo>
+                  <m:mn>1</m:mn>
+                </m:mrow>
+              </m:mfrac>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id253612">significantly increased the speed of convergence. With this particular factor, the
+algorithm becomes a form of Newton's method which has quadratic convergence.</para>
+        <para id="id253619">A third modification applied homotopy <link target-id="bid8"/>, <link target-id="bid9"/>, <link target-id="bid10"/>, <link target-id="bid11"/>
+by starting with a value for <m:math overflow="scroll"><m:mi>p</m:mi></m:math> which is equal to 2 and increasing it each iteration
+(or each few iterations) until it reached the desired value, or, in the case of <m:math overflow="scroll"><m:mrow><m:mi>p</m:mi><m:mo>&lt;</m:mo><m:mn>2</m:mn></m:mrow></m:math>, decrease it.
+This made a significant increase in both the
+range of <m:math overflow="scroll"><m:mi>p</m:mi></m:math> that allowed convergence and in the speed of calculations. Some
+of the history and details can be found applied to digital filter design in <link target-id="bid3"/>, <link target-id="bid4"/>.</para>
+        <para id="id253685">A Matlab program that implements these ideas applied to our pseudoinverse
+problem with more equations than unknowns (case 2a) is:</para>
+        <code id="id253690" display="block">% m-file IRLS1.m to find the optimal solution to Ax=b
+</code>
+        <code id="id253701" display="block">%  minimizing the L_p norm ||Ax-b||_p, using IRLS.
+</code>
+        <code id="id253713" display="block">%  Newton iterative update of solution, x, for  M &gt; N.
+</code>
+        <code id="id253724" display="block">%  For 2&lt;p&lt;infty, use homotopy parameter K = 1.01 to 2
+</code>
+        <code id="id253738" display="block">%  For 0&lt;p&lt;2, use K = approx 0.7 - 0.9
+</code>
+        <code id="id253753" display="block">%  csb 10/20/2012
+</code>
+        <code id="id253762" display="block">function x = IRLS1(A,b,p,K,KK)
+</code>
+        <code id="id253771" display="block">if nargin &lt; 5, KK=10;  end;
+</code>
+        <code id="id253781" display="block">if nargin &lt; 4, K = 2;  end;
+</code>
+        <code id="id253792" display="block">if nargin &lt; 3, p = 10; end;
+</code>
+        <code id="id253802" display="block">pk = 2;                                      % Initial homotopy value
+</code>
+        <code id="id253812" display="block">x  = pinv(A)*b;                              % Initial L_2 solution
+</code>
+        <code id="id253822" display="block">E = [];
+</code>
+        <code id="id253831" display="block">for k = 1:KK                                 % Iterate
+</code>
+        <code id="id253841" display="block">   if p &gt;= 2, pk = min([p, K*pk]);           % Homotopy change of p
+</code>
+        <code id="id253852" display="block">      else pk = max([p, K*pk]); end
+</code>
+        <code id="id253862" display="block">   e  = A*x - b;                             % Error vector
+</code>
+        <code id="id253873" display="block">   w  = abs(e).^((pk-2)/2);                  % Error weights for IRLS
+</code>
+        <code id="id253885" display="block">   W  = diag(w/sum(w));                      % Normalize weight matrix
+</code>
+        <code id="id253895" display="block">   WA = W*A;                                 % apply weights
+</code>
+        <code id="id253904" display="block">   x1  = (WA'*WA)\(WA'*W)*b;                 % weighted L_2 sol.
+</code>
+        <code id="id253919" display="block">   q  = 1/(pk-1);                            % Newton's parameter
+</code>
+        <code id="id253934" display="block">   if p &gt; 2, x = q*x1 + (1-q)*x; nn=p;       % partial update for p&gt;2
+</code>
+        <code id="id253950" display="block">      else x = x1; nn=2; end                 % no partial update for p&lt;2
+</code>
+        <code id="id253962" display="block">   ee = norm(e,nn);   E = [E ee];            % Error at each iteration
+</code>
+        <code id="id253972" display="block">end
+</code>
+        <code id="id253980" display="block">plot(E)
+</code>
+        <para id="id253989">This can be modified to use different <m:math overflow="scroll"><m:mi>p</m:mi></m:math>'s in different bands of equations or to
+use weighting only when the error exceeds a certain threshold to achieve a
+constrained LS approximation <link target-id="bid3"/>, <link target-id="bid4"/>, <link target-id="bid12"/>. Our work was originally
+done in the context of filter design but others have done similar things in
+sparsity analysis <link target-id="bid13"/>, <link target-id="bid1"/>, <link target-id="bid14"/>.</para>
+        <para id="id254036">This is presented as applied to the overdetermined system (Case 2a and 2b) but can also
+be applied to other cases. A particularly important application of this section is to
+the design of digital filters.</para>
+      </section>
+      <section id="uid11">
+        <title>The Underdetermined System with more Unknowns than Equations</title>
+        <para id="id254052">If one poses the <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mi>p</m:mi></m:msub></m:math> approximation problem in solving an underdetermined set of
+equations (case 3 from Chapter 3), it comes from defining the solution norm as</para>
+        <equation id="uid12">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:msub>
+                <m:mrow>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                  <m:mi>x</m:mi>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                </m:mrow>
+                <m:mi>p</m:mi>
+              </m:msub>
+              <m:mo>=</m:mo>
+              <m:msup>
+                <m:mfenced separators="" open="(" close=")">
+                  <m:munder>
+                    <m:mo>∑</m:mo>
+                    <m:mi>n</m:mi>
+                  </m:munder>
+                  <m:msup>
+                    <m:mrow>
+                      <m:mo>|</m:mo>
+                      <m:mi>x</m:mi>
+                      <m:mrow>
+                        <m:mo>(</m:mo>
+                        <m:mi>n</m:mi>
+                        <m:mo>)</m:mo>
+                      </m:mrow>
+                      <m:mo>|</m:mo>
+                    </m:mrow>
+                    <m:mi>p</m:mi>
+                  </m:msup>
+                </m:mfenced>
+                <m:mrow>
+                  <m:mn>1</m:mn>
+                  <m:mo>/</m:mo>
+                  <m:mi>p</m:mi>
+                </m:mrow>
+              </m:msup>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id254150">and finding <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> to minimizing this p-norm while satisfying <m:math overflow="scroll"><m:mrow><m:mi mathvariant="bold">Ax</m:mi><m:mo>=</m:mo><m:mi mathvariant="bold">b</m:mi></m:mrow></m:math>.</para>
+        <para id="id254185">It has been shown this is equivalent to solving a least weighted norm problem
+for specific weights.</para>
+        <equation id="uid13">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:msub>
+                <m:mrow>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                  <m:mi>x</m:mi>
+                  <m:mo>|</m:mo>
+                  <m:mo>|</m:mo>
+                </m:mrow>
+                <m:mi>p</m:mi>
+              </m:msub>
+              <m:mo>=</m:mo>
+              <m:msup>
+                <m:mfenced separators="" open="(" close=")">
+                  <m:munder>
+                    <m:mo>∑</m:mo>
+                    <m:mi>n</m:mi>
+                  </m:munder>
+                  <m:mi>w</m:mi>
+                  <m:msup>
+                    <m:mrow>
+                      <m:mo>(</m:mo>
+                      <m:mi>n</m:mi>
+                      <m:mo>)</m:mo>
+                    </m:mrow>
+                    <m:mn>2</m:mn>
+                  </m:msup>
+                  <m:msup>
+                    <m:mrow>
+                      <m:mo>|</m:mo>
+                      <m:mi>x</m:mi>
+                      <m:mrow>
+                        <m:mo>(</m:mo>
+                        <m:mi>n</m:mi>
+                        <m:mo>)</m:mo>
+                      </m:mrow>
+                      <m:mo>|</m:mo>
+                    </m:mrow>
+                    <m:mn>2</m:mn>
+                  </m:msup>
+                </m:mfenced>
+                <m:mrow>
+                  <m:mn>1</m:mn>
+                  <m:mo>/</m:mo>
+                  <m:mn>2</m:mn>
+                </m:mrow>
+              </m:msup>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id254285">The development follows the same arguments as in the previous section but using the formula
+<link target-id="bid15"/>, <link target-id="bid6"/> derived in <link target-id=""/></para>
+        <equation id="uid14">
+          <m:math overflow="scroll" mode="display">
+            <m:mrow>
+              <m:mi mathvariant="bold">x</m:mi>
+              <m:mo>=</m:mo>
+              <m:mrow>
+                <m:msup>
+                  <m:mrow>
+                    <m:mo>[</m:mo>
+                    <m:msup>
+                      <m:mi mathvariant="bold">W</m:mi>
+                      <m:mi mathvariant="bold">T</m:mi>
+                    </m:msup>
+                    <m:mi mathvariant="bold">W</m:mi>
+                    <m:mo>]</m:mo>
+                  </m:mrow>
+                  <m:mrow>
+                    <m:mo>-</m:mo>
+                    <m:mn mathvariant="bold">1</m:mn>
+                  </m:mrow>
+                </m:msup>
+                <m:msup>
+                  <m:mi mathvariant="bold">A</m:mi>
+                  <m:mi mathvariant="bold">T</m:mi>
+                </m:msup>
+                <m:msup>
+                  <m:mfenced separators="" open="[" close="]">
+                    <m:mi mathvariant="bold">A</m:mi>
+                    <m:msup>
+                      <m:mrow>
+                        <m:mo>[</m:mo>
+                        <m:msup>
+                          <m:mi mathvariant="bold">W</m:mi>
+                          <m:mi mathvariant="bold">T</m:mi>
+                        </m:msup>
+                        <m:mi mathvariant="bold">W</m:mi>
+                        <m:mo>]</m:mo>
+                      </m:mrow>
+                      <m:mrow>
+                        <m:mo>-</m:mo>
+                        <m:mn mathvariant="bold">1</m:mn>
+                      </m:mrow>
+                    </m:msup>
+                    <m:msup>
+                      <m:mi mathvariant="bold">A</m:mi>
+                      <m:mi mathvariant="bold">T</m:mi>
+                    </m:msup>
+                  </m:mfenced>
+                  <m:mrow>
+                    <m:mo>-</m:mo>
+                    <m:mn mathvariant="bold">1</m:mn>
+                  </m:mrow>
+                </m:msup>
+                <m:mi mathvariant="bold">b</m:mi>
+              </m:mrow>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id254444">with the weights, <m:math overflow="scroll"><m:mrow><m:mi>w</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math>, being the diagonal of the matrix, <m:math overflow="scroll"><m:mi mathvariant="bold">W</m:mi></m:math>,
+in the iterative algorithm to give the minimum weighted solution norm in the same way as <link target-id="uid7"/>
+gives the minimum weighted equation error.</para>
+        <para id="id254482">A Matlab program that implements these ideas applied to our pseudoinverse
+problem with more unknowns than equations (case 3a) is:</para>
+        <code id="id254486" display="block">% m-file IRLS2.m to find the optimal solution to Ax=b
+</code>
+        <code id="id254498" display="block">%  minimizing the L_p norm ||x||_p, using IRLS.
+</code>
+        <code id="id254508" display="block">%  Newton iterative update of solution, x, for  M &lt; N.
+</code>
+        <code id="id254520" display="block">%  For 2&lt;p&lt;infty, use homotopy parameter K = 1.01 to 2
+</code>
+        <code id="id254534" display="block">%  For 0&lt;p&lt;2, use K = approx 0.7 to 0.9
+</code>
+        <code id="id254548" display="block">%  csb 10/20/2012
+</code>
+        <code id="id254557" display="block">function x = IRLS2(A,b,p,K,KK)
+</code>
+        <code id="id254566" display="block">if nargin &lt; 5, KK= 10;  end;
+</code>
+        <code id="id254578" display="block">if nargin &lt; 4, K = .8;  end;
+</code>
+        <code id="id254589" display="block">if nargin &lt; 3, p = 1.1; end;
+</code>
+        <code id="id254600" display="block">pk = 2;                                 % Initial homotopy value
+</code>
+        <code id="id254611" display="block">x  = pinv(A)*b;                         % Initial L_2 solution
+</code>
+        <code id="id254621" display="block">E = [];
+</code>
+        <code id="id254630" display="block">for k = 1:KK
+</code>
+        <code id="id254639" display="block">   if p &gt;= 2, pk = min([p, K*pk]);      % Homotopy update of p
+</code>
+        <code id="id254651" display="block">      else pk = max([p, K*pk]); end
+</code>
+        <code id="id254660" display="block">   W  = diag(abs(x).^((2-pk)/2)+0.00001);  % norm weights for IRLS
+</code>
+        <code id="id254672" display="block">   AW = A*W;                            % applying new weights
+</code>
+        <code id="id254682" display="block">   x1 = W*AW'*((AW*AW')\b);             % Weighted L_2 solution
+</code>
+        <code id="id254696" display="block">   q  = 1/(pk-1);                       % Newton's parameter
+</code>
+        <code id="id254711" display="block">   if p &gt;= 2, x = q*x1 + (1-q)*x; nn=p; % Newton's partial update for p&gt;2
+</code>
+        <code id="id254730" display="block">      else x = x1; nn=1; end            % no Newton's partial update for p&lt;2
+</code>
+        <code id="id254744" display="block">   ee = norm(x,nn);  E = [E ee];        % norm at each iteration
+</code>
+        <code id="id254753" display="block">end;
+</code>
+        <code id="id254762" display="block">plot(E)
+</code>
+        <para id="id254771">This approach is useful in sparse signal processing and for frame representation.</para>
+      </section>
+    </section>
+    <section id="cid3">
+      <title>The Chebyshev, Minimax, or <m:math overflow="scroll"><m:msub><m:mi>L</m:mi><m:mi>∞</m:mi></m:msub></m:math> Appriximation</title>
+      <para id="id254802">The <emphasis effect="bold">Chebyshev</emphasis> optimization problem minimizes the maximum error:</para>
+      <equation id="uid15">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:msub>
+              <m:mi>ϵ</m:mi>
+              <m:mi>m</m:mi>
+            </m:msub>
+            <m:mo>=</m:mo>
+            <m:munder>
+              <m:mo movablelimits="true" form="prefix">max</m:mo>
+              <m:mi>n</m:mi>
+            </m:munder>
+            <m:mrow>
+              <m:mo>|</m:mo>
+              <m:mi>ϵ</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi>n</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>|</m:mo>
+            </m:mrow>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id254863">This is particularly important in filter design. The Remez exchange algorithm
+applied to filter design as the Parks-McClellan algorithm is very efficient <link target-id="bid2"/>.
+An interesting result is the limit of an <m:math overflow="scroll"><m:msub><m:mrow><m:mo>|</m:mo><m:mo>|</m:mo><m:mi mathvariant="bold">x</m:mi><m:mo>|</m:mo><m:mo>|</m:mo></m:mrow><m:mi>p</m:mi></m:msub></m:math> optimization as
+<m:math overflow="scroll"><m:mrow><m:mi>p</m:mi><m:mo>→</m:mo><m:mi>∞</m:mi></m:mrow></m:math> is the Chebyshev optimal solution. So, the
+Chebyshev optimal, the minimax optimal, and the <m:math overflow="scroll"><m:msub><m:mi>L</m:mi><m:mi>∞</m:mi></m:msub></m:math> optimal are
+all the same <link target-id="bid0"/>, <link target-id="bid2"/>.</para>
+      <para id="id254943">A particularly powerful theorem which characterizes a solution to <m:math overflow="scroll"><m:mrow><m:mi mathvariant="bold">Ax</m:mi><m:mo>=</m:mo><m:mi mathvariant="bold">b</m:mi></m:mrow></m:math> is given
+by Cheney <link target-id="bid0"/> in Chapter 2 of his book:</para>
+      <list id="id254971" display="block" list-type="bulleted">
+        <item id="uid16">
+          <emphasis effect="bold">A Characterization Theorem:</emphasis>
+          <emphasis effect="italics">For an <m:math overflow="scroll"><m:mi>M</m:mi></m:math> by <m:math overflow="scroll"><m:mi>N</m:mi></m:math> real matrix, <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> with <m:math overflow="scroll"><m:mrow><m:mi>M</m:mi><m:mo>&gt;</m:mo><m:mi>N</m:mi></m:mrow></m:math>, every minimax solution
+<m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> is a minimax solution of an appropriate <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>+</m:mo><m:mn>1</m:mn></m:mrow></m:math> subsystem of the <m:math overflow="scroll"><m:mi>M</m:mi></m:math> equations. This
+optimal minimax solution will have at least <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>+</m:mo><m:mn>1</m:mn></m:mrow></m:math> equal magnitude errors and they will be larger
+than any of the errors of the other equations.</emphasis>
+        </item>
+      </list>
+      <para id="id255091">This is a powerful statement saying an optimal minimax solution will have out of <m:math overflow="scroll"><m:mi>M</m:mi></m:math>, at least <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>+</m:mo><m:mn>1</m:mn></m:mrow></m:math> maximum
+magnitude errors and they are the minimum size possible. What this theorem doesn't state is which of the
+<m:math overflow="scroll"><m:mi>M</m:mi></m:math> equations are the <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>+</m:mo><m:mn>1</m:mn></m:mrow></m:math> appropriate ones. Cheney develops an algorithm based on this
+theorem which finds these equations and exactly calculates this optimal solution in a finite number
+of steps. He shows how this
+can be combined with the minimum <m:math overflow="scroll"><m:msub><m:mrow><m:mo>|</m:mo><m:mo>|</m:mo><m:mi mathvariant="bold">e</m:mi><m:mo>|</m:mo><m:mo>|</m:mo></m:mrow><m:mi>p</m:mi></m:msub></m:math> using a large <m:math overflow="scroll"><m:mi>p</m:mi></m:math>, to make an efficient solver for
+a minimax or Chebyshev solution.</para>
+      <para id="id255178">This theorem is similar to the Alternation Theorem <link target-id="bid2"/> but more general and, therefore,
+somewhat more difficult to implement.</para>
+    </section>
+    <section id="cid4">
+      <title>The <m:math overflow="scroll"><m:msub><m:mi>L</m:mi><m:mn>1</m:mn></m:msub></m:math> Approximation and Sparsity</title>
+      <para id="id255212">The <emphasis effect="bold">sparsity</emphasis> optimization is to minimize the number of non-zero terms in a vector.
+A “pseudonorm", <m:math overflow="scroll"><m:msub><m:mrow><m:mo>|</m:mo><m:mo>|</m:mo><m:mi mathvariant="bold">x</m:mi><m:mo>|</m:mo><m:mo>|</m:mo></m:mrow><m:mn>0</m:mn></m:msub></m:math>, is sometimes used to denote a measure of sparsity.
+This is not convex, so is not really a norm but the convex (in the limit) norm
+<m:math overflow="scroll"><m:msub><m:mrow><m:mo>|</m:mo><m:mo>|</m:mo><m:mi mathvariant="bold">x</m:mi><m:mo>|</m:mo><m:mo>|</m:mo></m:mrow><m:mn>1</m:mn></m:msub></m:math> is close enough to the <m:math overflow="scroll"><m:msub><m:mrow><m:mo>|</m:mo><m:mo>|</m:mo><m:mi mathvariant="bold">x</m:mi><m:mo>|</m:mo><m:mo>|</m:mo></m:mrow><m:mn>0</m:mn></m:msub></m:math> to give the same
+sparsity of solution <link target-id="bid5"/>. Finding a sparse solution is not easy but interative
+reweighted least squares (IRLS) <link target-id="bid4"/>, <link target-id="bid12"/>, weighted norms <link target-id="bid13"/>, <link target-id="bid1"/>, and
+a somewhat recent result is called Basis Pursuit <link target-id="bid16"/>, <link target-id="bid17"/> are possibilities.</para>
+      <para id="id255342">This approximation is often used with an underdetermined set of equations (Case 3a) to obtain
+a sparse solution <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math>.</para>
+      <para id="id255357">Using the IRLS algorithm to minimize the <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mi>p</m:mi></m:msub></m:math> equation error often gives a sparse error if
+one exists. Using the algorithm in the illustrated Matlab program with <m:math overflow="scroll"><m:mrow><m:mi>p</m:mi><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>.</m:mo><m:mn>1</m:mn></m:mrow></m:math> on the problem in
+Cheney <link target-id="bid0"/> gives a zero error in equation 4 while using no larger <m:math overflow="scroll"><m:mi>p</m:mi></m:math> gives any zeros.
+
+
+</para>
+    </section>
+  </content>
+  <bib:file>
+    <bib:entry id="bid3">
+      <bib:inproceedings>
+        <!--required fields-->
+        <bib:author>Burrus, C. S. and Barreto, J. A.</bib:author>
+        <bib:title>Least <!--no math allowed in bib entries-->-Power Error Design of FIR Filters</bib:title>
+        <bib:booktitle>Proceedings of the IEEE International Symposium on Circuits and Systems</bib:booktitle>
+        <bib:year>1992</bib:year>
+        <!--optional fields-->
+        <bib:editor/>
+        <bib:volume>2</bib:volume>
+        <bib:series/>
+        <bib:pages>545–548</bib:pages>
+        <bib:address>ISCAS-92, San Diego, CA</bib:address>
+        <bib:month>May</bib:month>
+        <bib:organization/>
+        <bib:publisher/>
+        <bib:note/>
+      </bib:inproceedings>
+    </bib:entry>
+    <bib:entry id="bid8">
+      <bib:inproceedings>
+        <!--required fields-->
+        <bib:author>Burrus, C. S. and Barreto, J. A. and Selesnick, I. W.</bib:author>
+        <bib:title>Reweighted Least Squares Design of FIR Filters</bib:title>
+        <bib:booktitle>Paper Summaries for the IEEE Signal Processing Society's Fifth DSP Workshop</bib:booktitle>
+        <bib:year>1992</bib:year>
+        <!--optional fields-->
+        <bib:editor/>
+        <bib:number/>
+        <bib:series/>
+        <bib:pages>3.1.1</bib:pages>
+        <bib:address>Starved Rock Lodge, Utica, IL</bib:address>
+        <bib:month>September 13–16</bib:month>
+        <bib:organization/>
+        <bib:publisher/>
+        <bib:note/>
+      </bib:inproceedings>
+    </bib:entry>
+    <bib:entry id="bid4">
+      <bib:article>
+        <!--required fields-->
+        <bib:author>Burrus, C. S. and Barreto, J. A. and Selesnick, I. W.</bib:author>
+        <bib:title>Iterative Reweighted Least Squares Design of FIR Filters</bib:title>
+        <bib:journal>IEEE Transactions on Signal Processing</bib:journal>
+        <bib:year>1994</bib:year>
+        <!--optional fields-->
+        <bib:volume>42</bib:volume>
+        <bib:number>11</bib:number>
+        <bib:pages>2926–2936</bib:pages>
+        <bib:month>November</bib:month>
+        <bib:note/>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid6">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Ben-Israel, Adi and Greville, T. N. E.</bib:author>
+        <bib:title>Generalized Inverses: Theory and Applications</bib:title>
+        <bib:publisher>Wiley and Sons</bib:publisher>
+        <bib:year>1974</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>New York</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>Second edition, Springer, 2003</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid7">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Björck, Åke</bib:author>
+        <bib:title>Numerical Methods for Least Squares Problems</bib:title>
+        <bib:publisher>Blaisdell, Dover, SIAM</bib:publisher>
+        <bib:year>1996</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>Philadelphia</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid2">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Burrus, C. Sidney</bib:author>
+        <bib:title>Digital Signal Processing and Digital Filter Design</bib:title>
+        <bib:publisher>Connexions, cnx.org</bib:publisher>
+        <bib:year>2008</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address/>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>http://cnx.org/content/col10598/latest/</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid17">
+      <bib:article>
+        <!--required fields-->
+        <bib:author>Chen, Scott S. and Donoho, David L. and Saunders, Michael A.</bib:author>
+        <bib:title>Atomic Decomposition by Basis Pursuit</bib:title>
+        <bib:journal>SIAM Review</bib:journal>
+        <bib:year>2001</bib:year>
+        <!--optional fields-->
+        <bib:volume>43</bib:volume>
+        <bib:number>1</bib:number>
+        <bib:pages>129–159</bib:pages>
+        <bib:month>March</bib:month>
+        <bib:note>http://www-stat.stanford.edu/ donoho/reports.html</bib:note>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid16">
+      <bib:article>
+        <!--required fields-->
+        <bib:author>Chen, S. S. and Donoho, D. L. and Saunders, M. A.</bib:author>
+        <bib:title>Atomic Decomposition by Basis Pursuit</bib:title>
+        <bib:journal>SIAM Journal of Sci. Compt.</bib:journal>
+        <bib:year>1998</bib:year>
+        <!--optional fields-->
+        <bib:volume>20</bib:volume>
+        <bib:number/>
+        <bib:pages>33-61</bib:pages>
+        <bib:month/>
+        <bib:note/>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid0">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Cheney, E. W.</bib:author>
+        <bib:title>Introduction to Approximation Theory</bib:title>
+        <bib:publisher>McGraw-Hill</bib:publisher>
+        <bib:year>1966</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>New York</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>Second edition, AMS Chelsea, 2000</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid1">
+      <bib:article>
+        <!--required fields-->
+        <bib:author>Daubechies, Ingrid and DeVore, Ronald and Fornasier, Massimo and Gunturk, C. Sinan</bib:author>
+        <bib:title>Iteratively Reweighted Least Squares Minimization for Sparse Recovery</bib:title>
+        <bib:journal>Communications on Pure and Applied Mathematics</bib:journal>
+        <bib:year>2010</bib:year>
+        <!--optional fields-->
+        <bib:volume>63</bib:volume>
+        <bib:number>1</bib:number>
+        <bib:pages>1–38</bib:pages>
+        <bib:month>January</bib:month>
+        <bib:note/>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid5">
+      <bib:article>
+        <!--required fields-->
+        <bib:author>Donoho, David L.</bib:author>
+        <bib:title>For Most Large Underdetermined Systems of Linear Equations the Minimal <!--no math allowed in bib entries-->-norm Solution is also the Sparsest Solution</bib:title>
+        <bib:journal>Communications on Pure and Applied Mathematics</bib:journal>
+        <bib:year>2006</bib:year>
+        <!--optional fields-->
+        <bib:volume>59</bib:volume>
+        <bib:number>6</bib:number>
+        <bib:pages>797–829</bib:pages>
+        <bib:month>June</bib:month>
+        <bib:note>http://stats.stanford.edu/ donoho/Reports/2004/l1l0EquivCorrected.pdf</bib:note>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid13">
+      <bib:article>
+        <!--required fields-->
+        <bib:author>Gorodnitsky, Irina F. and Rao, Bhaskar D.</bib:author>
+        <bib:title>Sparse Signal Reconstruction from Limited Data using FOCUSS: a Re-weighted Minimum Norm Algorithm</bib:title>
+        <bib:journal>IEEE Transactions on Signal Processing</bib:journal>
+        <bib:year>1997</bib:year>
+        <!--optional fields-->
+        <bib:volume>45</bib:volume>
+        <bib:number>3</bib:number>
+        <bib:pages/>
+        <bib:month>March</bib:month>
+        <bib:note/>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid15">
+      <bib:misc>
+        <!--required fields-->
+        <!--optional fields-->
+        <bib:author>Selesnick, Ivan W.</bib:author>
+        <bib:title>Least Squares Solutions to Linear System of Equations</bib:title>
+        <bib:howpublished/>
+        <bib:month/>
+        <bib:year>2009</bib:year>
+        <bib:note>to be published in Connexions</bib:note>
+      </bib:misc>
+    </bib:entry>
+    <bib:entry id="bid11">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Sieradski, Allan J.</bib:author>
+        <bib:title>An Introduction to Topology and Homotopy</bib:title>
+        <bib:publisher>PWS–Kent</bib:publisher>
+        <bib:year>1992</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>Boston</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid12">
+      <bib:article>
+        <!--required fields-->
+        <bib:author>Vargas, Ricardo and Burrus, C. Sidney</bib:author>
+        <bib:title>Iterative Design of <!--no math allowed in bib entries--> Digital Filters</bib:title>
+        <bib:journal>arXiv</bib:journal>
+        <bib:year>2012</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:number/>
+        <bib:pages/>
+        <bib:month/>
+        <bib:note>arXiv:1207.4526v1 [cs.IT] July 19, 2012</bib:note>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid14">
+      <bib:misc>
+        <!--required fields-->
+        <!--optional fields-->
+        <bib:author>Yagle, Andrew E.</bib:author>
+        <bib:title>Non-Iterative Reweighted-Norm Least-Squares Local <!--no math allowed in bib entries--> Minimization for Sparse Solutions to Underdetermined Linear Systems of Equations</bib:title>
+        <bib:howpublished/>
+        <bib:month/>
+        <bib:year>2008</bib:year>
+        <bib:note>preprint at http://web.eecs.umich.edu/ aey/sparse/sparse11.pdf</bib:note>
+      </bib:misc>
+    </bib:entry>
+  </bib:file>
+</document>

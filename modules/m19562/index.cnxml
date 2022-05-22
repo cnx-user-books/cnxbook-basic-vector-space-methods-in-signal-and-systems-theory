@@ -1,0 +1,112 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:bib="http://bibtexml.sf.net/">
+  <title>Constructing the Operator (Design)</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m19562</md:content-id>
+  <md:title>Constructing the Operator (Design)</md:title>
+  <md:abstract/>
+  <md:uuid>4766a723-55a0-4494-a5a0-a272b3f7b0e8</md:uuid>
+</metadata>
+
+<content>
+    <section id="cid1">
+      <title>Constructing the Operator (unfinished)</title>
+      <para id="id120842">Solving the third problem posed in the introduction to these notes is
+rather different from the other two. Here we want to find an operator or
+matrix that when multiplied by <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> gives <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> . Clearly a solution to this
+problem would not be unique as stated. In order to pose a better defined
+problem, we generally give a set or family of inputs <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> and the
+corresponding outputs <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> . If these families are independent, and if the
+number of them is the same as the size of the matrix, a unique matrix is
+defined and can be found by solving simultaneous equations. If a smaller
+number is given, the remaining degrees of freedom can be used to satisfy
+some other criterion. If a larger number is given, there is probably no
+exact solution and some approximation will be necessary.</para>
+      <para id="id121230">If the unknown operator matrix is of dimension <m:math overflow="scroll"><m:mi>M</m:mi></m:math> by <m:math overflow="scroll"><m:mi>N</m:mi></m:math>, then we take <m:math overflow="scroll"><m:mi>N</m:mi></m:math> inputs
+<m:math overflow="scroll"><m:msub><m:mi mathvariant="bold">x</m:mi><m:mi mathvariant="bold">k</m:mi></m:msub></m:math> for <m:math overflow="scroll"><m:mrow><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>,</m:mo><m:mn>2</m:mn><m:mo>,</m:mo><m:mo>⋯</m:mo><m:mo>,</m:mo><m:mi>N</m:mi></m:mrow></m:math>, each of dimension <m:math overflow="scroll"><m:mi>N</m:mi></m:math> and the
+corresponding <m:math overflow="scroll"><m:mi>N</m:mi></m:math> outputs <m:math overflow="scroll"><m:msub><m:mi mathvariant="bold">b</m:mi><m:mi mathvariant="bold">k</m:mi></m:msub></m:math>, each of dimension <m:math overflow="scroll"><m:mi>M</m:mi></m:math> and form
+the matrix equation:</para>
+      <equation id="uid1">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mi mathvariant="bold">AX</m:mi>
+            <m:mo>=</m:mo>
+            <m:mi mathvariant="bold">B</m:mi>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id121364">where <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> is the <m:math overflow="scroll"><m:mi>M</m:mi></m:math> by <m:math overflow="scroll"><m:mi>N</m:mi></m:math> unknown operator, <m:math overflow="scroll"><m:mi mathvariant="bold">X</m:mi></m:math> is the <m:math overflow="scroll"><m:mi>N</m:mi></m:math> by <m:math overflow="scroll"><m:mi>N</m:mi></m:math>
+input matrix with <m:math overflow="scroll"><m:mi>N</m:mi></m:math> columns which are the inputs <m:math overflow="scroll"><m:msub><m:mi mathvariant="bold">x</m:mi><m:mi mathvariant="bold">k</m:mi></m:msub></m:math> and <m:math overflow="scroll"><m:mi mathvariant="bold">B</m:mi></m:math>
+is the <m:math overflow="scroll"><m:mi>M</m:mi></m:math> by <m:math overflow="scroll"><m:mi>N</m:mi></m:math> output matrix with columns <m:math overflow="scroll"><m:msub><m:mi mathvariant="bold">b</m:mi><m:mi mathvariant="bold">k</m:mi></m:msub></m:math>. The operator matrix
+is then determined by:</para>
+      <equation id="uid2">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mi mathvariant="bold">A</m:mi>
+            <m:mo>=</m:mo>
+            <m:mi mathvariant="bold">B</m:mi>
+            <m:msup>
+              <m:mi mathvariant="bold">X</m:mi>
+              <m:mrow>
+                <m:mo>-</m:mo>
+                <m:mn mathvariant="bold">1</m:mn>
+              </m:mrow>
+            </m:msup>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id121526">if the inputs are independent which means <m:math overflow="scroll"><m:mi mathvariant="bold">X</m:mi></m:math> is nonsingular.</para>
+      <para id="id121542">This problem can be posed so that there are more (perhaps many more)
+inputs and outputs than <m:math overflow="scroll"><m:mi>N</m:mi></m:math> with a resulting equation error which can
+be minimized with some form of pseudoinverse.</para>
+      <para id="id121555">Linear regression can be put in this form. If our matrix equation is</para>
+      <equation id="uid3">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mi mathvariant="bold">A</m:mi>
+            <m:mi mathvariant="bold">x</m:mi>
+            <m:mo>=</m:mo>
+            <m:mi mathvariant="bold">b</m:mi>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id121586">where <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> is a row vector of unknown weights and <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> is a
+column vector of known inputs, then <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> is a scaler inter product.
+If a seond experiment gives a second scaler inner product from a second
+column vector of known inputs, then we augment <m:math overflow="scroll"><m:mi mathvariant="bold">X</m:mi></m:math> to have two
+rows and <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> to be a length-2 row vector. This is continued for
+<m:math overflow="scroll"><m:mi>N</m:mi></m:math> experiment to give <link target-id="uid3"/> as a 1 by <m:math overflow="scroll"><m:mi>N</m:mi></m:math> row vector times an <m:math overflow="scroll"><m:mi>M</m:mi></m:math> by <m:math overflow="scroll"><m:mi>N</m:mi></m:math> matrix
+which equals a 1 by <m:math overflow="scroll"><m:mi>M</m:mi></m:math> row vector. It this equation is transposed, it is in the form
+of <link target-id="uid3"/> which can be approximately solved by the pesuedo inverse to
+give the unknown weights for the regression.</para>
+      <para id="id121693">Alternatively, the matrix may be constrained by structure to have less
+than <m:math overflow="scroll"><m:msup><m:mi>N</m:mi><m:mn>2</m:mn></m:msup></m:math> degrees of freedom. It may be a cyclic convolution, a non
+cyclic convolution, a Toeplitz, a Hankel, or a Toeplitz plus Hankel
+matrix.</para>
+      <para id="id121711">A problem of this sort came up in research on designing efficient prime length fast
+Fourier transform (FFT) algorithms where <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> is the data and <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> is the FFT
+of <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> . The problem was to derive an operator that would make this
+calculation using the least amount of arithmetic. We solved it using a
+special formulation <link target-id="bid0"/> and Matlab.
+
+
+</para>
+    </section>
+  </content>
+  <bib:file>
+    <bib:entry id="bid0">
+      <bib:article>
+        <!--required fields-->
+        <bib:author>Johnson, Howard W. and Burrus, C. S.</bib:author>
+        <bib:title>On the Structure of Efficient DFT Algorithms</bib:title>
+        <bib:journal>IEEE Transactions on Acoustics, Speech, and Signal Processing</bib:journal>
+        <bib:year>1985</bib:year>
+        <!--optional fields-->
+        <bib:volume>33</bib:volume>
+        <bib:number>1</bib:number>
+        <bib:pages>248–254</bib:pages>
+        <bib:month>February</bib:month>
+        <bib:note/>
+      </bib:article>
+    </bib:entry>
+  </bib:file>
+</document>

@@ -1,0 +1,698 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:bib="http://bibtexml.sf.net/">
+  <title>Introduction</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m19560</md:content-id>
+  <md:title>Introduction</md:title>
+  <md:abstract>Overview of the use of a matrix times a vector for the description of signal and systems operations.  The vectors are descriptions of the signals and the matrix operator is a description of the system.</md:abstract>
+  <md:uuid>71f336ae-a639-4c40-a9ff-0c536cda0ce9</md:uuid>
+</metadata>
+
+<content>
+    <section id="cid1">
+      <title>Introduction</title>
+      <para id="id283453">The tools, ideas, and insights from linear algebra, abstract algebra, and functional
+analysis can be extremely useful to signal processing and system theory in various areas
+of engineering, science, and social science. Indeed, many important ideas can
+be developed from the simple operator equation</para>
+      <equation id="uid1">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mi mathvariant="bold">A</m:mi>
+            <m:mi mathvariant="bold">x</m:mi>
+            <m:mo>=</m:mo>
+            <m:mi mathvariant="bold">b</m:mi>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id283487">by considering it in a variety of ways. If <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> and <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> are
+vectors from the same or, perhaps, different vector spaces and <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math>
+is an operator, there are three interesting questions that can be asked
+which provide a setting for a broad study.</para>
+      <list id="id283861" display="block" list-type="enumerated">
+        <item id="uid2">Given <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> and <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> , find <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> . The analysis or operator problem or transform.
+</item>
+        <item id="uid3">Given <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> and <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> , find <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> . The inverse or control problem or deconvolution or design.
+</item>
+        <item id="uid4">Given <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> and <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> , find <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> . The synthesis or design problem or parameter identification.
+</item>
+      </list>
+      <para id="id283990">Much can be learned by studying each of these problems in some detail. We
+will generally look at the finite dimensional problem where <link target-id="uid1"/> can more
+easily be studied as a finite matrix multiplication <link target-id="bid0"/>, <link target-id="bid1"/>, <link target-id="bid2"/>, <link target-id="bid3"/></para>
+      <!--empty paragraphs get left behind.-->
+      <equation id="uid5">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>11</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>12</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>13</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:mo>⋯</m:mo>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mrow>
+                        <m:mn>1</m:mn>
+                        <m:mi>N</m:mi>
+                      </m:mrow>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>21</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>22</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>23</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd/>
+                  <m:mtd/>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>31</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>32</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mn>33</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd/>
+                  <m:mtd/>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:mo>⋮</m:mo>
+                  </m:mtd>
+                  <m:mtd/>
+                  <m:mtd/>
+                  <m:mtd/>
+                  <m:mtd>
+                    <m:mo>⋮</m:mo>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mrow>
+                        <m:mi>M</m:mi>
+                        <m:mn>1</m:mn>
+                      </m:mrow>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd/>
+                  <m:mtd/>
+                  <m:mtd>
+                    <m:mo>⋯</m:mo>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>a</m:mi>
+                      <m:mrow>
+                        <m:mi>M</m:mi>
+                        <m:mi>N</m:mi>
+                      </m:mrow>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mn>3</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:mo>⋮</m:mo>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>x</m:mi>
+                      <m:mi>N</m:mi>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+            <m:mo>=</m:mo>
+            <m:mfenced separators="" open="[" close="]">
+              <m:mtable>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>b</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>b</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>b</m:mi>
+                      <m:mn>3</m:mn>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:mo>⋮</m:mo>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd>
+                    <m:msub>
+                      <m:mi>b</m:mi>
+                      <m:mi>M</m:mi>
+                    </m:msub>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:mfenced>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id284470">
+but will also try to indicate what the infinite dimensional case might be <link target-id="bid4"/>, <link target-id="bid5"/>, <link target-id="bid6"/>, <link target-id="bid7"/>.</para>
+      <para id="id284499">An application
+to signal theory is in <link target-id="bid8"/>, to optimization <link target-id="bid9"/>, and multiscale system
+theory <link target-id="bid10"/>. The inverse problem (number 2 above) is the basis
+for a large study of pseudoinverses, approximation, optimization, filter design, and
+many applications. When used with the <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mn>2</m:mn></m:msub></m:math> norm <link target-id="bid11"/>, <link target-id="bid12"/> powerful
+results can be optained analytically but used with other norms such as
+<m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mi>∞</m:mi></m:msub></m:math>, <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mn>1</m:mn></m:msub></m:math>, <m:math overflow="scroll"><m:msub><m:mi>l</m:mi><m:mn>0</m:mn></m:msub></m:math> (a pseudonorm), an even larger set of
+problems can be posed and solved <link target-id="bid13"/>, <link target-id="bid14"/>.</para>
+      <para id="id284594">A development of vector space ideas for the purpose
+of presenting wavelet representations is given in <link target-id="bid15"/>, <link target-id="bid16"/>.
+An interesting idea of <emphasis effect="italics">unconditional bases</emphasis> is given by Donoho <link target-id="bid17"/>.</para>
+      <para id="id284619"><emphasis effect="italics">Linear regression</emphasis> analysis can be posed in the form of <link target-id="uid1"/> and <link target-id="uid5"/> where the <m:math overflow="scroll"><m:mi mathvariant="bold">M</m:mi></m:math>
+rows of <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> are the vectors of input data from <m:math overflow="scroll"><m:mi mathvariant="bold">M</m:mi></m:math> experiments, entries of
+<m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> are the <m:math overflow="scroll"><m:mi mathvariant="bold">N</m:mi></m:math> weights for the <m:math overflow="scroll"><m:mi mathvariant="bold">N</m:mi></m:math> components of the inputs, and
+the <m:math overflow="scroll"><m:mi mathvariant="bold">M</m:mi></m:math> values of <m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> are the outputs <link target-id="bid13"/>. This can be
+used in machine learning problems <link target-id="bid18"/>, <link target-id="bid19"/>. A problem similar to the
+design or synthesis problem is that of parameter identification where a model of some
+system is posed with unknown parameters. Then experiments with known inputs and
+measured outputs are run to identify these parameters. Linear regression is also an
+example of this <link target-id="bid13"/>, <link target-id="bid18"/>.</para>
+      <para id="id284742"><emphasis effect="italics">Dynamic systems</emphasis> are often modelled by ordinary differential equation where
+<m:math overflow="scroll"><m:mi mathvariant="bold">b</m:mi></m:math> is set to be the time derivative of <m:math overflow="scroll"><m:mi mathvariant="bold">x</m:mi></m:math> to give what are called the linear state
+equations:</para>
+      <equation id="uid6">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mover accent="true">
+              <m:mi mathvariant="bold">x</m:mi>
+              <m:mo>˙</m:mo>
+            </m:mover>
+            <m:mo>=</m:mo>
+            <m:mi mathvariant="bold">A</m:mi>
+            <m:mi mathvariant="bold">x</m:mi>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id284804">or for difference equations and discrete-time or digital signals,</para>
+      <equation id="uid7">
+        <m:math overflow="scroll" mode="display">
+          <m:mrow>
+            <m:mi mathvariant="bold">x</m:mi>
+            <m:mo>(</m:mo>
+            <m:mi>n</m:mi>
+            <m:mo>+</m:mo>
+            <m:mn>1</m:mn>
+            <m:mo>)</m:mo>
+            <m:mo>=</m:mo>
+            <m:mrow>
+              <m:mi mathvariant="bold">A</m:mi>
+              <m:mspace width="0.166667em"/>
+              <m:mi mathvariant="bold">x</m:mi>
+            </m:mrow>
+            <m:mo>(</m:mo>
+            <m:mi>n</m:mi>
+            <m:mo>)</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id284858">which are used in digital signal processing and the analysis of certain algorithms.
+State equations are useful in feedback control as well as in simulation of many
+dynamical systems and the eigenvalues and other properties of the square matix <m:math overflow="scroll"><m:mi mathvariant="bold">A</m:mi></m:math> are
+important indicators of the performance <link target-id="bid20"/>, <link target-id="bid21"/>.</para>
+      <para id="id284887">The ideas of similarity transformations, diagonalization, the eigenvalue
+problem, Jordon normal form, singular value decomposition, etc. from linear
+algebra <link target-id="bid0"/>, <link target-id="bid1"/>, <link target-id="bid22"/> are applicable to this problem.</para>
+      <para id="id284907">Various areas in optimization and approximation use vector space math to
+great advantage <link target-id="bid9"/>, <link target-id="bid11"/>.</para>
+      <para id="id284921">This booklet is intended to point out relationships, interpretations, and tools in linear algebra,
+matrix theory, and vector spaces that scientists and engineers might find useful. It is not a
+stand-alone linear algebra book. Details, definitions,
+and formal proofs can be found in the references. A very helpful source is Wikipedia.</para>
+      <para id="id284928">There is a variety software systems to both pose and solve linear algebra
+problems. A particularly powerful one is Matlab <link target-id="bid2"/> which is, in some ways,
+the gold standard since it started years ago a purely numerical matrix package. But
+there are others such as Octave, SciLab, LabVIEW, Mathematica, Maple, etc.
+
+
+</para>
+    </section>
+  </content>
+  <bib:file>
+    <bib:entry id="bid13">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Albert, Arthur</bib:author>
+        <bib:title>Regression and the Moore-Penrose Pseudoinverse</bib:title>
+        <bib:publisher>Academic Press</bib:publisher>
+        <bib:year>1972</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>New York</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid16">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Burrus, C. Sidney and Gopinath, Ramesh A. and Guo, Haitao</bib:author>
+        <bib:title>Introduction to Wavelets and the Wavelet Transform</bib:title>
+        <bib:publisher>Prentice Hall</bib:publisher>
+        <bib:year>1998</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>Upper Saddle River, NJ</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>to appear on the web in Connexions: cnx.org</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid14">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Ben-Israel, Adi and Greville, T. N. E.</bib:author>
+        <bib:title>Generalized Inverses: Theory and Applications</bib:title>
+        <bib:publisher>Wiley and Sons</bib:publisher>
+        <bib:year>1974</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>New York</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>Second edition, Springer, 2003</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid18">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Bishop, Christopher M.</bib:author>
+        <bib:title>Pattern Recognition and Machine Learning</bib:title>
+        <bib:publisher>Springer</bib:publisher>
+        <bib:year>2006</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address/>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid12">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Björck, Åke</bib:author>
+        <bib:title>Numerical Methods for Least Squares Problems</bib:title>
+        <bib:publisher>Blaisdell, Dover, SIAM</bib:publisher>
+        <bib:year>1996</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>Philadelphia</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid10">
+      <bib:article>
+        <!--required fields-->
+        <bib:author>Benveniste, A. and Nikoukhah, R. and Willsky, A. S.</bib:author>
+        <bib:title>Multiscale System Theory</bib:title>
+        <bib:journal>IEEE Transactions on Circuits and Systems, I</bib:journal>
+        <bib:year>1994</bib:year>
+        <!--optional fields-->
+        <bib:volume>41</bib:volume>
+        <bib:number>1</bib:number>
+        <bib:pages>2–15</bib:pages>
+        <bib:month>January</bib:month>
+        <bib:note/>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid15">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Daubechies, Ingrid</bib:author>
+        <bib:title>Ten Lectures on Wavelets</bib:title>
+        <bib:publisher>SIAM</bib:publisher>
+        <bib:year>1992</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>Philadelphia, PA</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>Notes from the 1990 CBMS-NSF Conference on Wavelets and Applications at Lowell, MA</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid17">
+      <bib:article>
+        <!--required fields-->
+        <bib:author>Donoho, David L.</bib:author>
+        <bib:title>Unconditional Bases are Optimal Bases for Data Compression and for Statistical Estimation</bib:title>
+        <bib:journal>Applied and Computational Harmonic Analysis</bib:journal>
+        <bib:year>1993</bib:year>
+        <!--optional fields-->
+        <bib:volume>1</bib:volume>
+        <bib:number>1</bib:number>
+        <bib:pages>100–115</bib:pages>
+        <bib:month>December</bib:month>
+        <bib:note>Also Stanford Statistics Dept. Report TR-410, Nov. 1992</bib:note>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid21">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>DeRusso, Paul M. and Roy, Rob J. and Close, Charles M.</bib:author>
+        <bib:title>State Variables for Engineers</bib:title>
+        <bib:publisher>Wiley</bib:publisher>
+        <bib:year>1965</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address/>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>Second edition 1997</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid8">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Franks, Lewis</bib:author>
+        <bib:title>Signal Theory</bib:title>
+        <bib:publisher>Prentice–Hall</bib:publisher>
+        <bib:year>1969</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>Englewood Cliffs, NJ</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid4">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Halmos, Paul R.</bib:author>
+        <bib:title>Finite-Dimensional Vector Spaces</bib:title>
+        <bib:publisher>Van Nostrand</bib:publisher>
+        <bib:year>1958</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>Princeton, NJ</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>Springer 1974</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid19">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Haykin, Simon O.</bib:author>
+        <bib:title>Neural Networks and Learning Machines</bib:title>
+        <bib:publisher>Prentice Hall</bib:publisher>
+        <bib:year>2008</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address/>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid22">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Hefferon, Jim</bib:author>
+        <bib:title>Linear Algebra</bib:title>
+        <bib:publisher>Virginia Commonwealth Univeristy Mathematics Textbook Series</bib:publisher>
+        <bib:year>2011</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address/>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>Copyright: cc-by-sa, URL:joshua.smcvt.edu</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid11">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Lawson, C. L. and Hanson, R. J.</bib:author>
+        <bib:title>Solving Least Squares Problems</bib:title>
+        <bib:publisher>Prentice-Hall</bib:publisher>
+        <bib:year>1974</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>Inglewood Cliffs, NJ</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>Second edition by SIAM in 1987</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid9">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Luenberger, D. G.</bib:author>
+        <bib:title>Optimization by Vector Space Methods</bib:title>
+        <bib:publisher>John Wiley &amp; Sons</bib:publisher>
+        <bib:year>1969, 1997</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>New York</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid2">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Moler, Cleve</bib:author>
+        <bib:title>Numerical Computing with MATLAB</bib:title>
+        <bib:publisher>The MathWorks, Inc.</bib:publisher>
+        <bib:year>2008</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>South Natick, MA</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>available: http://www.mathworks.com/moler/</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid7">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Moon, Todd K. and Stirling, Wynn C.</bib:author>
+        <bib:title>Mathematical Methods and Algorithms for Signal Processing</bib:title>
+        <bib:publisher>Prentice-Hall</bib:publisher>
+        <bib:year>2000</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>Upper Saddle River, NJ</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid6">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Oden, J. Tinsley and Demkowicz, Leszek F.</bib:author>
+        <bib:title>Applied Functional Analysis</bib:title>
+        <bib:publisher>CRC Press</bib:publisher>
+        <bib:year>1996</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>Boca Raton</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid0">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Strang, Gilbert</bib:author>
+        <bib:title>Linear Algebra and Its Applications</bib:title>
+        <bib:publisher>Academic Press</bib:publisher>
+        <bib:year>1976</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>New York</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>4th Edition, Brooks Cole, 2005</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid1">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Strang, Gilbert</bib:author>
+        <bib:title>Introduction to Linear Algebra</bib:title>
+        <bib:publisher>Wellesley Cambridge</bib:publisher>
+        <bib:year>1986</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>New York</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note>4th Edition, 2009</bib:note>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid3">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Trefethen, Lloyd N. and III, David Bau</bib:author>
+        <bib:title>Numerical Linear Algebra</bib:title>
+        <bib:publisher>SIAM</bib:publisher>
+        <bib:year>1997</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address/>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid5">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Young, R. M.</bib:author>
+        <bib:title>An Introduction to Nonharmonic Fourier Series</bib:title>
+        <bib:publisher>Academic Press</bib:publisher>
+        <bib:year>1980</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>New York</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid20">
+      <bib:book>
+        <!--required fields-->
+        <bib:author>Zadeh, Lotfi A. and Desoer, Charles A.</bib:author>
+        <bib:title>Linear System Theory: The State Space Approach</bib:title>
+        <bib:publisher>Dover</bib:publisher>
+        <bib:year>1963, 2008</bib:year>
+        <!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address/>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+  </bib:file>
+</document>
